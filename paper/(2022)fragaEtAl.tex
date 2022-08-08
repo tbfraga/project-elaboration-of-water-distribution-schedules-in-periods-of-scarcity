@@ -232,34 +232,60 @@ The symbols used in the model are shown in the Table (\ref{tab:symbols}). And th
 \end{equation}
 
 \begin{equation}
-	{InFR}_l - \mathrm{MaxInfR}_{l} \leq 0, \quad \forall{l}
+	{InFR}_l - \mathrm{MaxInFR}_{l} \leq 0, \quad \forall{l}
 	\label{eq:evalMaxInfR}
 \end{equation} 
 
 \begin{equation}
-	{InFR}_l - \mathrm{MinInfR}_{l} \leq 0, \quad \forall{l}
+	{InFR}_l - \mathrm{MinInFR}_{l} \geq 0, \quad \forall{l}
 	\label{eq:evalMinInfR}
 \end{equation}
 
-The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. The equations in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution.
+\begin{equation} 
+	OutF_{dsr} - \sum_{l=1}^{\mathrm{NL}}{(InF_{dsl}*\mathrm{Y}_{rl})} = 0, \quad \forall{d, s, r} \\ 
+	 \label{eq:evalOutFRes}
+\end{equation}
+
+\begin{equation}
+	VRes_{dsl} - VRes_{(d-1)(\mathrm{NS})l} - InF_{dsl} + OutF_{dsl} = 0, \quad s=1, \quad \forall{d,l} \\ 
+ 	\label{eq:volResT1}
+\end{equation}
+
+\begin{equation}
+	VRes_{dsl} - VRes_{d(s-1)l} - InF_{dsl} + OutF_{dsl} = 0, \quad s=2,...,\mathrm{NS}, \quad \forall{d,l}  \\ 
+	\label{eq:volRem!T1}
+\end{equation}
+
+\begin{equation}
+	VRes_{dsl} - \mathrm{IRV}_l = 0, \quad d = 0, \quad s = \mathrm{NS}, \quad \forall{l} 
+	\label{eq:volRStart}
+\end{equation}
+
+The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. The equations in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution. The equations in (\ref{eq:evalMaxInfR}) and (\ref{eq:evalMinInfR}) limit the inflow rates values. The equations in (\ref{eq:evalOutFRes}) guarantee that the reservoirs outflows are exactly the amount of water that each reservoir distributes to other reservoirs or zones. The equations in (\ref{eq:volResT1}) and (\ref{eq:volRem!T1}) are the well-known flow constraints, being the equations in (\ref{eq:volRStart}) boundary conditions. 
 
 \begin{table}[h]
 \begin{center}
+\small
 	\begin{tabular}{ l l } 
 		\multicolumn{2}{l}{\emph{indexes}} \\ \\
 
 		$d$ & used to designate a day, $d = 1, ..., \mathrm{ND}$ \\
 		$s$ & used to designate a shift of a day, $s = 1, ..., \mathrm{NS}$ \\
-		$l$ & used to designate a locations that are part of the water supply system (either zones, reservoirs or WTPs), \\
-		& $l  = 1, ..., \mathrm{NL}$\\ \\
+		$l$ & used to designate a location that are part of the water supply system  \\
+		& (either zones, reservoirs or WTPs), $l  = 1, ..., \mathrm{NL}$\\ 
+		$r$ & used to designate a reservoir, $r = 1, ..., \mathrm{NR}$ \\ \\
 
 		\multicolumn{2}{l}{\emph{parameters}} \\ \\
 		$\mathrm{ND}$ & number of days \\
 		$\mathrm{NS}$ & number of daily distribution shifts \\
 		$\mathrm{NL}$ & number of locations \\ 
 		$\mathrm{T}$ & time per shift \\
+		$\mathrm{IRV}_l$ & initial volume of reservoir at the location $l$ \\
 		$\mathrm{MaxInFR}_{l}$ & maximum inflow rate of the pipeline that reaches the reservoir at the location $l$ \\
 		$\mathrm{MinInFR}_{l}$ & minimum inflow rate set for the pipeline that reaches the reservoir at the location $l$ \\
+		$\mathrm{Y}_{rl}$ &  binary variable that informs the physical structure of the water distribution system. \\
+		& $\mathrm{Y}_{rl} = 1$ if water is supplied directly from the reservoir $r$ to the location $l$ and \\
+		& $\mathrm{Y}_{rl} = 0$ if that doesn't happen   \\
 		$\mathrm{FRF}$ & used as relevance factor for the fair distribution \\
 		$\mathrm{VRF}$ & used as relevance factor for the adjustment of the valves \\
 		 $\mathrm{ICIrF}$ &  irrelevance factor for idle capacity \\ \\
@@ -274,8 +300,10 @@ The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the vol
 		\multicolumn{2}{l}{\emph{secondary variables}} \\ \\
 
 		$InF_{dsl}$ & water inflow received by location $l$ on the $s$-th shift of day $d$ \\
-		${InFR}_l$ & ideal inflow rate of location $l$ \\ \\
-
+		$OutF_{dsr}$ & water outflow delivered by reservoir $r$ on the $s$-th shift of day $d$ \\
+		${InFR}_l$ & ideal inflow rate of location $l$ \\ 
+		$VRes_{dsl}$ &  volume of water remaining in the reservoir at location $l$ at the end of the $s$-th shift \\
+		& of the day $d$ \\ \\
 	\end{tabular}
 \caption{Table of symbols used in the mathematical model. 1* Notice that in some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model.}
 \label{tab:symbols}
@@ -301,46 +329,15 @@ Based on the equations and inequalities presented in (\ref{evalVolIn}) to (\ref{
 
 For the case of reservoirs, the volume of water supplied by the reservoir $r$ at the end of the $s$-th shift of the day $d$, $V_{\mathrm{out}dsr}$, can be defined by:
 
-\begin{eqnarray} 
-    \label{eq:evalVoutRes}
-	\mathrm{V_{out}}_{dsr} = \sum_{l=1}^{\mathrm{NL}}{(V_{\mathrm{in}dsl}*\mathrm{Y}_{rl})}, \\ 
-	\quad d = 1, ..., \mathrm{ND}, \quad s = 1, ..., \mathrm{NS}, \quad r=1, ..., \mathrm{NR} \nonumber
-\end{eqnarray}
 
-\noindent where the binary variable $\mathrm{Y}_{rl}$ informs the physical structure of the water distribution system:
 
-\begin{eqnarray}
-    \label{eqFisDist}
-	\mathrm{Y}_{rl} = 
-	\begin{cases}
-		1  & \text{if water is supplied directly from the reservoir } r \text{ to the location } l \\ 
-		0  & \text{if water is not supplied directly from the reservoir  } r \text{ to the location } l \\
-	\end{cases} \\ \nonumber
-	r = 1, ..., \mathrm{NR}, \quad l = 1, ..., \mathrm{NL} \nonumber
-\end{eqnarray}
 
 Furthermore, the inflows and outflows in the network are related through the flow equations in (\ref{eqVolRemT1}) and (\ref{eqVolRem!T1}):
 
-\begin{eqnarray}
-    \label{eqVolRemT1}
-	V_{\mathrm{rem}dsl} = V_{\mathrm{rem}(d-1)(\mathrm{NS})l} + V_{\mathrm{in}dsl} - V_{\mathrm{out}dsl}, \\ 
-	\quad d = 1, ..., \mathrm{ND}, \quad s = 1, \quad l=1, ..., \mathrm{NL} \nonumber
-\end{eqnarray}
 
-\noindent and
 
-\begin{eqnarray}
-    \label{eqVolRem!T1}
-	V_{\mathrm{rem}dsl} = V_{\mathrm{rem}d(s-1)l} + V_{\mathrm{in}dsl} - V_{\mathrm{out}dsl}, \\ 
-	\quad d = 1, ..., \mathrm{ND}, \quad s= 2, ..., \mathrm{NS}, \quad l=1, ..., \mathrm{NL} \nonumber
-\end{eqnarray}
-
-\noindent where $V_{\mathrm{rem}dsl}$ represents the volume of water remaining in the reservoir at location $l$ at the end of the $s$-th shift of the day $d$, being $V_{\mathrm{rem}0(\mathrm{NS})l}$ a constant defined by the initial reservoir volume at location $l$, $\mathrm{V_{ini}}_l$:
+ being $V_{\mathrm{rem}0(\mathrm{NS})l}$ a constant defined by the initial reservoir volume at location $l$:
  
-\begin{equation}
-	V_{\mathrm{rem}dsl} = \mathrm{V_{ini}}_l, \quad d = 0, \quad s = \mathrm{NS}, \quad l=1, ..., \mathrm{NL}
-	\label{EqVolRemD0}
-\end{equation}
 
 It is also necessary to consider that the remaining volumes in the reservoirs must not be negative and must always be less than their respective capacities, $\mathrm{C}_{l}$.
 
