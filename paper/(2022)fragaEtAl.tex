@@ -206,55 +206,73 @@ Based on this issue, the water distribution problem was then defined, as discuss
 \section{Problem of Elaborating Water Distribution Schedules in Periods of Scarcity} 
 \label{sec:EWDSPSP}
 
-This water distribution problem arises in times of scarcity, in which it becomes necessary to draw up a distribution schedule for the different zones of the city, based on the limitation of this precious resource. Such schedule informs the shifts in which the inhabitants will be able to acquire treated water, generating their reserves for the periods in which there will be no supply. The following section presents a detailed definition and mathematical modeling for the problem considered in this work. 
+This water distribution problem arises in times of scarcity, in which it becomes necessary to draw up a distribution schedule for the different zones of the city, based on the limitation of this precious resource. Such schedule informs the shifts in which the inhabitants will be able to acquire treated water, generating their reserves for the periods in which there will be no supply. The following section presents a mathematical modeling for the problem considered in this work. 
 
 \subsection{Mathematical modeling}
-\label{sec:ProblemModel}
+\label{sec:problemModel}
+ 
+The symbols used in the model are shown in the Table (\ref{tab:symbols}). And the mathematical model is presented as follows:
 
-\subsubsection{Decision variables}
+\begin{table}[h]
+\begin{center}
+	\begin{tabular}{ l l } 
+		\multicolumn{2}{l}{\emph{indexes}} \\ \\
 
-As informed in this work, the municipality carries out the distribution planning for the various zones and reservoirs considering distribution shifts. On each shift, water release is controlled by opening or closing valves. Thus, in each considered shift, there are two possible states for each valve - open (when it allows the transfer of water from one point to another) and closed (when it does not allow this transfer of water). Therefore, the water distribution problem basically consists of defining for each valve and for each shift, whether the valve will be open or closed, so that the primary decision variables considered in the model can be defined by the binary variables $X_{dsl} $, where:
+		$d$ & used to designate a day, $d = 1, ..., \mathrm{ND}$ \\
+		$s$ & used to designate a shift of a day, $s = 1, ..., \mathrm{NS}$ \\
+		$l$ & used to designate a locations that are part of the water supply system (either zones, reservoirs or WTPs), \\
+		& $l  = 1, ..., \mathrm{NL}$\\ \\
 
-\begin{eqnarray}
-	X_{dsl} =  
-	\begin{cases}
-		1  \quad \text{whether water is supplied to location } l \text{ in the } s\text{-th shift of the day } d \\
-		0  \quad \text{if no water is supplied to location } l \text{ in the } s\text{-th shift of the day } d \\
-	\end{cases}  \\
-	d = 1, ..., \mathrm{ND}, \quad s = 1, ..., \mathrm{NS}, \quad l = 1, ..., \mathrm{NL} \nonumber
-\end{eqnarray}
+		\multicolumn{2}{l}{\emph{parameters}} \\ \\
+		$\mathrm{ND}$ & number of days \\
+		$\mathrm{NS}$ & number of daily distribution shifts \\
+		$\mathrm{NL}$ & number of locations \\ 
+		$\mathrm{RF_{fair}}$ & used as relevance factor for the fair distribution \\
+		$\mathrm{RF_{valves}}$ & used as relevance factor for the adjustment of the valves \\ \\
 
-\noindent in which:
+		\multicolumn{2}{l}{\emph{decision variables}} \\ \\
+		$X_{dsl} $ & binary variable that receives value 1 when the inlet valve\footnote[1*]{} of location $l$ is open on \\
+		& the $s$-th shift of day $d$, and receives value 0 when it is closed in the same period \\
+		$InF_{dsl}$ & water inflow received by location $l$ on the $s$-th shift of day $d$ \\
 
-\noindent $\mathrm{ND}$ represents the number of days considered in the planning horizon; 
-
-\noindent $\mathrm{NS}$ represents the number of shifts considered for each day; 
-
-\noindent and $\mathrm{NL}$ represents the number of locations that are part of the water supply system (either zones, reservoirs or WTPs). 
-
-In some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model. 
-
-\subsubsection{Objective function}
-
-The objective of the problem considered here is, at the same time: 1) to maximize the volume distributed to the zones; 2) to make the distribution of water between the different zones as fair as possible; and 3) to minimize the idle capacity of the reservoirs. 
+	\end{tabular}
+\caption{Table of symbols used in the mathematical model. 1* Notice that in some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model.}
+\label{tab:symbols}
+\end{center}
+\end{table}
 
 \begin{eqnarray}
 	maximize \quad Fitness = V_\mathrm{dist} - \mathrm{RF_{fair}} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{|\mathrm{P_{dem}}_{z} - P_{\mathrm{dist}dsz}|}}} \\ \nonumber 
 	+ \mathrm{RF_{valves}} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{l=1}^{\mathrm{NL}}{X_{dsl}}}} - \mathrm{IrF_{idleness}}*C_{\mathrm{idleEWSum}}
 \end{eqnarray}
 
-\noindent where $\mathrm{RF_{fair}}$ and $\mathrm{RF_{valves}}$ are parameters used as relevance factors, for the fair distribution and adjustment of the valves, respectively.  The irrelevance factor for idle capacity, $\mathrm{IrF_{idleness}}$, is used in the objective function to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. In this work we adopt $\mathrm{IrF_{idleness}} = 0.000005$. 
-
-The other parameters, variables and terms of the objective function are detailed in the restrictions section presented below. 
-
-\subsubsection{Restrictions}
-
-Note that once the values of the primary decision variables are defined, it is possible to calculate the volume of water received daily and per shift at each location, $V_{\mathrm{in}dsl}$, through the equations: 
+\emph{subj. to}
 
 \begin{equation}
 	V_{\mathrm{in}dsl} = V_{l} * X_{dsl}, \quad d = 1, ..., \mathrm{ND}, \quad s = 1, ..., \mathrm{NS}, \quad l=1, ..., \mathrm{NL}
 	\label{evalVolIn}
 \end{equation}
+
+\subsubsection{Decision variables}
+
+As informed in this work, the municipality carries out the distribution planning for the various zones and reservoirs considering distribution shifts. On each shift, water release is controlled by opening or closing valves. Thus, in each considered shift, there are two possible states for each valve - open (when it allows the transfer of water from one point to another) and closed (when it does not allow this transfer of water). Therefore, the water distribution problem basically consists of defining for each valve and for each shift, whether the valve will be open or closed, so that the primary decision variables considered in the model can be defined by the binary variables $X_{dsl} $, where:
+ 
+
+\subsubsection{Objective function}
+
+The objective of the problem considered here is, at the same time: 1) to maximize the volume distributed to the zones; 2) to make the distribution of water between the different zones as fair as possible; and 3) to minimize the idle capacity of the reservoirs. 
+
+
+
+The irrelevance factor for idle capacity, $\mathrm{IrF_{idleness}}$, is used in the objective function to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. In this work we adopt $\mathrm{IrF_{idleness}} = 0.000005$. 
+
+The other parameters, variables and terms of the objective function are detailed in the restrictions section presented below. 
+
+\subsubsection{Restrictions}
+
+Note that once the values of the primary decision variables are defined, it is possible to calculate the , , through the equations: 
+
+
 
 \noindent where $V_l$ represents the ideal volume of water distributed to the location $l$, if the corresponding valve remains open: 
 
