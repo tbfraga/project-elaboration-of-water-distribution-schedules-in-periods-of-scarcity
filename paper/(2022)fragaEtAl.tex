@@ -237,7 +237,7 @@ The symbols used in the model are shown in the Table (\ref{tab:symbols}). And th
 
 
 
-The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones; b) makes the distribution of water between the different zones as fair as possible; and c) minimizes the idle capacity of the reservoirs. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the first and second terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern.
+The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern.
 
 \begin{table}[h]
 \begin{center}
