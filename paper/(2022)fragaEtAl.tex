@@ -232,11 +232,14 @@ The symbols used in the model are shown in the Table (\ref{tab:symbols}). And th
 \end{equation}
 
 \begin{equation}
-	{InFR}_l - \mathrm{MaxInFR}_{l} \leq 0, \quad \forall{l}
-	\label{resEvalFRInf}
+	{InFR}_l - \mathrm{MaxInfR}_{l} \leq 0, \quad \forall{l}
+	\label{eq:evalMaxInfR}
 \end{equation} 
 
-
+\begin{equation}
+	{InFR}_l - \mathrm{MinInfR}_{l} \leq 0, \quad \forall{l}
+	\label{eq:evalMinInfR}
+\end{equation}
 
 The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. The equations in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution.
 
@@ -292,10 +295,7 @@ The  In this work we adopt $\mathrm{IrF_{idleness}} = 0.000005$.
 
 The other parameters, variables and terms of the objective function are detailed in the restrictions section presented below. 
 
-\begin{equation}
-	{InFR}_l >= \mathrm{InFR_{min}}_{l}, \quad l=1, ..., \mathrm{NL}.
-	\label{eq:resEvalInFRMin}
-\end{equation}
+
 
 Based on the equations and inequalities presented in (\ref{evalVolIn}) to (\ref{eq:resEvalInFRMin}) we can then determine the daily outflow of each location $l$ in each shift $s$, $V_{\mathrm{out}dsl}$.
 
