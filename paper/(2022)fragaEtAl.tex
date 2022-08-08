@@ -223,21 +223,22 @@ The symbols used in the model are shown in the Table (\ref{tab:symbols}). And th
 
 \begin{equation}
 	InF_{dsl} - V_{l} * X_{dsl} = 0, \quad \forall{d, s, l}
+	\label{eq:evalInF}
 \end{equation}
 
 \begin{equation}
 	V_l - {InFR}_l * \mathrm{T} = 0, \quad \forall{l}
-	\label{eqEvalFR}
+	\label{eq:evalnFR}
 \end{equation}
 
 \begin{equation}
-	{InFR}_l <= \mathrm{InFR_{max}}_{l}, \quad \forall{l}
+	{InFR}_l - \mathrm{MaxInFR}_{l} \leq 0, \quad \forall{l}
 	\label{resEvalFRInf}
 \end{equation} 
 
 
 
-The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern.
+The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. The equations in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution.
 
 \begin{table}[h]
 \begin{center}
