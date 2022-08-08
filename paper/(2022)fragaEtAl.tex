@@ -213,6 +213,32 @@ This water distribution problem arises in times of scarcity, in which it becomes
  
 The symbols used in the model are shown in the Table (\ref{tab:symbols}). And the mathematical model is presented as follows:
 
+\begin{eqnarray}
+\label{eq:objFunc}
+	maximize \quad V_\mathrm{dist} - \mathrm{FRF} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{|\mathrm{P_{dem}}_{z} - P_{\mathrm{dist}dsz}|}}} \\ \nonumber 
+	+ \mathrm{VRF} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{l=1}^{\mathrm{NL}}{X_{dsl}}}} - \mathrm{ICIrF}*C_{\mathrm{idleEWSum}}
+\end{eqnarray}
+
+\emph{subj. to}
+
+\begin{equation}
+	InF_{dsl} - V_{l} * X_{dsl} = 0, \quad \forall{d, s, l}
+\end{equation}
+
+\begin{equation}
+	V_l - {InFR}_l * \mathrm{T} = 0, \quad \forall{l}
+	\label{eqEvalFR}
+\end{equation}
+
+\begin{equation}
+	{InFR}_l <= \mathrm{InFR_{max}}_{l}, \quad \forall{l}
+	\label{resEvalFRInf}
+\end{equation} 
+
+
+
+The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones; b) makes the distribution of water between the different zones as fair as possible; and c) minimizes the idle capacity of the reservoirs. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the first and second terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern.
+
 \begin{table}[h]
 \begin{center}
 	\begin{tabular}{ l l } 
@@ -227,32 +253,30 @@ The symbols used in the model are shown in the Table (\ref{tab:symbols}). And th
 		$\mathrm{ND}$ & number of days \\
 		$\mathrm{NS}$ & number of daily distribution shifts \\
 		$\mathrm{NL}$ & number of locations \\ 
-		$\mathrm{RF_{fair}}$ & used as relevance factor for the fair distribution \\
-		$\mathrm{RF_{valves}}$ & used as relevance factor for the adjustment of the valves \\ \\
+		$\mathrm{T}$ & time per shift \\
+		$\mathrm{MaxInFR}_{l}$ & maximum inflow rate of the pipeline that reaches the reservoir at the location $l$ \\
+		$\mathrm{MinInFR}_{l}$ & minimum inflow rate set for the pipeline that reaches the reservoir at the location $l$ \\
+		$\mathrm{FRF}$ & used as relevance factor for the fair distribution \\
+		$\mathrm{VRF}$ & used as relevance factor for the adjustment of the valves \\
+		 $\mathrm{ICIrF}$ &  irrelevance factor for idle capacity \\ \\
 
 		\multicolumn{2}{l}{\emph{decision variables}} \\ \\
+
 		$X_{dsl} $ & binary variable that receives value 1 when the inlet valve\footnote[1*]{} of location $l$ is open on \\
 		& the $s$-th shift of day $d$, and receives value 0 when it is closed in the same period \\
+		$V_l$ & ideal volume of water distributed to the location $l$ in any shift in which \\
+		& the corresponding valve remains open \\\\ 
+
+		\multicolumn{2}{l}{\emph{secondary variables}} \\ \\
+
 		$InF_{dsl}$ & water inflow received by location $l$ on the $s$-th shift of day $d$ \\
+		${InFR}_l$ & ideal inflow rate of location $l$ \\ \\
 
 	\end{tabular}
 \caption{Table of symbols used in the mathematical model. 1* Notice that in some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model.}
 \label{tab:symbols}
 \end{center}
 \end{table}
-
-\begin{eqnarray}
-	maximize \quad Fitness = V_\mathrm{dist} - \mathrm{RF_{fair}} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{|\mathrm{P_{dem}}_{z} - P_{\mathrm{dist}dsz}|}}} \\ \nonumber 
-	+ \mathrm{RF_{valves}} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{l=1}^{\mathrm{NL}}{X_{dsl}}}} - \mathrm{IrF_{idleness}}*C_{\mathrm{idleEWSum}}
-\end{eqnarray}
-
-\emph{subj. to}
-
-\begin{equation}
-	V_{\mathrm{in}dsl} = V_{l} * X_{dsl}, \quad d = 1, ..., \mathrm{ND}, \quad s = 1, ..., \mathrm{NS}, \quad l=1, ..., \mathrm{NL}
-	\label{evalVolIn}
-\end{equation}
-
 \subsubsection{Decision variables}
 
 As informed in this work, the municipality carries out the distribution planning for the various zones and reservoirs considering distribution shifts. On each shift, water release is controlled by opening or closing valves. Thus, in each considered shift, there are two possible states for each valve - open (when it allows the transfer of water from one point to another) and closed (when it does not allow this transfer of water). Therefore, the water distribution problem basically consists of defining for each valve and for each shift, whether the valve will be open or closed, so that the primary decision variables considered in the model can be defined by the binary variables $X_{dsl} $, where:
@@ -260,35 +284,12 @@ As informed in this work, the municipality carries out the distribution planning
 
 \subsubsection{Objective function}
 
-The objective of the problem considered here is, at the same time: 1) to maximize the volume distributed to the zones; 2) to make the distribution of water between the different zones as fair as possible; and 3) to minimize the idle capacity of the reservoirs. 
 
 
 
-The irrelevance factor for idle capacity, $\mathrm{IrF_{idleness}}$, is used in the objective function to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. In this work we adopt $\mathrm{IrF_{idleness}} = 0.000005$. 
+The  In this work we adopt $\mathrm{IrF_{idleness}} = 0.000005$. 
 
 The other parameters, variables and terms of the objective function are detailed in the restrictions section presented below. 
-
-\subsubsection{Restrictions}
-
-Note that once the values of the primary decision variables are defined, it is possible to calculate the , , through the equations: 
-
-
-
-\noindent where $V_l$ represents the ideal volume of water distributed to the location $l$, if the corresponding valve remains open: 
-
-\begin{equation}
-	V_l = {InFR}_l * \mathrm{T}, \quad d = 1, ..., \mathrm{ND}, \quad s = 1, ..., \mathrm{NS}, \quad l=1, ..., \mathrm{NL}
-	\label{eqEvalFR}
-\end{equation}
-
-\noindent with $\mathrm{T}$ being the time per shift, and ${InFR}_l$ the ideal inflow, which is limited by the maximum inflow of the pipeline that reaches the reservoir at the location $l$, $\mathrm{InFR_{max}}_{l}$: 
-
-\begin{equation}
-	{InFR}_l <= \mathrm{InFR_{max}}_{l}, \quad l=1, ..., \mathrm{NL}.
-	\label{resEvalFRInf}
-\end{equation} 
-
-\noindent and by a desired minimum inflow rate for this same location, $\mathrm{InFR_{min}}_{l}$:
 
 \begin{equation}
 	{InFR}_l >= \mathrm{InFR_{min}}_{l}, \quad l=1, ..., \mathrm{NL}.
