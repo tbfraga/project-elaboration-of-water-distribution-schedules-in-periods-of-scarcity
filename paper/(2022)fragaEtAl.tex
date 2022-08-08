@@ -215,7 +215,7 @@ The symbols used in the model are shown in the Table (\ref{tab:symbols}). And th
 
 \begin{eqnarray}
 \label{eq:objFunc}
-	maximize \quad V_\mathrm{dist} - \mathrm{FRF} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{|\mathrm{P_{dem}}_{z} - P_{\mathrm{dist}dsz}|}}} \\ \nonumber 
+	maximize \quad TVD - \mathrm{FRF} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{|\mathrm{P_{dem}}_{z} - P_{\mathrm{dist}dsz}|}}} \\ \nonumber 
 	+ \mathrm{VRF} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{l=1}^{\mathrm{NL}}{X_{dsl}}}} - \mathrm{ICIrF}*C_{\mathrm{idleEWSum}}
 \end{eqnarray}
 
@@ -242,17 +242,17 @@ The symbols used in the model are shown in the Table (\ref{tab:symbols}). And th
 \end{equation}
 
 \begin{equation} 
-	OutF_{dsr} - \sum_{l=1}^{\mathrm{NL}}{(InF_{dsl}*\mathrm{Y}_{rl})} = 0, \quad \forall{d, s, r} \\ 
+	OutF_{dsr} - \sum_{l=1}^{\mathrm{NL}}{(InF_{dsl}*\mathrm{Y}_{rl})} = 0, \quad \forall{d, s, r}
 	 \label{eq:evalOutFRes}
 \end{equation}
 
 \begin{equation}
-	VRes_{dsl} - VRes_{(d-1)(\mathrm{NS})l} - InF_{dsl} + OutF_{dsl} = 0, \quad s=1, \quad \forall{d,l} \\ 
+	VRes_{dsl} - VRes_{(d-1)(\mathrm{NS})l} - InF_{dsl} + OutF_{dsl} = 0, \quad s=1, \quad \forall{d,l}
  	\label{eq:volResT1}
 \end{equation}
 
 \begin{equation}
-	VRes_{dsl} - VRes_{d(s-1)l} - InF_{dsl} + OutF_{dsl} = 0, \quad s=2,...,\mathrm{NS}, \quad \forall{d,l}  \\ 
+	VRes_{dsl} - VRes_{d(s-1)l} - InF_{dsl} + OutF_{dsl} = 0, \quad s=2,...,\mathrm{NS}, \quad \forall{d,l} 
 	\label{eq:volRem!T1}
 \end{equation}
 
@@ -261,11 +261,35 @@ The symbols used in the model are shown in the Table (\ref{tab:symbols}). And th
 	\label{eq:volRStart}
 \end{equation}
 
-The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. The equations in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution. The equations in (\ref{eq:evalMaxInfR}) and (\ref{eq:evalMinInfR}) limit the inflow rates values. The equations in (\ref{eq:evalOutFRes}) guarantee that the reservoirs outflows are exactly the amount of water that each reservoir distributes to other reservoirs or zones. The equations in (\ref{eq:volResT1}) and (\ref{eq:volRem!T1}) are the well-known flow constraints, being the equations in (\ref{eq:volRStart}) boundary conditions. 
+\begin{equation}
+	VRes_{dsl} \geq 0, \quad \forall{d,s,l}
+	\label{eq:minRV}
+\end{equation}
+
+\begin{equation}
+	VRes_{dsr} - \mathrm{C}_{r} \leq 0, \quad \forall{d,s,r}
+	\label{eq:maxRV}
+\end{equation}
+
+\begin{equation}
+	VRes_{dsz} - \mathrm{AZC}_z*\mathrm{NH}_z \leq 0, \quad \forall{d,s,z}
+	\label{eq:maxRZV}
+\end{equation}
+
+\begin{equation}
+	\sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{OutF_{dsz}} - \mathrm{IAC}*\mathrm{NH}_z*\mathrm{HC} \leq 0,  \quad \forall z
+	\label{eq:demandRes}
+\end{equation}
+
+\begin{equation}
+TDV - \sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{OutF_{z}} = 0
+\end{equation}
+
+The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. The equations in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution. The constraints in (\ref{eq:evalMaxInfR}) and (\ref{eq:evalMinInfR}) limit the inflow rates values. The equations in (\ref{eq:evalOutFRes}) guarantee that the reservoirs outflows are exactly the amount of water that each reservoir distributes to other reservoirs or zones. The equations in (\ref{eq:volResT1}) and (\ref{eq:volRem!T1}) are the well-known flow constraints, being the equations in (\ref{eq:volRStart}) boundary conditions. The constraints in (\ref{eq:minRV}), (\ref{eq:maxRV}) and (\ref{eq:maxRZV}) limit the values of the remaining volumes of the reservoirs. The constraints in (\ref{eq:demandRes}) ensure that the total volume distributed to each zone will not exceed its total demand. \\
 
 \begin{table}[h]
 \begin{center}
-\small
+\footnotesize
 	\begin{tabular}{ l l } 
 		\multicolumn{2}{l}{\emph{indexes}} \\ \\
 
@@ -273,14 +297,20 @@ The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the vol
 		$s$ & used to designate a shift of a day, $s = 1, ..., \mathrm{NS}$ \\
 		$l$ & used to designate a location that are part of the water supply system  \\
 		& (either zones, reservoirs or WTPs), $l  = 1, ..., \mathrm{NL}$\\ 
-		$r$ & used to designate a reservoir, $r = 1, ..., \mathrm{NR}$ \\ \\
-
+		$r$ & used to designate a WTP or a reservoir, $r = 1, ..., \mathrm{NR}$ \\
+		$z$ & used to designate a zone, $z=\mathrm{NR}+1, ..., \mathrm{NL}$ \\ \\
+		
 		\multicolumn{2}{l}{\emph{parameters}} \\ \\
 		$\mathrm{ND}$ & number of days \\
 		$\mathrm{NS}$ & number of daily distribution shifts \\
 		$\mathrm{NL}$ & number of locations \\ 
 		$\mathrm{T}$ & time per shift \\
 		$\mathrm{IRV}_l$ & initial volume of reservoir at the location $l$ \\
+		$\mathrm{C}_{r}$ & capacity of reservoir $r$ \\
+		$\mathrm{AZC}_z$ & average reservoir capacities of the households in the zone $z$ \\
+		$\mathrm{NH}_z$ & number of households in the zone $z$ \\
+		$\mathrm{HC}$ & housing coefficient \\ 
+		$\mathrm{IAC}$ & represents the average daily consumption per inhabitant \\
 		$\mathrm{MaxInFR}_{l}$ & maximum inflow rate of the pipeline that reaches the reservoir at the location $l$ \\
 		$\mathrm{MinInFR}_{l}$ & minimum inflow rate set for the pipeline that reaches the reservoir at the location $l$ \\
 		$\mathrm{Y}_{rl}$ &  binary variable that informs the physical structure of the water distribution system. \\
@@ -303,12 +333,17 @@ The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the vol
 		$OutF_{dsr}$ & water outflow delivered by reservoir $r$ on the $s$-th shift of day $d$ \\
 		${InFR}_l$ & ideal inflow rate of location $l$ \\ 
 		$VRes_{dsl}$ &  volume of water remaining in the reservoir at location $l$ at the end of the $s$-th shift \\
-		& of the day $d$ \\ \\
+		& of the day $d$ \\ 
+		$OutF_{z}$ & total outflow of zone $z$ \\
+		$TVD$ & total volume distributed \\ \\
 	\end{tabular}
-\caption{Table of symbols used in the mathematical model. 1* Notice that in some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model.}
+\caption{Table of symbols used in the mathematical model.}
 \label{tab:symbols}
 \end{center}
 \end{table}
+
+Notice that in some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model.
+
 \subsubsection{Decision variables}
 
 As informed in this work, the municipality carries out the distribution planning for the various zones and reservoirs considering distribution shifts. On each shift, water release is controlled by opening or closing valves. Thus, in each considered shift, there are two possible states for each valve - open (when it allows the transfer of water from one point to another) and closed (when it does not allow this transfer of water). Therefore, the water distribution problem basically consists of defining for each valve and for each shift, whether the valve will be open or closed, so that the primary decision variables considered in the model can be defined by the binary variables $X_{dsl} $, where:
@@ -334,37 +369,10 @@ For the case of reservoirs, the volume of water supplied by the reservoir $r$ at
 
 Furthermore, the inflows and outflows in the network are related through the flow equations in (\ref{eqVolRemT1}) and (\ref{eqVolRem!T1}):
 
-
-
- being $V_{\mathrm{rem}0(\mathrm{NS})l}$ a constant defined by the initial reservoir volume at location $l$:
- 
-
-It is also necessary to consider that the remaining volumes in the reservoirs must not be negative and must always be less than their respective capacities, $\mathrm{C}_{l}$.
-
-\begin{equation}
-	V_{\mathrm{rem}dsl} \geq 0, \quad d = 1, ..., \mathrm{ND}, \quad s = 1, ..., \mathrm{NS}, \quad l=1, ..., \mathrm{NL}
-\end{equation}
-
-\noindent and
-
-\begin{equation}
-	V_{\mathrm{rem}dsl} \leq \mathrm{C}_{l}, \quad d = 1, ..., \mathrm{ND}, \quad s = 1, ..., \mathrm{NS}, \quad l=1, ..., \mathrm{NL}
-\end{equation}
-
 In the case of the zones, the total daily volume distributed to each zone will be limited by the daily demand of that zone, $\mathrm{D}_z$:
 
-\begin{equation}
-	\sum_{s=1}^{\mathrm{NS}}{V_{\mathrm{out}dsz}} \leq \mathrm{D}_z, \quad d = 1, ..., \mathrm{ND}, \quad z=\mathrm{NR}+1, ..., \mathrm{NL}
-	\label{ResDemand}
-\end{equation}
 
 The total amount of water distributed by the zones, $V_\mathrm{dist}$, is then defined by the sum:
-
-\begin{equation}
-V_\mathrm{dist} = \sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{V_{\mathrm{out}z}}
-\end{equation}
-
-\noindent where $V_{\mathrm{out}z}$ represents the total outflow of zone $z$:
 
 \begin{equation}
 V_{\mathrm{out}z} = \sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{V_{\mathrm{out}dsz} }, \quad z=\mathrm{NR}+1, ..., \mathrm{NL}
@@ -398,8 +406,6 @@ Regarding the second term of the objective function, we consider in this work th
 	\mathrm{D}_z = \mathrm{C_{average}} * \mathrm{HC} * \mathrm{NH}_z, \quad z=\mathrm{NR}+1, ..., \mathrm{NL}
 \end{equation}
 
-\noindent such that $\mathrm{C_{average}}$ represents the average daily consumption per inhabitant, $\mathrm{HC}$ represents the housing coefficient, and $\mathrm{NH}_z$ the number of households in the zone $z$.
-
 The proportions of volume distributed in each shift by each zone, $P_{\mathrm{dist}dsz}$, are defined by:
 
 \begin{equation}
@@ -428,12 +434,6 @@ Once the remaining volumes in the reservoirs have been defined, it is then possi
 \noindent where $\mathrm{RF}_l$ represents the importance attributed to maintaining water in each reservoir, since there is a surplus of water to fill the reservoirs. It is important that the values of these parameters are greater than and close to 1.00. In this work, we adopted: $1.13$ for the WTP ($r=1$) and for the Central Reservoir ($r=2$); 1.12 for the other reservoirs; and $1.00$ for the zones.
 
 Note that, in the case of zones, each zone $z$ is considered to have a single reservoir, whose capacity is defined by the sum of the capacities of the various housing reservoirs in the zone.
-
-\begin{equation}
-	\mathrm{C}_z =  \mathrm{C_{averReserv}}_z * \mathrm{NH}_z, \quad z=\mathrm{NR}+1, ..., \mathrm{NL}
-\end{equation}
-
-\noindent where $\mathrm{C_{averReserv}}_z$ represents the average of the reservoir capacities of the households in the zone $z$.
 
 \subsubsection{Distribution time adjustment}
 
