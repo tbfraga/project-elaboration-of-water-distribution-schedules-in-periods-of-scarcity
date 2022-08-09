@@ -14,6 +14,9 @@
 \usepackage{soul}
 \newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
 
+\usepackage{colortbl}
+\newcolumntype{a}{>{\columncolor{yellow}}l}
+
 \def\newblock{\hskip .11em plus .33em minus .07em}
 
 \theoremstyle{TH}{
@@ -327,17 +330,17 @@ This water distribution problem arises in times of scarcity, in which it becomes
 \begin{table}[h]
 \begin{center}
 \footnotesize
-	\begin{tabular}{ l l } 
-		\multicolumn{2}{l}{\emph{indexes}} \\ \\
+	\begin{tabular}{ a a } 
+		\multicolumn{2}{a}{\emph{indexes}} \\ & \\
 
 		$d$ & used to designate a day, $d = 1, ..., \mathrm{ND}$ \\
 		$s$ & used to designate a shift of a day, $s = 1, ..., \mathrm{NS}$ \\
 		$l$ & used to designate a location that are part of the water supply system  \\
 		& (either zones, reservoirs or WTPs), $l  = 1, ..., \mathrm{NL}$\\ 
 		$r$ & used to designate a WTP or a reservoir, $r = 1, ..., \mathrm{NR}$ \\
-		$z$ & used to designate a zone, $z=\mathrm{NR}+1, ..., \mathrm{NL}$ \\ \\
+		$z$ & used to designate a zone, $z=\mathrm{NR}+1, ..., \mathrm{NL}$ \\ & \\
 		
-		\multicolumn{2}{l}{\emph{parameters}} \\ \\
+		\multicolumn{2}{a}{\emph{parameters}} \\ & \\
 		$\mathrm{ND}$ & number of days \\
 		$\mathrm{NS}$ & number of daily distribution shifts \\
 		$\mathrm{NL}$ & number of locations \\ 
@@ -361,16 +364,16 @@ This water distribution problem arises in times of scarcity, in which it becomes
 
 		$\mathrm{D}_z$ &  daily demand of zone $z$, $\mathrm{D}_z = \mathrm{IAC}*\mathrm{NH}_z*\mathrm{HC} $\\
 		$\mathrm{TD}$ & total daily demand, $\mathrm{TD} = \sum_{z=1}^{\mathrm{NZ}}{\mathrm{D}_z}$ \\ 
-		$\mathrm{PD}_z$ & $z$ zone percentage demand, $\mathrm{PD}_z = \dfrac{\mathrm{D}_z}{\mathrm{TD}}$ \\ \\
+		$\mathrm{PD}_z$ & $z$ zone percentage demand, $\mathrm{PD}_z = \dfrac{\mathrm{D}_z}{\mathrm{TD}}$ \\ & \\
 
-		\multicolumn{2}{l}{\emph{decision variables}} \\ \\
+		\multicolumn{2}{a}{\emph{decision variables}} \\ & \\
 
 		$X_{dsl} $ & binary variable that receives value 1 when the inlet valve of location $l$ is open on \\
 		& the $s$-th shift of day $d$, and receives value 0 when it is closed in the same period \\
 		$V_l$ & ideal volume of water distributed to the location $l$ in any shift in which \\
-		& the corresponding valve remains open \\\\ 
+		& the corresponding valve remains open \\ & \\ 
 
-		\multicolumn{2}{l}{\emph{secondary variables}} \\ \\
+		\multicolumn{2}{a}{\emph{secondary variables}} \\ & \\
 
 		$InF_{dsl}$ & water inflow received by location $l$ on the $s$-th shift of day $d$ \\
 		$OutF_{dsr}$ & water outflow delivered by reservoir $r$ on the $s$-th shift of day $d$ \\
