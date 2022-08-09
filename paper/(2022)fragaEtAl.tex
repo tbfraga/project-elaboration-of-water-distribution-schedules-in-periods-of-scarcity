@@ -223,105 +223,105 @@ This water distribution problem arises in times of scarcity, in which it becomes
 	\mathcolorbox{yellow}{+ \mathrm{VRF} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{l=1}^{\mathrm{NL}}{X_{dsl}}}} - \mathrm{ICIrF}*IdleCEWSum}
 \end{eqnarray}
 
-\emph{subj. to}
+\hl{\emph{subj. to}}
 
 \begin{equation}
-	InF_{dsl} - V_{l} * X_{dsl} = 0, \quad \forall{d, s, l}
+	\mathcolorbox{yellow}{InF_{dsl} - V_{l} * X_{dsl} = 0, \quad \forall{d, s, l}}
 	\label{eq:evalInF}
 \end{equation}
 
 \begin{equation}
-	V_l - {InFR}_l * \mathrm{T} = 0, \quad \forall{l}
+	\mathcolorbox{yellow}{V_l - {InFR}_l * \mathrm{T} = 0, \quad \forall{l}}
 	\label{eq:evalnFR}
 \end{equation}
 
 \begin{equation}
-	{InFR}_l - \mathrm{MaxInFR}_{l} \leq 0, \quad \forall{l}
+	\mathcolorbox{yellow}{{InFR}_l - \mathrm{MaxInFR}_{l} \leq 0, \quad \forall{l}}
 	\label{eq:evalMaxInfR}
 \end{equation} 
 
 \begin{equation}
-	{InFR}_l - \mathrm{MinInFR}_{l} \geq 0, \quad \forall{l}
+	\mathcolorbox{yellow}{{InFR}_l - \mathrm{MinInFR}_{l} \geq 0, \quad \forall{l}}
 	\label{eq:evalMinInfR}
 \end{equation}
 
 \begin{equation} 
-	OutF_{dsr} - \sum_{l=1}^{\mathrm{NL}}{(InF_{dsl}*\mathrm{Y}_{rl})} = 0, \quad \forall{d, s, r}
+	\mathcolorbox{yellow}{OutF_{dsr} - \sum_{l=1}^{\mathrm{NL}}{(InF_{dsl}*\mathrm{Y}_{rl})} = 0, \quad \forall{d, s, r}}
 	 \label{eq:evalOutFRes}
 \end{equation}
 
 \begin{equation}
-	VRes_{dsl} - VRes_{(d-1)(\mathrm{NS})l} - InF_{dsl} + OutF_{dsl} = 0, \quad s=1, \quad \forall{d,l}
+	\mathcolorbox{yellow}{VRes_{dsl} - VRes_{(d-1)(\mathrm{NS})l} - InF_{dsl} + OutF_{dsl} = 0, \quad s=1, \quad \forall{d,l}}
  	\label{eq:volResT1}
 \end{equation}
 
 \begin{equation}
-	VRes_{dsl} - VRes_{d(s-1)l} - InF_{dsl} + OutF_{dsl} = 0, \quad s=2,...,\mathrm{NS}, \quad \forall{d,l} 
+	\mathcolorbox{yellow}{VRes_{dsl} - VRes_{d(s-1)l} - InF_{dsl} + OutF_{dsl} = 0, \quad s=2,...,\mathrm{NS}, \quad \forall{d,l}}
 	\label{eq:volRem!T1}
 \end{equation}
 
 \begin{equation}
-	VRes_{dsl} - \mathrm{IRV}_l = 0, \quad d = 0, \quad s = \mathrm{NS}, \quad \forall{l} 
+	\mathcolorbox{yellow}{VRes_{dsl} - \mathrm{IRV}_l = 0, \quad d = 0, \quad s = \mathrm{NS}, \quad \forall{l}}
 	\label{eq:volRStart}
 \end{equation}
 
 \begin{equation}
-	VRes_{dsl} \geq 0, \quad \forall{d,s,l}
+	\mathcolorbox{yellow}{VRes_{dsl} \geq 0, \quad \forall{d,s,l}}
 	\label{eq:minRV}
 \end{equation}
 
 \begin{equation}
-	VRes_{dsr} - \mathrm{C}_{r} \leq 0, \quad \forall{d,s,r}
+	\mathcolorbox{yellow}{VRes_{dsr} - \mathrm{C}_{r} \leq 0, \quad \forall{d,s,r}}
 	\label{eq:maxRV}
 \end{equation}
 
 \begin{equation}
-	VRes_{dsz} - \mathrm{AZC}_z*\mathrm{NH}_z \leq 0, \quad \forall{d,s,z}
+	\mathcolorbox{yellow}{VRes_{dsz} - \mathrm{AZC}_z*\mathrm{NH}_z \leq 0, \quad \forall{d,s,z}}
 	\label{eq:maxRZV}
 \end{equation}
 
 \begin{equation}
-	\sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{OutF_{dsz}} -  \mathrm{D}_z*\mathrm{ND} \leq 0,  \quad \forall z
+	\mathcolorbox{yellow}{\sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{OutF_{dsz}} -  \mathrm{D}_z*\mathrm{ND} \leq 0,  \quad \forall z}
 	\label{eq:demandRes}
 \end{equation}
 
 \begin{equation}
-	OutF_{z} - \sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{OutF_{dsz}} = 0, \quad \forall z
+	\mathcolorbox{yellow}{OutF_{z} - \sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{OutF_{dsz}} = 0, \quad \forall z}
 	\label{eq:evalTOutFZone}
 \end{equation}
 
 \begin{equation}
-	TDV - \sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{OutF_{z}} = 0
+	\mathcolorbox{yellow}{TDV - \sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{OutF_{z}} = 0}
 	\label{eq:evalTOutF}
 \end{equation}
 
 \begin{equation}
-	PDist_{z} - \dfrac{OutF_{z}}{TDV} = 0, \quad \forall z
+	\mathcolorbox{yellow}{PDist_{z} - \dfrac{OutF_{z}}{TDV} = 0, \quad \forall z}
 	\label{eq:evalPDist}
 \end{equation}
 
 \begin{equation}
-	IdleC_{dsl} - \mathrm{C}_{l} + VRes_{dsl} = 0, \quad s = \mathrm{NS}, \quad \forall{d, l}
+	\mathcolorbox{yellow}{IdleC_{dsl} - \mathrm{C}_{l} + VRes_{dsl} = 0, \quad s = \mathrm{NS}, \quad \forall{d, l}}
 	\label{eq:evalIdleCap}
 \end{equation}
 
 \begin{equation}
-	IdleCEWSum - \sum_{d=1}^{\mathrm{ND}}{\sum_{l=1}^{\mathrm{NL}}{  (IdleC_{ds({\mathrm{NS}})})^{\mathrm{RF}_l }    }} = 0
+	\mathcolorbox{yellow}{IdleCEWSum - \sum_{d=1}^{\mathrm{ND}}{\sum_{l=1}^{\mathrm{NL}}{  (IdleC_{ds({\mathrm{NS}})})^{\mathrm{RF}_l }    }} = 0}
 	\label{eq:idleCapEWSum}
 \end{equation}
 
 \begin{equation}
-	X_{dsl} \in \{0, 1\}
+	\mathcolorbox{yellow}{X_{dsl} \in \{0, 1\}}
 	\label{eq:bv}
 \end{equation}
 
 \begin{equation}
-	V_{l} \in \mathbb{R}_+
+	\mathcolorbox{yellow}{V_{l} \in \mathbb{R}_+}
 	\label{eq:rv}
 \end{equation}
 
 
-The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves \footnotemark[1] \footnotetext[1]{In some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model.} remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. The equations in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution. The constraints in (\ref{eq:evalMaxInfR}) and (\ref{eq:evalMinInfR}) limit the inflow rates values. The equations in (\ref{eq:evalOutFRes}) guarantee that the reservoirs outflows are exactly the amount of water that each reservoir distributes to other reservoirs or zones  \footnotemark[2] \footnotetext[2]{Note that, in the case of zones, each zone $z$ is considered to have a single reservoir, whose capacity is defined by the sum of the capacities of the various housing reservoirs in the zone.}. The equations in (\ref{eq:volResT1}) and (\ref{eq:volRem!T1}) are the well-known flow constraints, being the equations in (\ref{eq:volRStart}) boundary conditions. The constraints in (\ref{eq:minRV}), (\ref{eq:maxRV}) and (\ref{eq:maxRZV}) limit the values of the remaining volumes of the reservoirs. The constraints in (\ref{eq:demandRes}) ensure that the total volume distributed to each zone will not exceed its total demand. The equations in (\ref{eq:evalTOutFZone}), (\ref{eq:evalTOutF}) and (\ref{eq:evalPDist}) calculate the total volume delivered to each zone, the total volume delivered to all zones and the proportions of volume distributed to each zone, respectively. The equations in (\ref{eq:evalIdleCap}) and (\ref{eq:idleCapEWSum}) calculate the idle capacity of the reservoirs in the last shift of each day, and an exponentially weighted sum of these values, respectively. Finally, the constraints in (\ref{eq:bv}) and (\ref{eq:rv}) inform the nature of the primary decision variables.\\
+\hl{The objective function (}\mathcolorbox{yellow}{\ref{eq:objFunc}}\hl{) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves} \footnotemark[1] \footnotetext[1]{\hl{In some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model.}} \hl{remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalInF}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalnFR}}\hl{) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution. The constraints in (}\mathcolorbox{yellow}{\ref{eq:evalMaxInfR}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalMinInfR}}\hl{) limit the inflow rates values. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalOutFRes}}\hl{) guarantee that the reservoirs outflows are exactly the amount of water that each reservoir distributes to other reservoirs or zones}\footnotemark[2] \footnotetext[2]{\hl{Note that, in the case of zones, each zone $z$ is considered to have a single reservoir, whose capacity is defined by the sum of the capacities of the various housing reservoirs in the zone.}}\hl{. The equations in (}\mathcolorbox{yellow}{\ref{eq:volResT1}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:volRem!T1}}\hl{) are the well-known flow constraints, being the equations in (}\mathcolorbox{yellow}{\ref{eq:volRStart}}\hl{) boundary conditions. The constraints in (}\mathcolorbox{yellow}{\ref{eq:minRV}}\hl{), (}\mathcolorbox{yellow}{\ref{eq:maxRV}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:maxRZV}}\hl{) limit the values of the remaining volumes of the reservoirs. The constraints in (}\mathcolorbox{yellow}{\ref{eq:demandRes}}\hl{) ensure that the total volume distributed to each zone will not exceed its total demand. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalTOutFZone}}\hl{), (}\mathcolorbox{yellow}{\ref{eq:evalTOutF}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalPDist}}\hl{) calculate the total volume delivered to each zone, the total volume delivered to all zones and the proportions of volume distributed to each zone, respectively. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalIdleCap}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:idleCapEWSum}}\hl{) calculate the idle capacity of the reservoirs in the last shift of each day, and an exponentially weighted sum of these values, respectively. Finally, the constraints in (}\mathcolorbox{yellow}{\ref{eq:bv}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:rv}}\hl{) inform the nature of the primary decision variables.}\\
 
 
 \begin{table}[h]
@@ -401,8 +401,8 @@ In order to guarantee a fair distribution, in specific cases where the actual fl
 
 \section{Tests and results}
 
-In this work we adopt $\mathrm{IrF_{idleness}} = 0.000005$. 
-It is important that the values of these parameters are greater than and close to 1.00. In this work, we adopted: $1.13$ for the WTP ($r=1$) and for the Central Reservoir ($r=2$); 1.12 for the other reservoirs; and $1.00$ for the zones.
+\hl{In this work we adopt $\mathrm{IrF_{idleness}} = 0.000005$. 
+It is important that the values of these parameters are greater than and close to 1.00. In this work, we adopted: $1.13$ for the WTP ($r=1$) and for the Central Reservoir ($r=2$); 1.12 for the other reservoirs; and $1.00$ for the zones.} *** need to modify.
 
 To validate the proposed model, a LINGO code was developed and ran in the 'global solver' mode, using the parameter values recommended by the software \cite{LINGO}. The tests were carried out based on the considerations presented in the sections \ref{sec:initialConsiderations}, \ref{sec:praticalAspects} and \ref{sec:limitations} and using the data collected during this work, as summarized in the section \ref{sec:data}. The results found as well as an analysis of these results are presented along the following sections together with the considerations studied. 
 
