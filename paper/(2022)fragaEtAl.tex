@@ -216,7 +216,7 @@ The symbols used in the model are shown in the Table (\ref{tab:symbols}). And th
 \begin{eqnarray}
 \label{eq:objFunc}
 	maximize \quad TVD - \mathrm{FRF} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{|\mathrm{PDem}_{z} - PDist_{z}|}}} \\ \nonumber 
-	+ \mathrm{VRF} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{l=1}^{\mathrm{NL}}{X_{dsl}}}} - \mathrm{ICIrF}*C_{\mathrm{idleEWSum}}
+	+ \mathrm{VRF} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{l=1}^{\mathrm{NL}}{X_{dsl}}}} - \mathrm{ICIrF}*IdleCEWSum
 \end{eqnarray}
 
 \emph{subj. to}
@@ -296,8 +296,18 @@ The symbols used in the model are shown in the Table (\ref{tab:symbols}). And th
 	\label{eq:evalPDist}
 \end{equation}
 
+\begin{equation}
+	IdleC_{dsl} - \mathrm{C}_{l} + VRes_{dsl} = 0, \quad s = \mathrm{NS}, \quad \forall{d, l}
+	\label{eq:evalIdleCap}
+\end{equation}
 
-The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. The equations in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution. The constraints in (\ref{eq:evalMaxInfR}) and (\ref{eq:evalMinInfR}) limit the inflow rates values. The equations in (\ref{eq:evalOutFRes}) guarantee that the reservoirs outflows are exactly the amount of water that each reservoir distributes to other reservoirs or zones. The equations in (\ref{eq:volResT1}) and (\ref{eq:volRem!T1}) are the well-known flow constraints, being the equations in (\ref{eq:volRStart}) boundary conditions. The constraints in (\ref{eq:minRV}), (\ref{eq:maxRV}) and (\ref{eq:maxRZV}) limit the values of the remaining volumes of the reservoirs. The constraints in (\ref{eq:demandRes}) ensure that the total volume distributed to each zone will not exceed its total demand. The equations in (\ref{eq:evalTOutFZone}), (\ref{eq:evalTOutF}) and (\ref{eq:evalPDist}) calculate the total volume delivered to each zone, the total volume delivered to all zones and the proportions of volume distributed to each zone, respectively.\\
+\begin{equation}
+	IdleCEWSum - \sum_{d=1}^{\mathrm{ND}}{\sum_{l=1}^{\mathrm{NL}}{  (IdleC_{ds({\mathrm{NS}})})^{\mathrm{RF}_l }    }} = 0
+	\label{EqIdleCapEWSum}
+\end{equation}
+
+
+The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. The equations in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution. The constraints in (\ref{eq:evalMaxInfR}) and (\ref{eq:evalMinInfR}) limit the inflow rates values. The equations in (\ref{eq:evalOutFRes}) guarantee that the reservoirs outflows are exactly the amount of water that each reservoir distributes to other reservoirs or zones. The equations in (\ref{eq:volResT1}) and (\ref{eq:volRem!T1}) are the well-known flow constraints, being the equations in (\ref{eq:volRStart}) boundary conditions. The constraints in (\ref{eq:minRV}), (\ref{eq:maxRV}) and (\ref{eq:maxRZV}) limit the values of the remaining volumes of the reservoirs. The constraints in (\ref{eq:demandRes}) ensure that the total volume distributed to each zone will not exceed its total demand. The equations in (\ref{eq:evalTOutFZone}), (\ref{eq:evalTOutF}) and (\ref{eq:evalPDist}) calculate the total volume delivered to each zone, the total volume delivered to all zones and the proportions of volume distributed to each zone, respectively. The equations in (\ref{eq:evalIdleCap}) and (\ref{EqIdleCapEWSum}) calculate the idle capacity of the reservoirs in the last shift of each day, and an exponentially weighted sum of these values, respectively. \\
 
 \begin{table}[h]
 \begin{center}
@@ -328,6 +338,8 @@ The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the vol
 		$\mathrm{Y}_{rl}$ &  binary variable that informs the physical structure of the water distribution system. \\
 		& $\mathrm{Y}_{rl} = 1$ if water is supplied directly from the reservoir $r$ to the location $l$ and \\
 		& $\mathrm{Y}_{rl} = 0$ if that doesn't happen   \\
+		$\mathrm{RF}_l$ & importance attributed to maintaining water in reservoir $l$, since there is a surplus of \\
+		& water to fill the reservoirs \\
 		$\mathrm{FRF}$ & used as relevance factor for the fair distribution \\
 		$\mathrm{VRF}$ & used as relevance factor for the adjustment of the valves \\
 		$\mathrm{ICIrF}$ &  irrelevance factor for idle capacity \\ 
@@ -353,6 +365,8 @@ The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the vol
 		$OutF_{z}$ & total outflow of zone $z$ \\
 		$TVD$ & total volume distributed \\
 		$PDist_{z}$ & percentage distributed to zone $z$ \\
+		$IdleC_{dsl}$ & idle capacity of reservoir at location $l$ at the end of the $s$-th shift of the day $d$ \\
+		$IdleCEWSum$ & exponentially weighted sum of idle capacities \\
 	\end{tabular}
 \caption{Table of symbols used in the mathematical model.}
 \label{tab:symbols}
@@ -393,49 +407,16 @@ In the case of the zones, the total daily volume distributed to each zone will b
 
 Regarding the second term of the objective function, we consider in this work that, in a fair distribution, the volume proportions distributed in each shift by each zone $z$ are as close as possible to its demand proportion, $\mathrm{P_ {dem}}_{z}$:
 
-
-
-\noindent being $\mathrm{D_{total}}$ the total demand:
-
-\begin{equation}
-	\mathrm{D_{total}} = \sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{\mathrm{D}_z}
-\end{equation}
-
-\noindent and $\mathrm{D_{shift}}_z$ the demand per shift of zone $z$:
-
-\begin{equation}
-	\mathrm{D_{shift}}_z = \mathrm{D}_z / (\mathrm{ND} * \mathrm{NS}), \quad z=\mathrm{NR}+1, ..., \mathrm{NL}
-	\label{evalDemandByShift}
-\end{equation}
-
-\noindent where the daily demand of zone $z$, $\mathrm{D}_z$, is defined by:
-
-\begin{equation}
-	\mathrm{D}_z = \mathrm{C_{average}} * \mathrm{HC} * \mathrm{NH}_z, \quad z=\mathrm{NR}+1, ..., \mathrm{NL}
-\end{equation}
-
-The proportions of volume distributed in each shift by each zone, $P_{\mathrm{dist}dsz}$, are defined by:
-
-
-The third term of the objective function seeks to ensure that the flow is distributed among the shifts, except when this distribution is bounded by flow restrictions. 
-
 Finally, the fourth term deals with another important issue to be considered: the idle capacity of the reservoirs. At the end of the last shift of each day, it is desired that the remaining reservoir volumes, $V_{\mathrm{rest}dsl}$, are as close to their respective capacities, $\mathrm{C}_l$, as possible.
 
 Once the remaining volumes in the reservoirs have been defined, it is then possible to determine the idle capacities of the latter in each shift, $C_{\mathrm{idle}dsl}$, through the Eqs. in (\ref{EqIdleCap}):
 
-\begin{equation}
-	C_{\mathrm{idle}dsl} = \mathrm{C}_{l} - V_{\mathrm{rem}dsl}, \quad d = 1, ..., \mathrm{ND}, \quad \quad s = 1, ..., \mathrm{NS}, \quad l=1, ..., \mathrm{NL}
-	\label{EqIdleCap}
-\end{equation}
+
 
 \noindent being the exponentially weighted sum of idle capacities, computed in the last shifts of each day, $C_{\mathrm{idleEWSum}}$, defined by:
 
-\begin{equation}
-	C_{\mathrm{idleEWSum}} = \sum_{d=1}^{\mathrm{ND}}{\sum_{l=1}^{\mathrm{NL}}{  (C_{\mathrm{idle}ds({\mathrm{NS}})})^{\mathrm{RF}_l }    }}
-	\label{EqIdleCapEWSum}
-\end{equation}
 
-\noindent where $\mathrm{RF}_l$ represents the importance attributed to maintaining water in each reservoir, since there is a surplus of water to fill the reservoirs. It is important that the values of these parameters are greater than and close to 1.00. In this work, we adopted: $1.13$ for the WTP ($r=1$) and for the Central Reservoir ($r=2$); 1.12 for the other reservoirs; and $1.00$ for the zones.
+\noindent where It is important that the values of these parameters are greater than and close to 1.00. In this work, we adopted: $1.13$ for the WTP ($r=1$) and for the Central Reservoir ($r=2$); 1.12 for the other reservoirs; and $1.00$ for the zones.
 
 Note that, in the case of zones, each zone $z$ is considered to have a single reservoir, whose capacity is defined by the sum of the capacities of the various housing reservoirs in the zone.
 
