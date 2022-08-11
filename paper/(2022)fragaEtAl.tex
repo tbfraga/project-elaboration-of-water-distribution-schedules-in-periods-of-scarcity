@@ -501,16 +501,16 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \subsection{Initial considerations}
 \label{sec:initialConsiderations}
 
-Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data summarized in the section \ref{sec:data}, calculated with the aid of the 'LibreOffice Calc' software, considering the maximum daily distribution value (in a 24-hour shift), limited by the outflows of the weirs and the WTP,  \hl{and the following values for the parameters: $\mathrm{ICIrF} = 0.000005$,  $\mathrm{RF}_r = 1.13, r=1,2$ (for the WTP and the Central Reservoir);  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$ (for the other reservoirs); and $\mathrm{RF}_z =1.00, \forall z$ (for the zones)} (case 01). 
+Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data summarized in the section \ref{sec:data}, calculated with the aid of the 'LibreOffice Calc' software, considering the maximum daily distribution value (in a 24-hour shift), limited by the outflows of the weirs and the WTP,  \hl{and the following values for the parameters: $\mathrm{FRF}$ $\mathrm{ICIrF} = 0.000005$,  $\mathrm{RF}_r = 1.13, r=1,2$ (for the WTP and the Central Reservoir);  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$ (for the other reservoirs); and $\mathrm{RF}_z =1.00, \forall z$ (for the zones)} (case 01). 
 
-\begin{figure*}[t]
+\begin{figure}[h]
 	\begin{center}
-	    \caption{Determination of optimal distribution values with 'LibreOffice Calc', considering a daily 24-hour distribution period}
+	    \caption{Determination of optimal distribution values with 'LibreOffice Calc', considering a daily 24-hour distribution period.}
 		\label{fig:evalOptimalValues}
 		\centering
-		\includegraphics{figures/fit360.png}
+		\includegraphics[width=\textwidth]{figures/evalCase01.png}
 	\end{center}
-\end{figure*}
+\end{figure}
 
 As we can see in this figure, the optimal daily water distribution volume per inhabitant, considering a daily 24-hour distribution period, is 184.96 liters / (day * inhabitant). Therefore, we can conclude that, in fact, the flow of the pipeline that transports water from the WTP ($r=1$) to the Central Reservoir ($r=2$) is not sufficient to meet the average daily consumption of the population informed by the company (200 liters / (day * inhabitant)).
 
