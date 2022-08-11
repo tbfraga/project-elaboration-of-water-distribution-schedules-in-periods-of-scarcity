@@ -10,6 +10,7 @@
 \usepackage{natbib,stfloats}
 \usepackage{mathrsfs}
 \usepackage[bottom]{footmisc}
+\usepackage{float}
 \usepackage{xcolor}
 \usepackage{soul}
 \newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
@@ -141,7 +142,7 @@ After the adduction, the water captured at the Santa Rita weir, goes to the trea
 \includegraphics{figures/calhaPashall360.png}
 \end{figure*}
 
-The water, then flocculated, goes to another phase, passing through larger layers called decanters, where the flakes formed are deposited in tubular modules similar to a beehive, making the water almost suitable for consumption. In these stages of treatment, almost all contamination factors are eliminated, filtration is then carried out to further improve the decanted water which, by gravity, passes through filters made of a porous medium with the ability to retain and remove impurities even existing in the water. In disinfection, physical or chemical agents are used, such as chlorine, used for the destruction of pathogenic organisms that cause diseases, ending with the correction of pH, where products are also added so that the treated water has a suitable pH for consumption. After being treated, the water is deposited in a supported type reservoir with a capacity of 500,000 m$^3$ of storage (Central Reservoir). Treatment is carried out in continuous flow. 
+The water, then flocculated, goes to another phase, passing through larger layers called decanters, where the flakes formed are deposited in tubular modules similar to a beehive, making the water almost suitable for consumption. In these stages of treatment, almost all contamination factors are eliminated, filtration is then carried out to further improve the decanted water which, by gravity, passes through filters made of a porous medium with the ability to retain and \hl{remove impurities still in the water}. In disinfection, physical or chemical agents are used, such as chlorine, used for the destruction of pathogenic organisms that cause diseases, ending with the correction of pH, where products are also added so that the treated water has a suitable pH for consumption. After being treated, the water is deposited in a supported type reservoir with a capacity of 500,000 m$^3$ of storage (Central Reservoir). Treatment is carried out in continuous flow. 
 
 The water collected from the Bálsamo das Freiras Reservoir is treated in mechanical filters, where the addition of chemical products is carried out automatically. The disposal of the water treated in these filters is also carried out in the Central Reservoir. 
 
@@ -185,7 +186,7 @@ Based on data obtained from the UN (United Nations), \cite{Paganine2013} informs
 
 Through the visits carried out at the WTP in Catende in 2016, it was also possible to obtain information on the daily production capacity and the number of households served, separated by the supply zones. Table \ref{tab:SectorsCatende} shows the water demand for each zone (neighborhood), where the necessary amount of water per household was defined considering that each household resides on average 3.9 inhabitants (average established by \cite{IBGECatende} through the last large demographic census of 2010). Information on the number of households/zones and the average water consumption per inhabitant were provided by the WTP managers, considering the average use of 200 liters of water per inhabitant. It was also informed that almost 100\% of households have reservoirs ranging between 500 and 1000 liters. These are activated when water is not supplied, either due to maintenance in the distribution network, or in periods when the water flow for treatment is low, thus limiting the daily supply. 
 
-\begin{table}[t]
+\begin{table}[H]
 \begin{center}
 	\begin{tabular}{ c  r  r } 
 		supply sector       &  \multicolumn{1}{c}{number of}     &   \multicolumn{1}{c}{average consumption}  \\
@@ -206,7 +207,7 @@ Through the visits carried out at the WTP in Catende in 2016, it was also possib
 \end{center}
 \end{table}
 
-Although Catende is located in a region that does not suffer so much from the lack of water, it has been observed over the years, a considerable drop in its water sources, alerting the population and managers about the need to save this resource. The production capacity of treated water, when the abstraction in water sources is at its maximum limit, is 288,000 liters of water per hour, in this way, in 24 hours it is possible to fill 13.8 reservoirs of 500,000 m$^3$. Observing the total daily demand required, it is concluded that the productive capacity does not meet the daily needs of the population, which highlights the need for good management of water distribution.
+Although Catende is located in a region that does not suffer so much from the lack of water, it has been observed over the years, a considerable drop in its water sources, alerting the population and managers about the need to save this resource. The production \hl{capacity of treated water is 288,000 liters of water per hour}. Observing the total daily demand required, it is concluded that the productive capacity does not meet the daily needs of the population, which highlights the need for good management of water distribution.
 
 Based on this issue, the water distribution problem was then defined, as discussed in the next section. 
 
@@ -327,7 +328,7 @@ This water distribution problem arises in times of scarcity, in which it becomes
 \hl{The objective function (}\mathcolorbox{yellow}{\ref{eq:objFunc}}\hl{) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves} \footnotemark[1] \footnotetext[1]{\hl{In some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model.}} \hl{remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalInF}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalnFR}}\hl{) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution. The constraints in (}\mathcolorbox{yellow}{\ref{eq:evalMaxInfR}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalMinInfR}}\hl{) limit the inflow rates values. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalOutFRes}}\hl{) guarantee that the reservoirs outflows are exactly the amount of water that each reservoir distributes to other reservoirs or zones}\footnotemark[2] \footnotetext[2]{\hl{Note that, in the case of zones, each zone $z$ is considered to have a single reservoir, whose capacity is defined by the sum of the capacities of the various housing reservoirs in the zone.}}\hl{. The equations in (}\mathcolorbox{yellow}{\ref{eq:volResT1}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:volRem!T1}}\hl{) are the well-known flow constraints, being the equations in (}\mathcolorbox{yellow}{\ref{eq:volRStart}}\hl{) boundary conditions. The constraints in (}\mathcolorbox{yellow}{\ref{eq:minRV}}\hl{), (}\mathcolorbox{yellow}{\ref{eq:maxRV}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:maxRZV}}\hl{) limit the values of the remaining volumes of the reservoirs. The constraints in (}\mathcolorbox{yellow}{\ref{eq:demandRes}}\hl{) ensure that the total volume distributed to each zone will not exceed its total demand. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalTOutFZone}}\hl{), (}\mathcolorbox{yellow}{\ref{eq:evalTOutF}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalPDist}}\hl{) calculate the total volume delivered to each zone, the total volume delivered to all zones and the proportions of volume distributed to each zone, respectively. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalIdleCap}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:idleCapEWSum}}\hl{) calculate the idle capacity of the reservoirs in the last shift of each day, and an exponentially weighted sum of these values, respectively. Finally, the constraints in (}\mathcolorbox{yellow}{\ref{eq:bv}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:rv}}\hl{) inform the nature of the primary decision variables.}\\
 
 
-\begin{table}[h]
+\begin{table}[H]
 \begin{center}
 \footnotesize
 	\begin{tabular}{ a a } 
@@ -405,12 +406,9 @@ In order to guarantee a fair distribution, in specific cases where the actual fl
 
 \section{Tests and results}
 
-\hl{In this work we adopt $\mathrm{IrF_{idleness}} = 0.000005$. 
-In this work, we adopted: $1.13$ for the WTP ($r=1$) and for the Central Reservoir ($r=2$); 1.12 for the other reservoirs; and $1.00$ for the zones.} *** need to modify.
-
 To validate the proposed model, a LINGO code was developed and ran in the 'global solver' mode, using the parameter values recommended by the software \cite{LINGO}. The tests were carried out based on the considerations presented in the sections \ref{sec:initialConsiderations}, \ref{sec:praticalAspects} and \ref{sec:limitations} and using the data collected during this work, as summarized in the section \ref{sec:data}. The results found as well as an analysis of these results are presented along the following sections together with the considerations studied. 
 
-\subsubsection{Data collected}
+\subsection{Data collected}
 \label{sec:data}
 
 Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatende} and \ref{tab:phyDitStr} present a synthesis of the data referring to the weirs, reservoirs, zones and the network of studied water distribution, respectively. The conceptual and mathematical model presented in this paper, as well as the solver used to validate the model, were developed through a recent effort. However, the data presented in this section were collected in 2016 as part of an extension project carried out by the authors of this article, through which a detailed study of the water distribution process presented in the section \ref{sec:CatendeWDS} was carried out \citep{CandidoEtAl2016}. 
@@ -425,7 +423,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 
 \noindent Note: each weir supplies water to an WTP (conventional or mechanical). However, both supply water to the Central Reservoir. For this reason, in this work we consider only a single WTP. 
 
-\begin{table}[t]
+\begin{table}[H]
 \begin{center}
 	\begin{tabular}{ c  c  c } 
 		weir      & name        & distribution flow rate  ($\mathrm{liters/hour}$)     \\
@@ -442,7 +440,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \end{center}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[H]
 \begin{center}
 	\begin{tabular}{ c  c  c  c } 
 		reservoir      & name              & capacity                       & Maximum inflow rate informed    \\
@@ -461,7 +459,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \end{center}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[H]
 \begin{center}
 	\begin{tabular}{ c  c  c } 
 		zone          & name         & Number of households \\
@@ -480,7 +478,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \end{center}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[H]
 \begin{center}
 	\begin{tabular}{ c c c c c c c c c c c c c } 
 
@@ -498,10 +496,10 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \end{center}
 \end{table}
 
-\subsubsection{Initial considerations}
+\subsection{Initial considerations}
 \label{sec:initialConsiderations}
 
-Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data summarized in the section \ref{sec:data}, calculated with the aid of the 'LibreOffice Calc' software, considering the maximum daily distribution value (in a 24-hour shift), limited by the outflows of the weirs and the WTP (case 01). 
+Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data summarized in the section \ref{sec:data}, calculated with the aid of the 'LibreOffice Calc' software, considering the maximum daily distribution value (in a 24-hour shift), limited by the outflows of the weirs and the WTP,  \hl{and the following values for the parameters: $\mathrm{ICIrF} = 0.000005$,  $\mathrm{RF}_r = 1.13, r=1,2$ (for the WTP and the Central Reservoir);  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$ (for the other reservoirs); and $\mathrm{RF}_z =1.00, \forall z$ (for the zones)} (case 01). 
 
 \begin{figure*}[t]
 	\begin{center}
@@ -636,7 +634,7 @@ Very close values were found for fitness and volumes distribution when the solve
 \end{center}
 \end{table}
 
-\subsubsection{Practical aspects}
+\subsection{Practical aspects}
 \label{sec:praticalAspects}
 
 It would be ideal if the company could regulate the flow rates for water distribution, adjusting these rates according to each ideal solution found by the solver for the different cases evaluated by the planners. However, in practice this becomes very difficult. The following situations will be faced when looking for solutions to real problems:
@@ -751,7 +749,7 @@ For situation (3), once a minimum value is indicated for the inflow of a given l
 
 As for situation (2), the developed solver does not present a good answer. The value found by the solver will always be an ideal value, based on the informed restrictions. If the ideal value is lower than the real value, the respective zone will have an excess amount of water. And there will be no sure way to prevent the volume consumed by that zone from being the desired volume. Except limiting distribution time. In this case, the ideal distribution time (within the period of a shift) can be calculated using the equations in (\ref{eq:evalTimeAdq}). 
 
-\subsubsection{Solver and model limitations}
+\subsection{Solver and model limitations}
 \label{sec:limitations}
 
 Lingo is an incredible software, indispensable for mathematical modeling of any real problem. With the help of Lingo, it is possible to notice a series of initial errors in the model, which could easily go unnoticed. Additionally, the elaborated mathematical model strongly influences the solver efficiency. This forces the modeler to think about issues that limit the model's solutions, and to work with functions that make the model robust and functional.
