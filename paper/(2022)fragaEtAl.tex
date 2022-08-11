@@ -222,7 +222,7 @@ This water distribution problem arises in times of scarcity, in which it becomes
 
 \begin{eqnarray} 
 \label{eq:objFunc}
-	 \mathcolorbox{yellow}{maximize \quad TVD - \mathrm{FRF} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{|\mathrm{PDem}_{z} - PDist_{z}|}}}} \\ \nonumber 
+	 \mathcolorbox{yellow}{maximize \quad TVD - \mathrm{FRF}*\sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{|\mathrm{PDem}_{z} - PDist_{z}|}} \\ \nonumber 
 	\mathcolorbox{yellow}{+ \mathrm{VRF} * \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{l=1}^{\mathrm{NL}}{X_{dsl}}}} - \mathrm{ICIrF}*IdleCEWSum}
 \end{eqnarray}
 
@@ -357,7 +357,8 @@ This water distribution problem arises in times of scarcity, in which it becomes
 		& $\mathrm{Y}_{rl} = 1$ if water is supplied directly from the reservoir $r$ to the location $l$ and \\
 		& $\mathrm{Y}_{rl} = 0$ if that doesn't happen   \\
 		$\mathrm{RF}_l$ & importance attributed to maintaining water in reservoir at location $l$,\\
-		&  since there is a surplus of water to fill the reservoirs \\
+		&  since there is a surplus of water to fill the reservoirs. It is important \\
+		& that the values of these parameters are greater than and close to 1.00.  \\
 		$\mathrm{FRF}$ & relevance factor for the fair distribution \\
 		$\mathrm{VRF}$ & relevance factor for the adjustment of the valves \\
 		$\mathrm{ICIrF}$ &  irrelevance factor for idle capacity \\ 
@@ -405,7 +406,7 @@ In order to guarantee a fair distribution, in specific cases where the actual fl
 \section{Tests and results}
 
 \hl{In this work we adopt $\mathrm{IrF_{idleness}} = 0.000005$. 
-It is important that the values of these parameters are greater than and close to 1.00. In this work, we adopted: $1.13$ for the WTP ($r=1$) and for the Central Reservoir ($r=2$); 1.12 for the other reservoirs; and $1.00$ for the zones.} *** need to modify.
+In this work, we adopted: $1.13$ for the WTP ($r=1$) and for the Central Reservoir ($r=2$); 1.12 for the other reservoirs; and $1.00$ for the zones.} *** need to modify.
 
 To validate the proposed model, a LINGO code was developed and ran in the 'global solver' mode, using the parameter values recommended by the software \cite{LINGO}. The tests were carried out based on the considerations presented in the sections \ref{sec:initialConsiderations}, \ref{sec:praticalAspects} and \ref{sec:limitations} and using the data collected during this work, as summarized in the section \ref{sec:data}. The results found as well as an analysis of these results are presented along the following sections together with the considerations studied. 
 
