@@ -1,0 +1,467 @@
+  LINGO/WIN64 19.0.55 (5 May 2022 ), LINDO API 13.0.4099.342
+
+  Licensee info: tatiana.balbi@ufpe.br
+  License expires:  9 FEB 2023
+
+  Global optimal solution found.
+  Objective value:                            6922117.35
+  Objective bound:                            6922117.43
+  Infeasibilities:                            0.00000000
+  Extended solver steps:                               1
+  Total solver iterations:                          3328
+  Elapsed runtime seconds:                          0.41
+
+  Model Class:                                     MINLP
+
+  Total variables:                    118
+  Nonlinear variables:                 43
+  Integer variables:                   12
+
+  Total constraints:                  143
+  Nonlinear constraints:               30
+
+  Total nonzeros:                     301
+  Nonlinear nonzeros:                  48
+
+
+
+                            Variable             Value          Reduced Cost
+                            N_SHIFTS        1.00000000            0.00000000
+                        N_RESERVOIRS        6.00000000            0.00000000
+                       HOUSING_COEFF        3.90000000            0.00000000
+                   DAILY_COMSUMPTION        200.000000            0.00000000
+                      TIME_PER_SHIFT        24.0000000            0.00000000
+                  IRRELEVANCE_FACTOR       0.100000000E-03        0.00000000
+                DEM_RELEVANCE_FACTOR        500000.000            0.00000000
+             VALVES_RELEVANCE_FACTOR        1000.00000            0.00000000
+                              N_DAYS        1.00000000            0.00000000
+                  N_TOTAL_HOUSEHOLDS        9582.00000            0.00000000
+                        TOTAL_DEMAND        7473960.00            0.00000000
+                 MAX_INFLOW_RATE_INF        367200.000            0.00000000
+                  TOTAL_ZONE_OUTFLOW        6912000.00            0.00000000
+           IDLE_CAP_EXP_WEIGHTED_SUM        18826516.3            0.00000000
+               HOUSEHOLD_AVER_INFLOW        721.352536            0.00000000
+                 INHABIT_AVER_INFLOW        184.962189            0.00000000
+             IDEAL_INFLOW_RATE( ETA)        367200.000            0.00000000
+              IDEAL_INFLOW_RATE( R1)        288000.000            0.00000000
+              IDEAL_INFLOW_RATE( R2)        60683.7821            0.00000000
+              IDEAL_INFLOW_RATE( R3)        13795.8673            0.00000000
+              IDEAL_INFLOW_RATE( R4)        46226.6750            0.00000000
+              IDEAL_INFLOW_RATE( R5)        4057.60802            0.00000000
+              IDEAL_INFLOW_RATE( S1)        163236.068            0.00000000
+              IDEAL_INFLOW_RATE( S2)        31348.7790            0.00000000
+              IDEAL_INFLOW_RATE( S3)        29335.0031            0.00000000
+              IDEAL_INFLOW_RATE( S4)        13795.8673            0.00000000
+              IDEAL_INFLOW_RATE( S5)        46226.6750            0.00000000
+              IDEAL_INFLOW_RATE( S6)        4057.60802            0.00000000
+               MAX_INFLOW_RATE( ETA)        367200.000            0.00000000
+                MAX_INFLOW_RATE( R1)        288000.000            0.00000000
+                MAX_INFLOW_RATE( R2)        367200.000            0.00000000
+                MAX_INFLOW_RATE( R3)        367200.000            0.00000000
+                MAX_INFLOW_RATE( R4)        367200.000            0.00000000
+                MAX_INFLOW_RATE( R5)        367200.000            0.00000000
+                MAX_INFLOW_RATE( S1)        367200.000            0.00000000
+                MAX_INFLOW_RATE( S2)        367200.000            0.00000000
+                MAX_INFLOW_RATE( S3)        367200.000            0.00000000
+                MAX_INFLOW_RATE( S4)        367200.000            0.00000000
+                MAX_INFLOW_RATE( S5)        367200.000            0.00000000
+                MAX_INFLOW_RATE( S6)        367200.000            0.00000000
+               MIN_INFLOW_RATE( ETA)        0.00000000            0.00000000
+                MIN_INFLOW_RATE( R1)        0.00000000            0.00000000
+                MIN_INFLOW_RATE( R2)        0.00000000            0.00000000
+                MIN_INFLOW_RATE( R3)        0.00000000            0.00000000
+                MIN_INFLOW_RATE( R4)        0.00000000            0.00000000
+                MIN_INFLOW_RATE( R5)        0.00000000            0.00000000
+                MIN_INFLOW_RATE( S1)        0.00000000            0.00000000
+                MIN_INFLOW_RATE( S2)        0.00000000            0.00000000
+                MIN_INFLOW_RATE( S3)        0.00000000            0.00000000
+                MIN_INFLOW_RATE( S4)        0.00000000            0.00000000
+                MIN_INFLOW_RATE( S5)        0.00000000            0.00000000
+                MIN_INFLOW_RATE( S6)        0.00000000            0.00000000
+                  IDEAL_INFLOW( ETA)        8812800.00            0.00000000
+                   IDEAL_INFLOW( R1)        6912000.00            0.00000000
+                   IDEAL_INFLOW( R2)        1456410.77            0.00000000
+                   IDEAL_INFLOW( R3)        331100.814            0.00000000
+                   IDEAL_INFLOW( R4)        1109440.20            0.00000000
+                   IDEAL_INFLOW( R5)        97382.5924            0.00000000
+                   IDEAL_INFLOW( S1)        3917665.62            0.00000000
+                   IDEAL_INFLOW( S2)        752370.695            0.00000000
+                   IDEAL_INFLOW( S3)        704040.075            0.00000000
+                   IDEAL_INFLOW( S4)        331100.814            0.00000000
+                   IDEAL_INFLOW( S5)        1109440.20            0.00000000
+                   IDEAL_INFLOW( S6)        97382.5924            0.00000000
+                INITIAL_VOLUME( ETA)        0.00000000            0.00000000
+                 INITIAL_VOLUME( R1)        0.00000000            0.00000000
+                 INITIAL_VOLUME( R2)        0.00000000            0.00000000
+                 INITIAL_VOLUME( R3)        0.00000000            0.00000000
+                 INITIAL_VOLUME( R4)        0.00000000            0.00000000
+                 INITIAL_VOLUME( R5)        0.00000000            0.00000000
+                 INITIAL_VOLUME( S1)        0.00000000            0.00000000
+                 INITIAL_VOLUME( S2)        0.00000000            0.00000000
+                 INITIAL_VOLUME( S3)        0.00000000            0.00000000
+                 INITIAL_VOLUME( S4)        0.00000000            0.00000000
+                 INITIAL_VOLUME( S5)        0.00000000            0.00000000
+                 INITIAL_VOLUME( S6)        0.00000000            0.00000000
+                      CAPACITY( ETA)        2500000.00            0.00000000
+                       CAPACITY( R1)        500000.000            0.00000000
+                       CAPACITY( R2)        400000.000            0.00000000
+                       CAPACITY( R3)        100000.000            0.00000000
+                       CAPACITY( R4)        180000.000            0.00000000
+                       CAPACITY( R5)        20000.0000            0.00000000
+                       CAPACITY( S1)        5431000.00            0.00000000
+                       CAPACITY( S2)        1043000.00            0.00000000
+                       CAPACITY( S3)        976000.000            0.00000000
+                       CAPACITY( S4)        459000.000            0.00000000
+                       CAPACITY( S5)        1538000.00            0.00000000
+                       CAPACITY( S6)        135000.000            0.00000000
+              RELEVANCE_FACTOR( ETA)        1.13000000            0.00000000
+               RELEVANCE_FACTOR( R1)        1.13000000            0.00000000
+               RELEVANCE_FACTOR( R2)        1.12000000            0.00000000
+               RELEVANCE_FACTOR( R3)        1.12000000            0.00000000
+               RELEVANCE_FACTOR( R4)        1.12000000            0.00000000
+               RELEVANCE_FACTOR( R5)        1.12000000            0.00000000
+               RELEVANCE_FACTOR( S1)        1.00000000            0.00000000
+               RELEVANCE_FACTOR( S2)        1.00000000            0.00000000
+               RELEVANCE_FACTOR( S3)        1.00000000            0.00000000
+               RELEVANCE_FACTOR( S4)        1.00000000            0.00000000
+               RELEVANCE_FACTOR( S5)        1.00000000            0.00000000
+               RELEVANCE_FACTOR( S6)        1.00000000            0.00000000
+          VALVE_STATUS( D1, T1, ETA)        1.00000000           -6614.05538
+           VALVE_STATUS( D1, T1, R1)        1.00000000           -6908596.82
+           VALVE_STATUS( D1, T1, R2)        1.00000000           -1000.00000
+           VALVE_STATUS( D1, T1, R3)        1.00000000           -1000.00000
+           VALVE_STATUS( D1, T1, R4)        1.00000000           -1000.00000
+           VALVE_STATUS( D1, T1, R5)        1.00000000           -1000.00000
+           VALVE_STATUS( D1, T1, S1)        1.00000000           -1000.00000
+           VALVE_STATUS( D1, T1, S2)        1.00000000           -1000.00000
+           VALVE_STATUS( D1, T1, S3)        1.00000000           -1000.00000
+           VALVE_STATUS( D1, T1, S4)        1.00000000           -1000.00000
+           VALVE_STATUS( D1, T1, S5)        1.00000000           -1000.00000
+           VALVE_STATUS( D1, T1, S6)        1.00000000           -1000.00000
+                INFLOW( D1, T1, ETA)        8812800.00            0.00000000
+                 INFLOW( D1, T1, R1)        6912000.00            0.00000000
+                 INFLOW( D1, T1, R2)        1456410.77            0.00000000
+                 INFLOW( D1, T1, R3)        331100.814            0.00000000
+                 INFLOW( D1, T1, R4)        1109440.20            0.00000000
+                 INFLOW( D1, T1, R5)        97382.5924            0.00000000
+                 INFLOW( D1, T1, S1)        3917665.62            0.00000000
+                 INFLOW( D1, T1, S2)        752370.695            0.00000000
+                 INFLOW( D1, T1, S3)        704040.075            0.00000000
+                 INFLOW( D1, T1, S4)        331100.814            0.00000000
+                 INFLOW( D1, T1, S5)        1109440.20            0.00000000
+                 INFLOW( D1, T1, S6)        97382.5924            0.00000000
+               OUTFLOW( D1, T1, ETA)        6912000.00            0.00000000
+                OUTFLOW( D1, T1, R1)        6912000.00            0.00000000
+                OUTFLOW( D1, T1, R2)        1456410.77            0.00000000
+                OUTFLOW( D1, T1, R3)        331100.814            0.00000000
+                OUTFLOW( D1, T1, R4)        1109440.20            0.00000000
+                OUTFLOW( D1, T1, R5)        97382.5924            0.00000000
+                OUTFLOW( D1, T1, S1)        3917665.62            0.00000000
+                OUTFLOW( D1, T1, S2)        752370.695            0.00000000
+                OUTFLOW( D1, T1, S3)        704040.075            0.00000000
+                OUTFLOW( D1, T1, S4)        331100.814            0.00000000
+                OUTFLOW( D1, T1, S5)        1109440.20            0.00000000
+                OUTFLOW( D1, T1, S6)        97382.5924            0.00000000
+            RES_VOLUME( D1, T1, ETA)        1900800.00            0.00000000
+             RES_VOLUME( D1, T1, R1)        0.00000000            0.00000000
+             RES_VOLUME( D1, T1, R2)        0.00000000            0.00000000
+             RES_VOLUME( D1, T1, R3)        0.00000000            0.00000000
+             RES_VOLUME( D1, T1, R4)        0.00000000            0.00000000
+             RES_VOLUME( D1, T1, R5)        0.00000000            0.00000000
+             RES_VOLUME( D1, T1, S1)        0.00000000            0.00000000
+             RES_VOLUME( D1, T1, S2)        0.00000000            0.00000000
+             RES_VOLUME( D1, T1, S3)        0.00000000            0.00000000
+             RES_VOLUME( D1, T1, S4)        0.00000000            0.00000000
+             RES_VOLUME( D1, T1, S5)        0.00000000            0.00000000
+             RES_VOLUME( D1, T1, S6)        0.00000000            0.00000000
+         IDLE_CAPACITY( D1, T1, ETA)        599200.000            0.00000000
+          IDLE_CAPACITY( D1, T1, R1)        500000.000            0.00000000
+          IDLE_CAPACITY( D1, T1, R2)        400000.000            0.00000000
+          IDLE_CAPACITY( D1, T1, R3)        100000.000            0.00000000
+          IDLE_CAPACITY( D1, T1, R4)        180000.000            0.00000000
+          IDLE_CAPACITY( D1, T1, R5)        20000.0000            0.00000000
+          IDLE_CAPACITY( D1, T1, S1)        5431000.00            0.00000000
+          IDLE_CAPACITY( D1, T1, S2)        1043000.00            0.00000000
+          IDLE_CAPACITY( D1, T1, S3)        976000.000            0.00000000
+          IDLE_CAPACITY( D1, T1, S4)        459000.000            0.00000000
+          IDLE_CAPACITY( D1, T1, S5)        1538000.00            0.00000000
+          IDLE_CAPACITY( D1, T1, S6)        135000.000            0.00000000
+     IDLE_CAP_EXP_WEIG( D1, T1, ETA)        3377972.73            0.00000000
+      IDLE_CAP_EXP_WEIG( D1, T1, R1)        2753189.50            0.00000000
+      IDLE_CAP_EXP_WEIG( D1, T1, R2)        1880646.59            0.00000000
+      IDLE_CAP_EXP_WEIG( D1, T1, R3)        398107.171            0.00000000
+      IDLE_CAP_EXP_WEIG( D1, T1, R4)        768962.579            0.00000000
+      IDLE_CAP_EXP_WEIG( D1, T1, R5)        65637.7364            0.00000000
+      IDLE_CAP_EXP_WEIG( D1, T1, S1)        5431000.00            0.00000000
+      IDLE_CAP_EXP_WEIG( D1, T1, S2)        1043000.00            0.00000000
+      IDLE_CAP_EXP_WEIG( D1, T1, S3)        976000.000            0.00000000
+      IDLE_CAP_EXP_WEIG( D1, T1, S4)        459000.000            0.00000000
+      IDLE_CAP_EXP_WEIG( D1, T1, S5)        1538000.00            0.00000000
+      IDLE_CAP_EXP_WEIG( D1, T1, S6)        135000.000            0.00000000
+                     HOUSEHOLDS( S1)        5431.00000            0.00000000
+                     HOUSEHOLDS( S2)        1043.00000            0.00000000
+                     HOUSEHOLDS( S3)        976.000000            0.00000000
+                     HOUSEHOLDS( S4)        459.000000            0.00000000
+                     HOUSEHOLDS( S5)        1538.00000            0.00000000
+                     HOUSEHOLDS( S6)        135.000000            0.00000000
+                         DEMAND( S1)        4236180.00            0.00000000
+                         DEMAND( S2)        813540.000            0.00000000
+                         DEMAND( S3)        761280.000            0.00000000
+                         DEMAND( S4)        358020.000            0.00000000
+                         DEMAND( S5)        1199640.00            0.00000000
+                         DEMAND( S6)        105300.000            0.00000000
+          ZONE_AVERAGE_CAPACITY( S1)        1000.00000            0.00000000
+          ZONE_AVERAGE_CAPACITY( S2)        1000.00000            0.00000000
+          ZONE_AVERAGE_CAPACITY( S3)        1000.00000            0.00000000
+          ZONE_AVERAGE_CAPACITY( S4)        1000.00000            0.00000000
+          ZONE_AVERAGE_CAPACITY( S5)        1000.00000            0.00000000
+          ZONE_AVERAGE_CAPACITY( S6)        1000.00000            0.00000000
+                   ZONE_OUTFLOW( S1)        3917665.62            0.00000000
+                   ZONE_OUTFLOW( S2)        752370.695            0.00000000
+                   ZONE_OUTFLOW( S3)        704040.075            0.00000000
+                   ZONE_OUTFLOW( S4)        331100.814            0.00000000
+                   ZONE_OUTFLOW( S5)        1109440.20            0.00000000
+                   ZONE_OUTFLOW( S6)        97382.5924            0.00000000
+                           DIFF( S1)        0.00000000            500000.000
+                           DIFF( S2)        0.00000000            500000.000
+                           DIFF( S3)        0.00000000            500000.000
+                           DIFF( S4)        0.00000000            500000.000
+                           DIFF( S5)        0.00000000            500000.000
+                           DIFF( S6)        0.00000000            500000.000
+                     DEMAND_PER( S1)       0.566791901            0.00000000
+                     DEMAND_PER( S2)       0.108849927            0.00000000
+                     DEMAND_PER( S3)       0.101857650            0.00000000
+                     DEMAND_PER( S4)       0.479023168E-01        0.00000000
+                     DEMAND_PER( S5)       0.160509288            0.00000000
+                     DEMAND_PER( S6)       0.140889167E-01        0.00000000
+               ZONE_OUTFLOW_PER( S1)       0.566791901            0.00000000
+               ZONE_OUTFLOW_PER( S2)       0.108849927            0.00000000
+               ZONE_OUTFLOW_PER( S3)       0.101857650            0.00000000
+               ZONE_OUTFLOW_PER( S4)       0.479023168E-01        0.00000000
+               ZONE_OUTFLOW_PER( S5)       0.160509288            0.00000000
+               ZONE_OUTFLOW_PER( S6)       0.140889167E-01        0.00000000
+                      NET( ETA, ETA)        0.00000000            0.00000000
+                       NET( ETA, R1)        1.00000000            0.00000000
+                       NET( ETA, R2)        0.00000000            0.00000000
+                       NET( ETA, R3)        0.00000000            0.00000000
+                       NET( ETA, R4)        0.00000000            0.00000000
+                       NET( ETA, R5)        0.00000000            0.00000000
+                       NET( ETA, S1)        0.00000000            0.00000000
+                       NET( ETA, S2)        0.00000000            0.00000000
+                       NET( ETA, S3)        0.00000000            0.00000000
+                       NET( ETA, S4)        0.00000000            0.00000000
+                       NET( ETA, S5)        0.00000000            0.00000000
+                       NET( ETA, S6)        0.00000000            0.00000000
+                       NET( R1, ETA)        0.00000000            0.00000000
+                        NET( R1, R1)        0.00000000            0.00000000
+                        NET( R1, R2)        1.00000000            0.00000000
+                        NET( R1, R3)        1.00000000            0.00000000
+                        NET( R1, R4)        1.00000000            0.00000000
+                        NET( R1, R5)        1.00000000            0.00000000
+                        NET( R1, S1)        1.00000000            0.00000000
+                        NET( R1, S2)        0.00000000            0.00000000
+                        NET( R1, S3)        0.00000000            0.00000000
+                        NET( R1, S4)        0.00000000            0.00000000
+                        NET( R1, S5)        0.00000000            0.00000000
+                        NET( R1, S6)        0.00000000            0.00000000
+                       NET( R2, ETA)        0.00000000            0.00000000
+                        NET( R2, R1)        0.00000000            0.00000000
+                        NET( R2, R2)        0.00000000            0.00000000
+                        NET( R2, R3)        0.00000000            0.00000000
+                        NET( R2, R4)        0.00000000            0.00000000
+                        NET( R2, R5)        0.00000000            0.00000000
+                        NET( R2, S1)        0.00000000            0.00000000
+                        NET( R2, S2)        1.00000000            0.00000000
+                        NET( R2, S3)        1.00000000            0.00000000
+                        NET( R2, S4)        0.00000000            0.00000000
+                        NET( R2, S5)        0.00000000            0.00000000
+                        NET( R2, S6)        0.00000000            0.00000000
+                       NET( R3, ETA)        0.00000000            0.00000000
+                        NET( R3, R1)        0.00000000            0.00000000
+                        NET( R3, R2)        0.00000000            0.00000000
+                        NET( R3, R3)        0.00000000            0.00000000
+                        NET( R3, R4)        0.00000000            0.00000000
+                        NET( R3, R5)        0.00000000            0.00000000
+                        NET( R3, S1)        0.00000000            0.00000000
+                        NET( R3, S2)        0.00000000            0.00000000
+                        NET( R3, S3)        0.00000000            0.00000000
+                        NET( R3, S4)        1.00000000            0.00000000
+                        NET( R3, S5)        0.00000000            0.00000000
+                        NET( R3, S6)        0.00000000            0.00000000
+                       NET( R4, ETA)        0.00000000            0.00000000
+                        NET( R4, R1)        0.00000000            0.00000000
+                        NET( R4, R2)        0.00000000            0.00000000
+                        NET( R4, R3)        0.00000000            0.00000000
+                        NET( R4, R4)        0.00000000            0.00000000
+                        NET( R4, R5)        0.00000000            0.00000000
+                        NET( R4, S1)        0.00000000            0.00000000
+                        NET( R4, S2)        0.00000000            0.00000000
+                        NET( R4, S3)        0.00000000            0.00000000
+                        NET( R4, S4)        0.00000000            0.00000000
+                        NET( R4, S5)        1.00000000            0.00000000
+                        NET( R4, S6)        0.00000000            0.00000000
+                       NET( R5, ETA)        0.00000000            0.00000000
+                        NET( R5, R1)        0.00000000            0.00000000
+                        NET( R5, R2)        0.00000000            0.00000000
+                        NET( R5, R3)        0.00000000            0.00000000
+                        NET( R5, R4)        0.00000000            0.00000000
+                        NET( R5, R5)        0.00000000            0.00000000
+                        NET( R5, S1)        0.00000000            0.00000000
+                        NET( R5, S2)        0.00000000            0.00000000
+                        NET( R5, S3)        0.00000000            0.00000000
+                        NET( R5, S4)        0.00000000            0.00000000
+                        NET( R5, S5)        0.00000000            0.00000000
+                        NET( R5, S6)        1.00000000            0.00000000
+
+                                 Row      Slack or Surplus        Dual Price
+                      OBJECTIVE_EQ02        6922117.35            1.00000000
+                      CALC_DIFF( S1)        0.00000000            0.00000000
+                      CALC_DIFF( S2)        0.00000000            0.00000000
+                      CALC_DIFF( S3)        0.00000000            0.00000000
+                      CALC_DIFF( S4)        0.00000000            0.00000000
+                      CALC_DIFF( S5)        0.00000000            0.00000000
+                      CALC_DIFF( S6)        0.00000000            0.00000000
+                                   8        0.00000000            0.00000000
+                                   9        0.00000000            0.00000000
+                                  10        0.00000000            0.00000000
+                                  11        0.00000000            0.00000000
+                                  12        0.00000000            0.00000000
+                                  13        0.00000000            0.00000000
+                                  14        0.00000000            0.00000000
+                                  15        0.00000000            0.00000000
+                                  16        0.00000000            0.00000000
+                                  17        0.00000000            0.00000000
+                                  18        0.00000000            0.00000000
+                                  19        0.00000000            0.00000000
+     VOL_DIST_RESERVAT( D1, T1, ETA)        0.00000000          -0.637034243E-03
+      VOL_DIST_RESERVAT( D1, T1, R1)        0.00000000           -1.00000000
+      VOL_DIST_RESERVAT( D1, T1, R2)        0.00000000           -1.00000000
+      VOL_DIST_RESERVAT( D1, T1, R3)        0.00000000           -1.00000000
+      VOL_DIST_RESERVAT( D1, T1, R4)        0.00000000           -1.00000000
+      VOL_DIST_RESERVAT( D1, T1, R5)        0.00000000           -1.00000000
+                   CALC_VOLUME_TOTAL        0.00000000            1.00000000
+                 RES_DE_DEMANDA( S1)        318514.377            0.00000000
+                 RES_DE_DEMANDA( S2)        61169.3049            0.00000000
+                 RES_DE_DEMANDA( S3)        57239.9249            0.00000000
+                 RES_DE_DEMANDA( S4)        26919.1860            0.00000000
+                 RES_DE_DEMANDA( S5)        90199.7996            0.00000000
+                 RES_DE_DEMANDA( S6)        7917.40764            0.00000000
+   VOLUME_DISTRIBUIDO_POR_SETOR( S1)        0.00000000            1.00000000
+   VOLUME_DISTRIBUIDO_POR_SETOR( S2)        0.00000000            1.00000000
+   VOLUME_DISTRIBUIDO_POR_SETOR( S3)        0.00000000            1.00000000
+   VOLUME_DISTRIBUIDO_POR_SETOR( S4)        0.00000000            1.00000000
+   VOLUME_DISTRIBUIDO_POR_SETOR( S5)        0.00000000            1.00000000
+   VOLUME_DISTRIBUIDO_POR_SETOR( S6)        0.00000000            1.00000000
+                    CALC_AVER_INFLOW        0.00000000            0.00000000
+            CALC_INHABIT_AVER_INFLOW        0.00000000            0.00000000
+     VOL_REST_NAO_NULO( D1, T1, ETA)        1900800.00            0.00000000
+      VOL_REST_NAO_NULO( D1, T1, R1)        0.00000000          -0.999377779
+      VOL_REST_NAO_NULO( D1, T1, R2)        0.00000000          -0.999473419
+      VOL_REST_NAO_NULO( D1, T1, R3)        0.00000000          -0.999554120
+      VOL_REST_NAO_NULO( D1, T1, R4)        0.00000000          -0.999521534
+      VOL_REST_NAO_NULO( D1, T1, R5)        0.00000000          -0.999632429
+      VOL_REST_NAO_NULO( D1, T1, S1)        0.00000000          -0.999900000
+      VOL_REST_NAO_NULO( D1, T1, S2)        0.00000000          -0.999900000
+      VOL_REST_NAO_NULO( D1, T1, S3)        0.00000000          -0.999900000
+      VOL_REST_NAO_NULO( D1, T1, S4)        0.00000000          -0.999900000
+      VOL_REST_NAO_NULO( D1, T1, S5)        0.00000000          -0.999900000
+      VOL_REST_NAO_NULO( D1, T1, S6)        0.00000000          -0.999900000
+        RES_CAPACIDADE( D1, T1, ETA)        599200.000            0.00000000
+         RES_CAPACIDADE( D1, T1, R1)        500000.000            0.00000000
+         RES_CAPACIDADE( D1, T1, R2)        400000.000            0.00000000
+         RES_CAPACIDADE( D1, T1, R3)        100000.000            0.00000000
+         RES_CAPACIDADE( D1, T1, R4)        180000.000            0.00000000
+         RES_CAPACIDADE( D1, T1, R5)        20000.0000            0.00000000
+         RES_CAPACIDADE( D1, T1, S1)        5431000.00            0.00000000
+         RES_CAPACIDADE( D1, T1, S2)        1043000.00            0.00000000
+         RES_CAPACIDADE( D1, T1, S3)        976000.000            0.00000000
+         RES_CAPACIDADE( D1, T1, S4)        459000.000            0.00000000
+         RES_CAPACIDADE( D1, T1, S5)        1538000.00            0.00000000
+         RES_CAPACIDADE( D1, T1, S6)        135000.000            0.00000000
+ INFLOW_PER_SHIFT_EQ03( D1, T1, ETA)        0.00000000           0.637034243E-03
+  INFLOW_PER_SHIFT_EQ03( D1, T1, R1)        0.00000000           0.999362966
+  INFLOW_PER_SHIFT_EQ03( D1, T1, R2)        0.00000000            0.00000000
+  INFLOW_PER_SHIFT_EQ03( D1, T1, R3)        0.00000000            0.00000000
+  INFLOW_PER_SHIFT_EQ03( D1, T1, R4)        0.00000000            0.00000000
+  INFLOW_PER_SHIFT_EQ03( D1, T1, R5)        0.00000000            0.00000000
+  INFLOW_PER_SHIFT_EQ03( D1, T1, S1)        0.00000000            0.00000000
+  INFLOW_PER_SHIFT_EQ03( D1, T1, S2)        0.00000000            0.00000000
+  INFLOW_PER_SHIFT_EQ03( D1, T1, S3)        0.00000000            0.00000000
+  INFLOW_PER_SHIFT_EQ03( D1, T1, S4)        0.00000000            0.00000000
+  INFLOW_PER_SHIFT_EQ03( D1, T1, S5)        0.00000000            0.00000000
+  INFLOW_PER_SHIFT_EQ03( D1, T1, S6)        0.00000000            0.00000000
+     CALC_VOL_REST_INI( D1, T1, ETA)        0.00000000           0.637034243E-03
+      CALC_VOL_REST_INI( D1, T1, R1)      -0.838190317E-08        1.00000000
+      CALC_VOL_REST_INI( D1, T1, R2)        0.00000000            1.00000000
+      CALC_VOL_REST_INI( D1, T1, R3)        0.00000000            1.00000000
+      CALC_VOL_REST_INI( D1, T1, R4)        0.00000000            1.00000000
+      CALC_VOL_REST_INI( D1, T1, R5)        0.00000000            1.00000000
+      CALC_VOL_REST_INI( D1, T1, S1)        0.00000000            1.00000000
+      CALC_VOL_REST_INI( D1, T1, S2)        0.00000000            1.00000000
+      CALC_VOL_REST_INI( D1, T1, S3)        0.00000000            1.00000000
+      CALC_VOL_REST_INI( D1, T1, S4)        0.00000000            1.00000000
+      CALC_VOL_REST_INI( D1, T1, S5)        0.00000000            1.00000000
+      CALC_VOL_REST_INI( D1, T1, S6)        0.00000000            1.00000000
+                   EVAL_INFLOW( ETA)      -0.372529030E-08       0.637034243E-03
+                    EVAL_INFLOW( R1)        0.00000000           0.999362966
+                    EVAL_INFLOW( R2)        0.00000000            0.00000000
+                    EVAL_INFLOW( R3)        0.00000000            0.00000000
+                    EVAL_INFLOW( R4)        0.00000000            0.00000000
+                    EVAL_INFLOW( R5)        0.00000000            0.00000000
+                    EVAL_INFLOW( S1)        0.00000000            0.00000000
+                    EVAL_INFLOW( S2)        0.00000000            0.00000000
+                    EVAL_INFLOW( S3)        0.00000000            0.00000000
+                    EVAL_INFLOW( S4)        0.00000000            0.00000000
+                    EVAL_INFLOW( S5)        0.00000000            0.00000000
+                    EVAL_INFLOW( S6)        0.00000000            0.00000000
+      RES_MAX_INFLOW_RATE_EQ05( ETA)        0.00000000           0.152888218E-01
+       RES_MAX_INFLOW_RATE_EQ05( R1)        0.00000000            23.9847112
+       RES_MAX_INFLOW_RATE_EQ05( R2)        306516.218            0.00000000
+       RES_MAX_INFLOW_RATE_EQ05( R3)        353404.133            0.00000000
+       RES_MAX_INFLOW_RATE_EQ05( R4)        320973.325            0.00000000
+       RES_MAX_INFLOW_RATE_EQ05( R5)        363142.392            0.00000000
+       RES_MAX_INFLOW_RATE_EQ05( S1)        203963.932            0.00000000
+       RES_MAX_INFLOW_RATE_EQ05( S2)        335851.221            0.00000000
+       RES_MAX_INFLOW_RATE_EQ05( S3)        337864.997            0.00000000
+       RES_MAX_INFLOW_RATE_EQ05( S4)        353404.133            0.00000000
+       RES_MAX_INFLOW_RATE_EQ05( S5)        320973.325            0.00000000
+       RES_MAX_INFLOW_RATE_EQ05( S6)        363142.392            0.00000000
+      RES_MIN_INFLOW_RATE_EQ06( ETA)        367200.000            0.00000000
+       RES_MIN_INFLOW_RATE_EQ06( R1)        288000.000            0.00000000
+       RES_MIN_INFLOW_RATE_EQ06( R2)        60683.7821            0.00000000
+       RES_MIN_INFLOW_RATE_EQ06( R3)        13795.8673            0.00000000
+       RES_MIN_INFLOW_RATE_EQ06( R4)        46226.6750            0.00000000
+       RES_MIN_INFLOW_RATE_EQ06( R5)        4057.60802            0.00000000
+       RES_MIN_INFLOW_RATE_EQ06( S1)        163236.068            0.00000000
+       RES_MIN_INFLOW_RATE_EQ06( S2)        31348.7790            0.00000000
+       RES_MIN_INFLOW_RATE_EQ06( S3)        29335.0031            0.00000000
+       RES_MIN_INFLOW_RATE_EQ06( S4)        13795.8673            0.00000000
+       RES_MIN_INFLOW_RATE_EQ06( S5)        46226.6750            0.00000000
+       RES_MIN_INFLOW_RATE_EQ06( S6)        4057.60802            0.00000000
+       CALC_CAP_OCIOSA( D1, T1, ETA)        0.00000000          -0.637034243E-03
+        CALC_CAP_OCIOSA( D1, T1, R1)        0.00000000          -0.622220827E-03
+        CALC_CAP_OCIOSA( D1, T1, R2)        0.00000000          -0.526581045E-03
+        CALC_CAP_OCIOSA( D1, T1, R3)        0.00000000          -0.445880031E-03
+        CALC_CAP_OCIOSA( D1, T1, R4)        0.00000000          -0.478465605E-03
+        CALC_CAP_OCIOSA( D1, T1, R5)        0.00000000          -0.367571324E-03
+        CALC_CAP_OCIOSA( D1, T1, S1)        0.00000000          -0.100000000E-03
+        CALC_CAP_OCIOSA( D1, T1, S2)        0.00000000          -0.100000000E-03
+        CALC_CAP_OCIOSA( D1, T1, S3)        0.00000000          -0.100000000E-03
+        CALC_CAP_OCIOSA( D1, T1, S4)        0.00000000          -0.100000000E-03
+        CALC_CAP_OCIOSA( D1, T1, S5)        0.00000000          -0.100000000E-03
+        CALC_CAP_OCIOSA( D1, T1, S6)        0.00000000          -0.100000000E-03
+                CALC_CAP_OCIOSA_POND      -0.186264515E-08      -0.100000000E-03
+                                 138        0.00000000          -0.100000000E-03
+                                 139      -0.279396772E-08      -0.100000000E-03
+                                 140      -0.186264515E-08      -0.100000000E-03
+                                 141        0.00000000          -0.100000000E-03
+                                 142        0.00000000          -0.100000000E-03
+                                 143        0.00000000          -0.100000000E-03
+                                 144        0.00000000          -0.100000000E-03
+                                 145        0.00000000          -0.100000000E-03
+                                 146        0.00000000          -0.100000000E-03
+                                 147        0.00000000          -0.100000000E-03
+                                 148        0.00000000          -0.100000000E-03
+                                 149        0.00000000          -0.100000000E-03
+
+ 
