@@ -445,15 +445,15 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \begin{table}[H]
 \begin{center}
 	\begin{tabular}{ c  c  c  c } 
-		reservoir      & name              & capacity                       & Maximum inflow rate informed    \\
-		($r$)          &             	   &  ($\mathrm{C}_{r}$) (m$^3$)    &  ($\mathrm{InFR_{max}}_{r}$) ($\mathrm{liters/hour}$) \\
+		reservoir      & name              & capacity                       & \hl{maximum inflow rate}    \\
+		($r$)          &             	   &  ($\mathrm{C}_{r}$) (\hl{liters})    &  (\hl{$\mathrm{MaxInFR}_{r}$}) ($\mathrm{liters/hour}$) \\
 		\\
 		1              & WTP               & 2.500.000            &  367.200,00   \\
-		2              & Central           &   500.000 			  &  288.000,00   \\
-		3              & Elevated          &   400.000            & não informado \\
-		4              & Panelas Piranji   &   100.000            & não informado \\
-		5              & Canaã             &   180.000            & não informado \\
-		6              & Oxifan            &    20.000            & não informado \\
+		2              & Central           &   500.000 		&  288.000,00   \\
+		3              & Elevated          &   400.000            & \hl{uninformed} \\
+		4              & Panelas Piranji   &   100.000            & \hl{uninformed} \\
+		5              & Canaã             &   180.000            & \hl{uninformed} \\
+		6              & Oxifan            &    20.000            & \hl{uninformed} \\
 		\\
 	\end{tabular}
 \caption{Reservoirs data - Catende (data from 2016)}
@@ -464,7 +464,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \begin{table}[H]
 \begin{center}
 	\begin{tabular}{ c  c  c } 
-		zone          & name         & Number of households \\
+		zone          & name         & \hl{n}umber of households \\
 		($z$)          &              & ($\mathrm{NH}_{z}$)   \\
 		                                               \\
 		7              & Centro           & 5.431 \\
@@ -501,7 +501,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \subsection{Initial considerations}
 \label{sec:initialConsiderations}
 
-Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data summarized in the section \ref{sec:data}, calculated with the aid of the 'LibreOffice Calc' software, considering the maximum daily distribution value (in a 24-hour shift), limited by the outflows of the weirs and the WTP,  \hl{and the following values for the parameters: $\mathrm{FRF}$ $\mathrm{ICIrF} = 0.000005$,  $\mathrm{RF}_r = 1.13, r=1,2$ (for the WTP and the Central Reservoir);  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$ (for the other reservoirs); and $\mathrm{RF}_z =1.00, \forall z$ (for the zones)} (case 01). 
+Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data summarized in the section \ref{sec:data}, calculated with the aid of the 'LibreOffice Calc' software, considering the maximum daily distribution value (in a 24-hour shift), limited by the outflows of the weirs and the WTP,  \hl{and the following values for the parameters: $\mathrm{FRF}= 100,000$, $\mathrm{VRF}= 1,000$,  $\mathrm{ICIrF} = 0.000005$,  $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$} (case 01). 
 
 \begin{figure}[h]
 	\begin{center}
@@ -519,24 +519,24 @@ Another important piece of information that we observe in this figure are the id
 \noindent 1) as the part of the inflow received by the WTP and not distributed is completely used to fill its reservoir and, as the inflow rate of the Central Reservoir is lower than the inflow rate of the WTP, so $V_{\mathrm{in}dsr}$, for the WTP and the Central Reservoir, are calculated according to Eqs. in \ref{eq:volInFRCentral}: 
 
 \begin{equation}
-	V_{\mathrm{in}dsr} = \mathrm{InFR_{max}}_r * \mathrm{T}, \quad d = 1, \quad s = 1, \quad r = 1,2
+	\mathcolorbox{yellow}{InF_{dsr} = \mathrm{MaxInFR}_r * \mathrm{T}}, \quad d = 1, \quad s = 1, \quad r = 1,2
 	\label{eq:volInFRCentral}
 \end{equation}
 
 \noindent 2) the total availability of water, released by the Central Reservoir, which directly or indirectly supplies all other reservoirs and zones, is less than the total demand. Therefore, the volume of water received by the Central Reservoir is completely distributed to the zones (and not to fill the reservoirs), with the fair distribution being proportional to the number of households in each zone: 
 
-\begin{eqnarray}
-	V_{\mathrm{in}dsz} = V_{\mathrm{in}dsr} * (\mathrm{ND}_z / \mathrm{ND_{total}}), \\
-	\quad d = 1, \quad s = 1, \quad r = 2, \quad z=\mathrm{NR}+1, ..., \mathrm{NL} \nonumber
-\end{eqnarray}
+\begin{equation}
+	\mathcolorbox{yellow}{InF_{dsz} = InF_{dsr} * \dfrac{\mathrm{D}_z}{ \mathrm{TD}},
+	\quad d = 1, \quad s = 1, \quad r = 2, \quad \forall z}  
+\end{equation}
 
 \noindent and, 3) as the volumes received by the reservoirs are completely distributed: 
 
 \begin{equation}
-	\mathrm{V_{in}}_{dsr} = \mathrm{V_{out}}_{dsr} \quad d = 1, \quad s = 1, \quad r=3, ..., \mathrm{NR}
+	\mathcolorbox{yellow}{InF_{dsr} = OutF_{dsr}} \quad d = 1, \quad s = 1, \quad r=3, ..., \mathrm{NR}
 \end{equation}
 
-\noindent being the values of $V_{\mathrm{out}dsr}$ calculated according to the Eqs. in (\ref{eq:evalVoutRes}) recursively, and the ideal rates (not informed) then calculated based on the Eqs. in (\ref{eqEvalFR}).
+\noindent being the values of \hl{$OutF_{dsr}$} calculated according to the Eqs. in (\ref{eq:evalOutFRes}) recursively, and the ideal rates (not informed) then calculated based on the Eqs. in (\ref{eq:evalnFR}).
 
 After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, we run the solver in Lingo, using the same inputs shown in this figure, along with other data reported in the \ref{sec:data} section. The values 367,200.00 and 288,000.00 were used as the values of the maximum inflow rates informed for the WTP ($r=1$) and for the Central Reservoir ($r=2$), respectively. No limit values for inflow rates were informed for the other reservoirs and zones. Table \ref{tab:lingoEvalCase01} displays the values found by the solver. As we can see in this table, the solver found the calculated optimal values very quickly and with a very small margin of error. 
 
@@ -545,9 +545,9 @@ After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, w
 \begin{small}
 	\begin{tabular}{ c r r r r r } 
 		location & \multicolumn{1}{c}{total demand}      & \multicolumn{1}{c}{capacity} & \multicolumn{1}{c}{initial vol.} & \multicolumn{1}{c}{idle capacity **} & \multicolumn{1}{c}{total inflow}  \\
-		      & \multicolumn{1}{c}{(liters)} & \multicolumn{1}{c}{(m$^3$)}   & \multicolumn{1}{c}{(m$^3$)}     &  \multicolumn{1}{c}{(m$^3$)}   &  \multicolumn{1}{c}{(liters)}               \\
+		      & \multicolumn{1}{c}{(liters)} & \multicolumn{1}{c}{(\hl{liters})}   & \multicolumn{1}{c}{(\hl{liters})}     &  \multicolumn{1}{c}{(\hl{liters})}   &  \multicolumn{1}{c}{(liters)}               \\
 		\\
-		WTP   &              & 2,500,000.00 & 0.00 &  2498,099.20 & 8,812,800.00 \\
+		WTP   &              & 2,500,000.00 & 0.00 &  2,498,099.20 & 8,812,800.00 \\
 		R1    &              &   500,000.00 & 0.00 &    500,000.00 & 6,912,000.00 \\
 		R2    &              &   400,000.00 & 0.00 &    400,000.00 & 1,456,410.77 \\
 		R3    &              &   100,000.00 & 0.00 &    100,000.00 &   331,100.81 \\
