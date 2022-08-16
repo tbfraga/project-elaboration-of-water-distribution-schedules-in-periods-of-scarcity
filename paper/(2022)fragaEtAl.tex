@@ -287,13 +287,13 @@ This water distribution problem arises in times of scarcity, in which it becomes
 \end{equation}
 
 \begin{equation}
-	\mathcolorbox{yellow}{\sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{OutF_{dsz}} -  \mathrm{D}_z*\mathrm{ND} \leq 0,  \quad \forall z}
-	\label{eq:demandRes}
+	\mathcolorbox{yellow}{OutF_{z} - \sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{OutF_{dsz}} = 0, \quad \forall z}
+	\label{eq:evalTOutFZone}
 \end{equation}
 
 \begin{equation}
-	\mathcolorbox{yellow}{OutF_{z} - \sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{OutF_{dsz}} = 0, \quad \forall z}
-	\label{eq:evalTOutFZone}
+	\mathcolorbox{yellow}{OutF_{z} -  \mathrm{D}_z  \leq 0,  \quad \forall z}
+	\label{eq:demandRes}
 \end{equation}
 
 \begin{equation}
@@ -366,8 +366,8 @@ This water distribution problem arises in times of scarcity, in which it becomes
 		$\mathrm{VRF}$ & relevance factor for the adjustment of the valves \\
 		$\mathrm{ICIrF}$ &  irrelevance factor for idle capacity \\ 
 
-		$\mathrm{D}_z$ &  daily demand of zone $z$, $\mathrm{D}_z = \mathrm{IAC}*\mathrm{NH}_z*\mathrm{HC} $\\
-		$\mathrm{TD}$ & total daily demand, $\mathrm{TD} = \sum_{z=1}^{\mathrm{NZ}}{\mathrm{D}_z}$ \\ 
+		$\mathrm{D}_z$ &  demand of zone $z$, $\mathrm{D}_z = \mathrm{IAC}*\mathrm{NH}_z*\mathrm{HC}*\mathrm{ND} $\\
+		$\mathrm{TD}$ & total demand, $\mathrm{TD} = \sum_{z=1}^{\mathrm{NZ}}{\mathrm{D}_z}$ \\ 
 		$\mathrm{PD}_z$ & $z$ zone percentage demand, $\mathrm{PD}_z = \dfrac{\mathrm{D}_z}{\mathrm{TD}}$ \\ & \\
 
 		\multicolumn{2}{a}{\emph{decision variables}} \\ & \\
