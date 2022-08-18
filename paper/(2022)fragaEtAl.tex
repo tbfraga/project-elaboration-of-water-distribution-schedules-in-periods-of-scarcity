@@ -501,7 +501,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \subsection{Initial considerations}
 \label{sec:initialConsiderations}
 
-Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data summarized in the section \ref{sec:data}, calculated with the aid of the 'LibreOffice Calc' software, considering the maximum daily distribution value (in a 24-hour shift), limited by the outflows of the weirs and the WTP,  \hl{and the following values for the parameters: $\mathrm{FRF}= 500,000$, $\mathrm{VRF}= 1,000$,  $\mathrm{ICIrF} = 0.0001$,  $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$} (case 01). 
+Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data summarized in the section \ref{sec:data}, calculated with the aid of the 'LibreOffice Calc' software, considering the maximum daily distribution value (in a 24-hour shift), limited by the outflows of the weirs and the WTP,  \hl{and the following values for the parameters: $\mathrm{FRF}= 500,000$, $\mathrm{VRF}= 500,000$,  $\mathrm{ICIrF} = 0.0001$,  $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$} (case 01). 
 
 \begin{figure}[h]
 	\begin{center}
@@ -768,23 +768,23 @@ Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the e
 	\begin{tabular}{ c c c c c c c c c } 
 	
          &    &    &                &           &           &   \multicolumn{3}{c}{relevance factors}  \\      
-	case & ND & NS &  optimum &  fitness   & rel. error &  time(s)  & \hl{ierations}     \\
-	 01  &  1 & 1  &  \hl{12,910,117.35}  &  \hl{6,922,117.35}  & 0\% &  \hl{0.43}   &   \hl{3,272}       \\
+	case & ND & NS &  optimum &  fitness   & \hl{rel. error} &  time(s)  & \hl{ierations}     \\
+	 01  &  1 & 1  &  \hl{12,910,117.35}  &  \hl{12,910,117.35}  & \hl{0\%} &  \hl{0.43}   &   \hl{3,440}       \\
 	 02  &  1 & 2  &  \hl{18,910,117.35}  &  \hl{18,910,117.35}  & \hl{0\%} &  \hl{0.72}   &   \hl{5,425}    \\
 	 03  &  1 & 3  &  \hl{24,910,117.35}  &  \hl{24,910,117.32}  & \hl{$\approx 0\%$} &  \hl{0.15}   &   \hl{524}     \\
-	 04  &  2 & 1  & \hl{25,822,455.15} & \hl{13,844,826.12}  & &  \hl{73.88}   &   \hl{97,554}    \\
+	 04  &  2 & 1  & \hl{25,822,455.15} & \hl{25,822,454.86}  &  \hl{$\approx 0\%$} &  \hl{0.71}   &   \hl{4,808}    \\
 	 05  &  2 & 2  & \hl{37,822,455.15} & \hl{37,822,454.72}  &  \hl{$\approx 0\%$} &  \hl{0.21}   &   \hl{914}      \\
 	 06  &  2 & 3  & \hl{49,822,455.15} & \hl{49,822,454.59}  &  \hl{$\approx 0\%$} &  \hl{0.26}   &   \hl{789}     \\
-	 07  &  3 & 1  & \hl{38,734,455,15} & 19,939,821.57  & &   3.40   &    878      \\
+	 07  &  3 & 1  & \hl{38,734,455,15} & \hl{38,734,454.72}  & \hl{$\approx 0\%$} &   \hl{0.11}   &    \hl{517}      \\
 	 08  &  3 & 2  & \hl{56,734,455,15} & \hl{56,734,454.51}  & \hl{$\approx 0\%$} & \hl{0.24}  &  \hl{771}    \\
 	 09  &  3 & 3  & \hl{74,734,455,15} & \hl{74,734,454.32}  & \hl{$\approx 0\%$} &   \hl{0.65} & \hl{1,139}   \\
-	 10  &  4 & 1  & \hl{51,646,455,15} & 26,586,806.96  & &  12.34   &   5556    \\
+	 10  &  4 & 1  & \hl{51,646,455,15} & \hl{51,646,455.14}  & \hl{$\approx 0\%$} &  \hl{0.29}   &  \hl{1511}    \\
 	 11  &  4 & 2  & \hl{75,646,455,15} & \hl{75,646,454.30}  & \hl{$\approx 0\%$} &  \hl{0.43}   &    \hl{976}     \\
 	 12  &  4 & 3  & \hl{99,646,455,15} & \hl{99,646,454.04}  & \hl{$\approx 0\%$} &  \hl{0.94}   &   \hl{1,295}      \\
-	 13  &  5 & 1  & \hl{64,558,455,15} & 33,233,971.23  & &  17.03   &   6408      \\
+	 13  &  5 & 1  & \hl{64,558,455,15} & \hl{64,558,454.43}  & \hl{$\approx 0\%$}  &  \hl{0.30}   &   \hl{916}    \\
 	 14  &  5 & 2  & \hl{94,558,455,15} & \hl{94,558,454.10}  &  \hl{$\approx 0\%$} &  \hl{0.59}   &   \hl{1,130}    \\
 	 15  &  5 & 3  & \hl{124,558,455,15} & \hl{124,558,453.76} & \hl{$\approx 0\%$} &  \hl{1.00}   &   \hl{1,016}       \\
-	 16  &  6 & 1  & \hl{77,470,455,15} & 39,953,314.33  & &  24.23   &   7386      \\
+	 16  &  6 & 1  & \hl{77,470,455,15} & \hl{77,470,454.29}  & \hl{$\approx 0\%$}  &  \hl{0.24}   &   \hl{738}       \\
 	 17  &  6 & 2  & \hl{113,470,455,15} & \hl{113,470,453.89}  & \hl{$\approx 0\%$} &  \hl{0.97}   &   \hl{1,191}      \\
 	 18  &  6 & 3  & \hl{149,470,455,15} & \hl{149,470,455.13}  & \hl{$\approx 0\%$} & \hl{1.63}   &   \hl{1,332}     \\
 	 19  &  7 & 1  & \hl{90,382,455,15}  & \hl{90,382,454.14}  & \hl{$\approx 0\%$} &  \hl{0.50}   &  \hl{1,480}       \\
@@ -798,9 +798,7 @@ Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the e
 \end{center}
 \end{table}
 
-As can be seen in this table, we adopted $\mathrm{RF_{valves}} = 2000$ for cases 12, 16 and 21. This is because we identified that the developed solver had difficulty in finding optimal solutions for these three cases using $\mathrm {RF_{valves}} = 1000$. In case 12, the solver found a solution that claimed to be a global optimum, but that was not. In cases 16 and 21, the solver could not find a viable solution to the problem within the stipulated time limit (10 minutes). An interesting aspect of the set of real data collected is that it turned the studied problem into a natural poorly sized problem. This is due, in large part, to the dimension of reservoir capacities. We believe that this problem of undersizing can be easily solved, however, to date, we have not found a solution. 
-
-Another important issue to be considered is that the adjustment of the parameters $\mathrm{RF_{fair}}$, $\mathrm{RF_{valves}}$, and $\mathrm{IrF_{idleness}}$ strongly influence the efficiency of the solver as well as the solution found. An important aspect of the relevance / irrelevance parameters adopted is that they allow the planner to interfere in the solution presented by the solver, so that this solution meets the planning objectives (e.g., prioritization of filling reservoirs or meeting demand). However, this requires that the planner has good experience in applying the solver and a good understanding of how solve reacts to the adjustment of these parameters. Therefore, the good performance of the developed solver will depend largely on the qualification of the planner for this purpose. We understand that it is possible to build formulas for automatic calculation of suitable values for these parameters, using quantitative and qualitative analyzes referring to the decision-making process (e.g., formulas defined according to answers given for some questionnaire). It is also possible, of course, to develop a user-friendly graphical interface. These efforts would make using the solver much simpler, however they depend on the continuity of this project, with a strong commitment of time and dedication of professionals with adequate intellectual capacities.
+An important issue to be considered is that the adjustment of the parameters \hl{$\mathrm{FRF}$}, \hl{$\mathrm{VRF}$}, and \hl{$\mathrm{ICIrF}$} strongly influence the efficiency of the solver as well as the solution found. An important aspect of the relevance / irrelevance parameters adopted is that they allow the planner to interfere in the solution presented by the solver, so that this solution meets the planning objectives (e.g., prioritization of filling reservoirs or meeting demand). However, this requires that the planner has good experience in applying the solver and a good understanding of how solve reacts to the adjustment of these parameters. Therefore, the good performance of the developed solver will depend largely on the qualification of the planner for this purpose. We understand that it is possible to build formulas for automatic calculation of suitable values for these parameters, using quantitative and qualitative analyzes referring to the decision-making process (e.g., formulas defined according to answers given for some questionnaire). It is also possible, of course, to develop a user-friendly graphical interface. These efforts would make using the solver much simpler, however they depend on the continuity of this project, \hl{with a strong commitment of time and dedication of qualified professionals}.
 
 \section{Conclusions and future works}
 \label{sec:conclusions}
