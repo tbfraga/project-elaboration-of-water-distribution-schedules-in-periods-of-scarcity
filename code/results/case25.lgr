@@ -8,8 +8,8 @@
   Objective bound:                          14142455.303
   Infeasibilities:                          0.0000000000
   Extended solver steps:                              39
-  Total solver iterations:                        464543
-  Elapsed runtime seconds:                         54.49
+  Total solver iterations:                        459487
+  Elapsed runtime seconds:                         54.74
 
   Model Class:                                     MINLP
 
