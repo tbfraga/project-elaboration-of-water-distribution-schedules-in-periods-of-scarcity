@@ -347,6 +347,7 @@ This water distribution problem arises in times of scarcity, in which it becomes
 		$\mathrm{ND}$ & number of days \\
 		$\mathrm{NS}$ & number of daily distribution shifts \\
 		$\mathrm{NL}$ & number of locations \\ 
+		$\mathrm{NR}$ & number of reservoirs (reservoirs and WTPs) \\
 		$\mathrm{T}$ & time per shift \\
 		$\mathrm{IRV}_l$ & initial volume of reservoir at the location $l$ \\
 		$\mathrm{C}_{l}$ & capacity of reservoir at the location $l$ \\
@@ -372,7 +373,7 @@ This water distribution problem arises in times of scarcity, in which it becomes
 
 		\multicolumn{2}{a}{\emph{decision variables}} \\ & \\
 
-		$X_{dsl} $ & binary variable that receives value 1 when the inlet valve of location $l$ is open on \\
+		$X_{dsl}$ & binary variable that receives value 1 when the inlet valve of location $l$ is open on \\
 		& the $s$-th shift of day $d$, and receives value 0 when it is closed in the same period \\
 		$V_l$ & ideal volume of water distributed to the location $l$ in any shift in which \\
 		& the corresponding valve remains open \\ & \\ 
@@ -408,7 +409,7 @@ In order to guarantee a fair distribution, in specific cases where the actual fl
 
 \section{Tests and results}
 
-To validate the proposed model, a LINGO code was developed and ran in the 'global solver' mode, using the parameter values recommended by the software \cite{LINGO} \hl{(with the exception of the Precision parameter, on the Interface tab, whose value was set to 10)}. The tests were carried out based on the considerations presented in the sections \ref{sec:initialConsiderations}, \ref{sec:praticalAspects} and \ref{sec:limitations} and using the data collected during this work, as summarized in the section \ref{sec:data}. The results found as well as an analysis of these results are presented along the following sections together with the considerations studied. 
+To validate the proposed model, a LINGO code was developed and ran in the 'global solver' mode, using the parameter values recommended by the software \cite{LINGO} \hl{(with the exception of the Precision parameter, on the Interface tab, whose value was set to 11)}. The tests were carried out based on the considerations presented in the sections \ref{sec:initialConsiderations}, \ref{sec:praticalAspects} and \ref{sec:limitations} and using the data collected during this work, as summarized in the section \ref{sec:data}. The results found as well as an analysis of these results are presented along the following sections together with the considerations studied. 
 
 \subsection{Data collected}
 \label{sec:data}
@@ -421,7 +422,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 
 \noindent housing coefficient ($\mathrm{HC}$) = 3.9 inhabitants / household 
 
-\noindent average daily inflow per inhabitant ($\mathrm{C_{average}}$) = 200 liters / inhabitant * day 
+\noindent average daily inflow per inhabitant (\hl{$\mathrm{IAC}$}) = 200 liters / inhabitant * day 
 
 \noindent Note: each weir supplies water to an WTP (conventional or mechanical). However, both supply water to the Central Reservoir. For this reason, in this work we consider only a single WTP. 
 
@@ -536,9 +537,9 @@ Another important piece of information that we observe in this figure are the id
 	\mathcolorbox{yellow}{InF_{dsr} = OutF_{dsr}} \quad d = 1, \quad s = 1, \quad r=3, ..., \mathrm{NR}
 \end{equation}
 
-\noindent being the values of \hl{$OutF_{dsr}$} calculated according to the Eqs. in (\ref{eq:evalOutFRes}) recursively, and the ideal rates (not informed) then calculated based on the Eqs. in (\ref{eq:evalnFR}).
+\noindent being the values of \hl{$OutF_{dsr}$} calculated according to the Eqs. in (\ref{eq:evalOutFRes}) recursively, and the ideal rates (not informed) then calculated based on the Eqs. in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}).
 
-After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, we run the solver in Lingo, using the same inputs shown in this figure, along with other data reported in the \ref{sec:data} section. The values 367,200.00 and 288,000.00 were used as the values of the maximum inflow rates informed for the WTP and for the Central Reservoir, respectively. No limit values for inflow rates were informed for the other reservoirs and zones. Table \ref{tab:lingoEvalCase01} displays the values found by the solver. As we can see in this table, the solver found the calculated optimal values very quickly \hl{and without any errors observed}. 
+After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, we run the solver in \hl{LINGO}, using the same inputs shown in this figure, along with other data reported in the \ref{sec:data} section. The values 367,200.00 and 288,000.00 were used as the values of the maximum inflow rates informed for the WTP and for the Central Reservoir, respectively. No limit values for inflow rates were informed for the other reservoirs and zones. Table \ref{tab:lingoEvalCase01} displays the values found by the solver. As we can see in this table, the solver found the calculated optimal values very quickly \hl{and without any errors observed}. 
 
 \begin{table}[t]
 \begin{center}
@@ -664,12 +665,12 @@ In the case of situation (1), as the solver seeks to maximize the volume of wate
 		R3    &               &   100,000.00 & 0.00 &    \hl{20,835.03} &   \hl{795,204.97} \\
 	    R4    &               &   180,000.00 & 0.00 &    \hl{20,835.03} &  \hl{2,558,444.97} \\
 	    R5    &               &    20,000.00 & 0.00 &     20,000.00 &    210,600.00 \\
-	    Z1    &  8,472,360.00 &     5,431.00 & 0.00 &      5,431.00 &  6,240,000.00 \\
-	    Z2    &  1,627,080.00 &     1,043.00 & 0.00 &      1,043.00 &  1,627,080.00 \\
-	    Z3    &  1,522,560.00 &       976.00 & 0.00 &        976.00 &  1,522,560.00 \\
-	    Z4    &    716,040,00 &       459.00 & 0.00 &        459.00 &    716,040.00 \\
-	    Z5    &  2,399,280.00 &     1,538.00 & 0.00 &      1,538.00 &  2,399,280.00 \\
-	    Z6    &    210,600.00 &       135.00 & 0.00 &        135.00 &    210,600.00 \\
+	    Z1    &  8,472,360.00 &     \hl{5,431,000.00} & 0.00 &      5,431.00 &  6,240,000.00 \\
+	    Z2    &  1,627,080.00 &     \hl{1,043,000.00} & 0.00 &      1,043.00 &  1,627,080.00 \\
+	    Z3    &  1,522,560.00 &       \hl{976,000.00} & 0.00 &        976.00 &  1,522,560.00 \\
+	    Z4    &    716,040,00 &       \hl{459,000.00} & 0.00 &        459.00 &    716,040.00 \\
+	    Z5    &  2,399,280.00 &     \hl{1,538,000.00} & 0.00 &      1,538.00 &  2,399,280.00 \\
+	    Z6    &    210,600.00 &       \hl{135,000.00} & 0.00 &        135.00 &    210,600.00 \\
 	    \\
 	    total & 14,947,920,00 & \multicolumn{2}{r}{exp. weighted sum:} & \hl{9,883,380.87} & \\
 		   \\
@@ -699,7 +700,7 @@ In the case of situation (1), as the solver seeks to maximize the volume of wate
 \end{center}
 \end{table}
 
-For situation (3), once a minimum value is indicated for the inflow of a given location, the solver will propose solutions in which the inflow of some locations will be null or concentrated in one or a few shifts. For example, Table \ref{tab:lingoEvaluationsCase23} presents the results found by the solver for case 23, in which the same data used in case 06 were considered, except that a minimum flow rate was reported for the reservoir $\mathrm{R5}$ ($r=6$), $\mathrm{InFR_{min}}_6 = $5,000.00 liters/hour. As we can see in this table, the inflow of reservoir $\mathrm{R5}$ and zone $\mathrm{Z6}$ received value 0 for the first shift of the first day. The solver presented a result for case 23 after setting the parameter value $\mathrm{RF_{valves}}=10,000$.
+For situation (3), once a minimum value is indicated for the inflow of a given location, the solver will propose solutions in which the inflow of some locations will be null or concentrated in one or a few shifts. For example, Table \ref{tab:lingoEvaluationsCase23} presents the results found by the solver for case 23, in which the same data used in case 06 were considered, except that a minimum flow rate was reported for the reservoir $\mathrm{R5}$ ($r=6$), \hl{$\mathrm{MinInFR}_6 = $10,000.00 liters/hour}. \hl{As we can see in this table, the R5 reservoir and the Z6 zone only receive flow in the third shift of the first and second days}. The solver presented a result for case 23 after setting the parameter value $\mathrm{VRF}=5,000$. \hl{The solution found by the solver is not optimal. It would be possible to obtain a better solution, for example, by distributing the volume received by zone Z6 among all shifts.}
 
 \begin{table}[t]
 \begin{center}
@@ -754,15 +755,15 @@ As for situation (2), the developed solver does not present a good answer. The v
 \subsection{Solver and model limitations}
 \label{sec:limitations}
 
-Lingo is an incredible software, indispensable for mathematical modeling of any real problem. With the help of Lingo, it is possible to notice a series of initial errors in the model, which could easily go unnoticed. Additionally, the elaborated mathematical model strongly influences the solver efficiency. This forces the modeler to think about issues that limit the model's solutions, and to work with functions that make the model robust and functional.
+\hl{LINGO} is an incredible software, indispensable for mathematical modeling of any real problem. With the help of \hl{LINGO}, it is possible to notice a series of initial errors in the model, which could easily go unnoticed. Additionally, the elaborated mathematical model strongly influences the solver efficiency. This forces the modeler to think about issues that limit the model's solutions, and to work with functions that make the model robust and functional.
 
-However, \hl{LINGO} is not a magic tool, \hl{LINGO}'s processing power is limited, due to limitations associated with exact solving techniques for optimization problems, especially when defined as non-linear and NP-Hard. For most problems, the computational effort increases as the number of decision variables increases, according to functions that are not polynomials. In other words, there is an explosion in the number of possible solutions, and current exact methodologies have not yet found a way to deal with this, in the case of problems with larger dimensions. 
+However, \hl{LINGO} is not a magic tool, \hl{LINGO}'s processing power is limited, due to limitations associated with exact solving techniques for optimization problems, especially when defined as non-linear and NP-Hard. For most problems, the computational effort increases as the number of decision variables increases, according to functions that are not polynomials. In other words, there is an explosion in the number of possible solutions, and current exact methodologies have not yet found a way to deal with this, in the case of problems with larger dimensions. \hl{In the case of the model presented in this work, it is a non-linear, mixed-integer mathematical programming model. Nonlinearity happens due to the objective function and the constraints in} (\ref{eq:evalInF}), (\ref{eq:evalPDist}) and (\ref{eq:idleCapEWSum}). \hl{The non-polynomial nature of the model arises due to the binary decision variables $X_{dsl}$.}
 
-In this section, we present an initial discussion about the limitations of the developed solver and mathematical model. It is important to emphasize that many of the limitations presented here could be mitigated through adjustments to the model, or even through a better use of the Lingo software. However, this requires a hard work. It may seem like it, but building a robust and adequate mathematical model is not a simple task and Lingo offers a wide range of different application possibilities through various parameter adjustments, and we are still familiarizing with all these possibilities. 
+In this section, we present an initial discussion about the limitations of the developed solver and mathematical model. It is important to emphasize that many of the limitations presented here could be mitigated through adjustments to the model, or even through a better use of the \hl{LINGO} software. However, this requires a hard work. It may seem like it, but building a robust and adequate mathematical model is not a simple task and \hl{LINGO} offers a wide range of different application possibilities through various parameter adjustments, and we are still familiarizing with all these possibilities. 
 
 Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the efficiency of the developed model and solver. We run the solver for case 01, and for similar cases where only the number of days and shifts have been changed. We used an interval between 1 and 7 days and, for each possibility, we considered 1, 2 and 3 shifts. The relevance / irrelevance factors referring to fair distribution, valve status and reservoir idle capacity were defined based on an extensive study. Such definition had the following purposes: to define as priorities meeting the demand, then fair distribution and finally filling the reservoirs; in order to test the ruggedness of the model, we also had the clear intention of distributing the flow among all shifts, allowing the valves to be turned off only when flow restrictions impose this condition. 
 
-\begin{table}[t]
+\begin{table}[h]
 \begin{center}
 \begin{small}
 	\begin{tabular}{ c c c c c c c c c } 
@@ -792,7 +793,7 @@ Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the e
 	 21  &  7 & 3  & \hl{174,382,455,15} & \hl{174,382,453.21}  & \hl{$\approx 0\%$}  &  \hl{2.51}   &  \hl{1,445}      \\
 	
 	\end{tabular}
-\caption{Study on the efficiency of the mathematical model and the solver}
+\caption{Study on the efficiency of the mathematical model and the solver.}
 \label{tab:lingoEvaluation}
 \end{small}
 \end{center}
@@ -803,7 +804,7 @@ An important issue to be considered is that the adjustment of the parameters \hl
 \section{Conclusions and future works}
 \label{sec:conclusions}
 
-In the present work, a conceptual and mathematical modeling for the problem of water distribution in periods of scarcity was presented. The validation of the mathematical model was performed using a solver developed with the Lingo software from Lindo Sistems. Through the tests carried out, we concluded that the developed model and solver fit perfectly to the studied reality, and are capable of proposing solutions that make the distribution of water volumes for the different zones fair, in periods of scarcity, through the control of flows and distribution times. Such solutions take into account the restrictions of the system and present alternatives for when the channelings are to be modulated optimally (with flow rates that optimally regulate the distribution). However, it was verified that, for the solver to present good results, it must be used by a suitably qualified employee. What may become less relevant through new advanced studies for high-level calculation of relevance / irrelevance parameters adopted in the model, as well as through the construction of a friendly graphic interface.  Additionally, due to the limitations of the exact methodologies developed so far for solving non-polynomial optimization problems (such as the studied problem), the developed solver naturally presented limitations related to its ability to solve larger problems. Such limitations justify the need to develop solution algorithms based on heuristics applied to optimization problems. These efforts will be the focus of our next works.
+In the present work, a conceptual and mathematical modeling for the problem of water distribution in periods of scarcity was presented. The validation of the mathematical model was performed using a solver developed with the \hl{LINGO} software from \hl{LINDO} Sistems. Through the tests carried out, we concluded that the developed model and solver fit perfectly to the studied reality, and are capable of proposing solutions that make the distribution of water volumes for the different zones fair, in periods of scarcity, through the control of flows and distribution times. Such solutions take into account the restrictions of the system and present alternatives for when the channelings are to be modulated optimally (with flow rates that optimally regulate the distribution). However, it was verified that, for the solver to present good results, it must be used by a suitably qualified employee. What may become less relevant through new advanced studies for high-level calculation of relevance / irrelevance parameters adopted in the model, as well as through the construction of a friendly graphic interface.  Additionally, due to the limitations of the exact methodologies developed so far for solving non-polynomial optimization problems (such as the studied problem), the developed solver naturally presented limitations related to its ability to solve larger problems. Such limitations justify the need to develop solution algorithms based on heuristics applied to optimization problems. These efforts will be the focus of our next works.
 
 %\section*{Acknowledgement}
 %\label{sec:acknowledgement}
