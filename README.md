@@ -1,4 +1,4 @@
-# paper-elaboration-of-water-distribution-schedules-in-periods-of-scarcity
+# project-elaboration-of-water-distribution-schedules-in-periods-of-scarcity
 
 Project for the modeling and solution of the problem of Elaboration of Water Distribution Schedules in Periods of Scarcity. 
 
