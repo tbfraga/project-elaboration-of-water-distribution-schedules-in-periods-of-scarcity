@@ -68,7 +68,7 @@ Vol. \theVOL, No. \theISSUE, \thePUBYEAR\hfill\thepage}}
 \begin{document}%
 %%%%%%%%%%%%%%%%%
 
-\RRH{letter to reviewers}
+\RRH{Elaboration of Water Distribution Schedules in Periods of Scarcity}
 
 Dear editor and reviewers, \\
 
@@ -89,6 +89,16 @@ we are enormously grateful for your important contributions. Below is a summary 
 \item In order to explain the computational challenges related to the proposed model, we have included the sentence: 'The model presented in this work is a non-linear, mixed-integer mathematical programming model. Nonlinearity happens due to the objective function and the constraints in (\ref{eq:evalInF}), (\ref{eq:evalPDist}) and (\ref{eq:idleCapEWSum}). The non-polynomial nature of the model arises due to the binary decision variables $X_{dsl}$.' (page \pageref{nonlinerarityExp}).
 \item 'remove impurities even existing in the water.' was replaced by 'remove impurities still in the water.' (page \pageref{firstChange}).
 \item 'capacity of treated water, when the abstraction in water sources is at its maximum limit, is 288,000' was replaced by 'capacity of treated water is 288,000' (page \pageref{secondChange}).
+\item We have improved the quality of all figures.
+\end{itemize}
+
+\emph{other modifications}
+
+\begin{itemize}
+\item We improved the mathematical model by removing some unnecessary calculations and correcting some errors.
+\item Section 3 was completely redone so that the mathematical model was formally presented.
+\item We modify the word LINGO by writing it with capital letters.
+\item We also fixed the measurement units used.
 \end{itemize}
 
 \newpage
@@ -313,13 +323,13 @@ This water distribution problem arises in times of scarcity, in which it becomes
 \end{equation}
 
 \begin{equation}
-	\mathcolorbox{yellow}{OutF_{z} - \sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{OutF_{dsz}} = 0, \quad \forall z}
-	\label{eq:evalTOutFZone}
+	\mathcolorbox{yellow}{OutF_{z} -  \mathrm{D}_z  \leq 0,  \quad \forall z}
+	\label{eq:demandRes}
 \end{equation}
 
 \begin{equation}
-	\mathcolorbox{yellow}{OutF_{z} -  \mathrm{D}_z  \leq 0,  \quad \forall z}
-	\label{eq:demandRes}
+	\mathcolorbox{yellow}{OutF_{z} - \sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{OutF_{dsz}} = 0, \quad \forall z}
+	\label{eq:evalTOutFZone}
 \end{equation}
 
 \begin{equation}
