@@ -13,6 +13,7 @@
 \usepackage{float}
 \usepackage{xcolor}
 \usepackage{graphicx}
+%\usepackage{hyperref}
 \usepackage{soul}
 \newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
 
@@ -66,6 +67,31 @@ Vol. \theVOL, No. \theISSUE, \thePUBYEAR\hfill\thepage}}
 %%%%%%%%%%%%%%%%%
 \begin{document}%
 %%%%%%%%%%%%%%%%%
+
+\RRH{letter to reviewers}
+
+Dear editor and reviewers, \\
+
+we are enormously grateful for your important contributions. Below is a summary of the changes made, according to the suggestions presented: \\
+
+\emph{first reviewer}
+
+\begin{itemize}
+\item .
+\end{itemize}
+
+\emph{second reviewer}
+
+\begin{itemize}
+\item In order to clarify the symbols used in the model, we created the Table \ref{tab:symbols} (page \pageref{tab:symbols}).
+\item For clarity, the symbols used have been adjusted, and the text throughout the paper has been modified accordingly.
+\item The problem with the numerical scale was solved by adjusting the values used for the model parameters. All tests were redone and the results presented in the paper were changed.
+\item In order to explain the computational challenges related to the proposed model, we have included the sentence: 'The model presented in this work is a non-linear, mixed-integer mathematical programming model. Nonlinearity happens due to the objective function and the constraints in (\ref{eq:evalInF}), (\ref{eq:evalPDist}) and (\ref{eq:idleCapEWSum}). The non-polynomial nature of the model arises due to the binary decision variables $X_{dsl}$.' (page \pageref{nonlinerarityExp}).
+\item 'remove impurities even existing in the water.' was replaced by 'remove impurities still in the water.' (page \pageref{firstChange}).
+\item 'capacity of treated water, when the abstraction in water sources is at its maximum limit, is 288,000' was replaced by 'capacity of treated water is 288,000' (page \pageref{secondChange}).
+\end{itemize}
+
+\newpage
 
 \setcounter{page}{1}
 
@@ -144,7 +170,7 @@ After the adduction, the water captured at the Santa Rita weir, goes to the trea
 \includegraphics[width=\textwidth]{figures/calhaPashall.png}
 \end{figure}
 
-The water, then flocculated, goes to another phase, passing through larger layers called decanters, where the flakes formed are deposited in tubular modules similar to a beehive, making the water almost suitable for consumption. In these stages of treatment, almost all contamination factors are eliminated, filtration is then carried out to further improve the decanted water which, by gravity, passes through filters made of a porous medium with the ability to retain and \hl{remove impurities still in the water}. In disinfection, physical or chemical agents are used, such as chlorine, used for the destruction of pathogenic organisms that cause diseases, ending with the correction of pH, where products are also added so that the treated water has a suitable pH for consumption. After being treated, the water is deposited in a supported type reservoir with a capacity of 500,000 m$^3$ of storage (Central Reservoir). Treatment is carried out in continuous flow. 
+The water, then flocculated, goes to another phase, passing through larger layers called decanters, where the flakes formed are deposited in tubular modules similar to a beehive, making the water almost suitable for consumption. In these stages of treatment, almost all contamination factors are eliminated, filtration is then carried out to further improve the decanted water which, by gravity, passes through filters made of a porous medium with the ability to retain and \label{firstChange}{\hl{remove impurities still in the water}}. In disinfection, physical or chemical agents are used, such as chlorine, used for the destruction of pathogenic organisms that cause diseases, ending with the correction of pH, where products are also added so that the treated water has a suitable pH for consumption. After being treated, the water is deposited in a supported type reservoir with a capacity of 500,000 m$^3$ of storage (Central Reservoir). Treatment is carried out in continuous flow. 
 
 The water collected from the Bálsamo das Freiras Reservoir is treated in mechanical filters, where the addition of chemical products is carried out automatically. The disposal of the water treated in these filters is also carried out in the Central Reservoir. 
 
@@ -176,7 +202,7 @@ The Central Reservoir, in addition to supplying water to the Elevated Reservoir 
 Figure \ref{fig:WDSCatende} shows a representation of the water supply network described above. The supplier managers regulates the water supply in Catende, by opening or closing the valves that control the distribution flow. Currently, the company leaves these valves permanently open, maintaining a continuous flow of this resource, with the supply being interrupted only to maintain the treatment filters or the distribution network. 
 
 \begin{figure}[h]
-\caption{Water Distribution Scheme in Catende  (subtitles in Portuguese).}
+\caption{Water Distribution Scheme in Catende \hl{(subtitles in Portuguese)}.}
 \label{fig:WDSCatende}
 \centering
 \includegraphics[width=\textwidth]{figures/esquemaDist.png}
@@ -209,7 +235,7 @@ Through the visits carried out at the WTP in Catende in 2016, it was also possib
 \end{center}
 \end{table}
 
-Although Catende is located in a region that does not suffer so much from the lack of water, it has been observed over the years, a considerable drop in its water sources, alerting the population and managers about the need to save this resource. The production \hl{capacity of treated water is 288,000 liters of water per hour}. Observing the total daily demand required, it is concluded that the productive capacity does not meet the daily needs of the population, which highlights the need for good management of water distribution.
+Although Catende is located in a region that does not suffer so much from the lack of water, it has been observed over the years, a considerable drop in its water sources, alerting the population and managers about the need to save this resource. The production \label{secondChange}{\hl{capacity of treated water is 288,000 liters of water per hour}}. Observing the total daily demand required, it is concluded that the productive capacity does not meet the daily needs of the population, which highlights the need for good management of water distribution.
 
 Based on this issue, the water distribution problem was then defined, as discussed in the next section. 
 
@@ -756,9 +782,9 @@ As for situation (2), the developed solver does not present a good answer. The v
 
 \hl{LINGO} is an incredible software, indispensable for mathematical modeling of any real problem. With the help of \hl{LINGO}, it is possible to notice a series of initial errors in the model, which could easily go unnoticed. Additionally, the elaborated mathematical model strongly influences the solver efficiency. This forces the modeler to think about issues that limit the model's solutions, and to work with functions that make the model robust and functional.
 
-However, \hl{LINGO} is not a magic tool, \hl{LINGO}'s processing power is limited, due to limitations associated with exact solving techniques for optimization problems, especially when defined as non-linear and NP-Hard. For most problems, the computational effort increases as the number of decision variables increases, according to functions that are not polynomials. In other words, there is an explosion in the number of possible solutions, and current exact methodologies have not yet found a way to deal with this, in the case of problems with larger dimensions. \hl{In the case of the model presented in this work, it is a non-linear, mixed-integer mathematical programming model. Nonlinearity happens due to the objective function and the constraints in} (\ref{eq:evalInF}), (\ref{eq:evalPDist}) and (\ref{eq:idleCapEWSum}). \hl{The non-polynomial nature of the model arises due to the binary decision variables $X_{dsl}$.}
+However, \hl{LINGO} is not a magic tool, \hl{LINGO}'s processing power is limited, due to limitations associated with exact solving techniques for optimization problems, especially when defined as non-linear and NP-Hard. For most problems, the computational effort increases as the number of decision variables increases, according to functions that are not polynomials. In other words, there is an explosion in the number of possible solutions, and current exact methodologies have not yet found a way to deal with this, in the case of problems with larger dimensions. 
 
-In this section, we present an initial discussion about the limitations of the developed solver and mathematical model. It is important to emphasize that many of the limitations presented here could be mitigated through adjustments to the model, or even through a better use of the \hl{LINGO} software. However, this requires a hard work. It may seem like it, but building a robust and adequate mathematical model is not a simple task and \hl{LINGO} offers a wide range of different application possibilities through various parameter adjustments, and we are still familiarizing with all these possibilities. 
+\label{nonlinerarityExp}{\hl{The model presented in this work is a non-linear, mixed-integer mathematical programming model. Nonlinearity happens due to the objective function and the constraints in}} (\ref{eq:evalInF}), (\ref{eq:evalPDist}) \hl{and} (\ref{eq:idleCapEWSum}). \hl{The non-polynomial nature of the model arises due to the binary decision variables $X_{dsl}$.} In this section, we present an initial discussion about the limitations of the developed solver and mathematical model. It is important to emphasize that many of the limitations presented here could be mitigated through adjustments to the model, or even through a better use of the \hl{LINGO} software. However, this requires a hard work. It may seem like it, but building a robust and adequate mathematical model is not a simple task and \hl{LINGO} offers a wide range of different application possibilities through various parameter adjustments, and we are still familiarizing with all these possibilities. 
 
 Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the efficiency of the developed model and solver. We run the solver for case 01, and for similar cases where only the number of days and shifts have been changed. We used an interval between 1 and 7 days and, for each possibility, we considered 1, 2 and 3 shifts. The relevance / irrelevance factors referring to fair distribution, valve status and reservoir idle capacity were defined based on an extensive study. Such definition had the following purposes: to define as priorities meeting the demand, then fair distribution and finally filling the reservoirs; in order to test the ruggedness of the model, we also had the clear intention of distributing the flow among all shifts, allowing the valves to be turned off only when flow restrictions impose this condition. 
 
