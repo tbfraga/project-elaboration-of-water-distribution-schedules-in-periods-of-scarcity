@@ -366,14 +366,11 @@ This water distribution problem arises in times of scarcity, in which it becomes
 	\label{eq:rv}
 \end{equation}
 
-
-\hl{The objective function (}\mathcolorbox{yellow}{\ref{eq:objFunc}}\hl{) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves} \footnotemark[1] \footnotetext[1]{\hl{In some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model.}} \hl{remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalInF}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalnFR}}\hl{) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution. The constraints in (}\mathcolorbox{yellow}{\ref{eq:evalMaxInfR}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalMinInfR}}\hl{) limit the inflow rates values. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalOutFRes}}\hl{) guarantee that the reservoirs outflows are exactly the amount of water that each reservoir distributes to other reservoirs or zones}\footnotemark[2] \footnotetext[2]{\hl{Note that, in the case of zones, each zone $z$ is considered to have a single reservoir, whose capacity is defined by the sum of the capacities of the various housing reservoirs in the zone.}}\hl{. The equations in (}\mathcolorbox{yellow}{\ref{eq:volResT1}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:volRem!T1}}\hl{) are the well-known flow constraints, being the equations in (}\mathcolorbox{yellow}{\ref{eq:volRStart}}\hl{) boundary conditions. The constraints in (}\mathcolorbox{yellow}{\ref{eq:minRV}}\hl{), (}\mathcolorbox{yellow}{\ref{eq:maxRV}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:maxRZV}}\hl{) limit the values of the remaining volumes of the reservoirs. The constraints in (}\mathcolorbox{yellow}{\ref{eq:demandRes}}\hl{) ensure that the total volume distributed to each zone will not exceed its total demand. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalTOutFZone}}\hl{), (}\mathcolorbox{yellow}{\ref{eq:evalTOutF}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalPDist}}\hl{) calculate the total volume delivered to each zone, the total volume delivered to all zones and the proportions of volume distributed to each zone, respectively. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalIdleCap}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:idleCapEWSum}}\hl{) calculate the idle capacities of the reservoirs in the last shift of the last day, and an exponentially weighted sum of these values, respectively. Finally, the constraints in (}\mathcolorbox{yellow}{\ref{eq:bv}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:rv}}\hl{) inform the nature of the primary decision variables.}
-
-\begin{table}[h]
+\begin{table}[h!]
 \begin{center}
 \footnotesize
 	\begin{tabular}{ a a } 
-		\multicolumn{2}{a}{\emph{indexes}} \\ & \\
+		\multicolumn{2}{a}{\emph{indexes}} \\ & \\ 
 
 		$d$ & used to designate a day, $d = 1, ..., \mathrm{ND}$ \\
 		$s$ & used to designate a shift of a day, $s = 1, ..., \mathrm{NS}$ \\
@@ -382,7 +379,8 @@ This water distribution problem arises in times of scarcity, in which it becomes
 		$r$ & used to designate a WTP or a reservoir, $r = 1, ..., \mathrm{NR}$ \\
 		$z$ & used to designate a zone, $z=\mathrm{NR}+1, ..., \mathrm{NL}$ \\ & \\
 		
-		\multicolumn{2}{a}{\emph{parameters}} \\ & \\
+		\multicolumn{2}{a}{\emph{parameters}} \\ & \\ 
+
 		$\mathrm{ND}$ & number of days \\
 		$\mathrm{NS}$ & number of daily distribution shifts \\
 		$\mathrm{NL}$ & number of locations \\ 
@@ -410,14 +408,12 @@ This water distribution problem arises in times of scarcity, in which it becomes
 		$\mathrm{TD}$ & total demand, $\mathrm{TD} = \sum_{z=1}^{\mathrm{NZ}}{\mathrm{D}_z}$ \\ 
 		$\mathrm{PD}_z$ & $z$ zone percentage demand, $\mathrm{PD}_z = \dfrac{\mathrm{D}_z}{\mathrm{TD}}$ \\ & \\
 
-		\multicolumn{2}{a}{\emph{decision variables}} \\ & \\
+		\multicolumn{2}{a}{\emph{decision and secondary variables}} \\ & \\ 
 
 		$X_{dsl}$ & binary variable that receives value 1 when the inlet valve of location $l$ is open on \\
 		& the $s$-th shift of day $d$, and receives value 0 when it is closed in the same period \\
 		$V_l$ & ideal volume of water distributed to the location $l$ in any shift in which \\
 		& the corresponding valve remains open \\ & \\ 
-
-		\multicolumn{2}{a}{\emph{secondary variables}} \\ & \\
 
 		$InF_{dsl}$ & water inflow received by location $l$ on the $s$-th shift of day $d$ \\
 		$OutF_{dsr}$ & water outflow delivered by reservoir $r$ on the $s$-th shift of day $d$ \\
@@ -430,10 +426,12 @@ This water distribution problem arises in times of scarcity, in which it becomes
 		$IdleC_{dsl}$ & idle capacity of reservoir at location $l$ at the end of the $s$-th shift of the day $d$ \\
 		$IdleCEWSum$ & exponentially weighted sum of idle capacities \\
 	\end{tabular}
-\caption{Table of symbols used in the mathematical model.}
+\caption{Symbols used in the mathematical model.}
 \label{tab:symbols}
 \end{center}
 \end{table}
+
+\hl{The objective function (}\mathcolorbox{yellow}{\ref{eq:objFunc}}\hl{) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves} \footnotemark[1] \footnotetext[1]{\hl{In some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model.}} \hl{remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. And $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalInF}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalnFR}}\hl{) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution. The constraints in (}\mathcolorbox{yellow}{\ref{eq:evalMaxInfR}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalMinInfR}}\hl{) limit the inflow rates values. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalOutFRes}}\hl{) guarantee that the reservoirs }\hl{outflows are exactly the amount of water that each reservoir distributes to other reservoirs or zones}\footnotemark[2] \footnotetext[2]{\hl{Note that, in the case of zones, each zone $z$ is considered to have a single reservoir, whose capacity is defined by the sum of the capacities of the various housing reservoirs in the zone.}}\hl{. The equations in (}\mathcolorbox{yellow}{\ref{eq:volResT1}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:volRem!T1}}\hl{) are the well-known flow constraints, being the equations in (}\mathcolorbox{yellow}{\ref{eq:volRStart}}\hl{) boundary conditions. The constraints in (}\mathcolorbox{yellow}{\ref{eq:minRV}}\hl{), (}\mathcolorbox{yellow}{\ref{eq:maxRV}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:maxRZV}}\hl{) limit the values of the remaining volumes of the reservoirs. The constraints in (}\mathcolorbox{yellow}{\ref{eq:demandRes}}\hl{) ensure that the total volume distributed to each zone will not exceed its total demand. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalTOutFZone}}\hl{), (}\mathcolorbox{yellow}{\ref{eq:evalTOutF}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalPDist}}\hl{) calculate the total volume delivered to each zone, the total volume delivered to all zones and the proportions of volume distributed to each zone, respectively. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalIdleCap}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:idleCapEWSum}}\hl{) calculate the idle capacities of the reservoirs in the last shift of the last day, and an exponentially weighted sum of these values, respectively. Finally, the constraints in (}\mathcolorbox{yellow}{\ref{eq:bv}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:rv}}\hl{) inform the nature of the primary decision variables.}
 
 \subsection{Distribution time adjustment}
 
@@ -543,7 +541,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 
 Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data summarized in the section \ref{sec:data}, calculated with the aid of the 'LibreOffice Calc' software, considering the maximum daily distribution value (in a 24-hour shift), limited by the outflows of the weirs and the WTP,  \hl{and the following values for the parameters: $\mathrm{FRF}= 500,000$, $\mathrm{VRF}= 500,000$,  $\mathrm{ICIrF} = 0.0001$,  $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$} (case 01). 
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\begin{center}
 	    \caption{Determination of optimal distribution values with 'LibreOffice Calc', considering a daily 24-hour distribution period.}
 		\label{fig:evalOptimalValues}
@@ -580,7 +578,7 @@ Another important piece of information that we observe in this figure are the id
 
 After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, we run the solver in \hl{LINGO}, using the same inputs shown in this figure, along with other data reported in the \ref{sec:data} section. The values 367,200.00 and 288,000.00 were used as the values of the maximum inflow rates informed for the WTP and for the Central Reservoir, respectively. No limit values for inflow rates were informed for the other reservoirs and zones. Table \ref{tab:lingoEvalCase01} displays the values found by the solver. As we can see in this table, the solver found the calculated optimal values very quickly \hl{and without any errors observed}. 
 
-\begin{table}[H]
+\begin{table}[h!]
 \begin{center}
 \begin{small}
 	\begin{tabular}{ c r r r r r } 
@@ -629,7 +627,7 @@ After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, w
 
 \hl{The same values were found for volumes distribution when the solver in LINGO was run considering 3 shifts of 8h (case 03). In this case, the inflow is distributed between the shifts, keeping the same ideal inflow rates.}
 
-\begin{table}[h]
+\begin{table}[h!]
 \begin{center}
 \begin{small}
 	\begin{tabular}{ c r r r r r } 
@@ -691,7 +689,7 @@ Situations (1) and (3) can be easily solved by indicating maximum and minimum va
 
 In the case of situation (1), as the solver seeks to maximize the volume of water distributed to the zones, the volume of distribution (limited by the inflow rate) in a given location will be transferred to other locations seeking to meet the demand and, later, distributed to filling the idle capacity of the reservoirs. For example, Table \ref{tab:lingoEvaluationsCase22} presents the results found by the solver for case 22, in which the same data used in case 06 were considered, except that a maximum flow rate was informed for zone $\mathrm{Z1}$ ($z = 7$), \hl{$\mathrm{MaxInFR}_7 = $130,000.00} liters/hour (case 06 is just like case 03 but with 2 days).
 
-\begin{table}[h]
+\begin{table}[h!]
 \begin{center}
 \begin{small}
 	\begin{tabular}{ c r r r r r } 
@@ -741,7 +739,7 @@ In the case of situation (1), as the solver seeks to maximize the volume of wate
 
 For situation (3), once a minimum value is indicated for the inflow of a given location, the solver will propose solutions in which the inflow of some locations will be null or concentrated in one or a few shifts. For example, Table \ref{tab:lingoEvaluationsCase23} presents the results found by the solver for case 23, in which the same data used in case 06 were considered, except that a minimum flow rate was reported for the reservoir $\mathrm{R5}$ ($r=6$), \hl{$\mathrm{MinInFR}_6 = $10,000.00 liters/hour}. \hl{As we can see in this table, the R5 reservoir and the Z6 zone only receive flow in the third shift of the first and second days}. The solver presented a result for case 23 after setting the parameter value $\mathrm{VRF}=5,000$. \hl{The solution found by the solver is not optimal. It would be possible to obtain a better solution, for example, by distributing the volume received by zone Z6 among all shifts.}
 
-\begin{table}[h]
+\begin{table}[h!]
 \begin{center}
 \begin{small}
 	\begin{tabular}{ c r r r r r } 
@@ -802,7 +800,7 @@ However, \hl{LINGO} is not a magic tool, \hl{LINGO}'s processing power is limite
 
 Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the efficiency of the developed model and solver. We run the solver for case 01, and for similar cases where only the number of days and shifts have been changed. We used an interval between 1 and 7 days and, for each possibility, we considered 1, 2 and 3 shifts. The relevance / irrelevance factors referring to fair distribution, valve status and reservoir idle capacity were defined based on an extensive study. Such definition had the following purposes: to define as priorities meeting the demand, then fair distribution and finally filling the reservoirs; in order to test the ruggedness of the model, we also had the clear intention of distributing the flow among all shifts, allowing the valves to be turned off only when flow restrictions impose this condition. 
 
-\begin{table}[h]
+\begin{table}[h!]
 \begin{center}
 \begin{small}
 	\begin{tabular}{ c c c c c c c c c } 
@@ -844,7 +842,7 @@ An important issue to be considered is that the adjustment of the parameters \hl
 \section{Conclusions and future works}
 \label{sec:conclusions}
 
-In the present work, a conceptual and mathematical modeling for the problem of water distribution in periods of scarcity was presented. The validation of the mathematical model was performed using a solver developed with the \hl{LINGO} software from \hl{LINDO} Sistems. Through the tests carried out, we concluded that the developed model and solver fit perfectly to the studied reality, and are capable of proposing solutions that make the distribution of water volumes for the different zones fair, in periods of scarcity, through the control of flows and distribution times. Such solutions take into account the restrictions of the system and present alternatives for when the channelings are to be modulated optimally (with flow rates that optimally regulate the distribution). However, it was verified that, for the solver to present good results, it must be used by a suitably qualified employee. What may become less relevant through new advanced studies for high-level calculation of relevance / irrelevance parameters adopted in the model, as well as through the construction of a friendly graphic interface.  Additionally, due to the limitations of the exact methodologies developed so far for solving non-polynomial optimization problems (such as the studied problem), the developed solver naturally presented limitations related to its ability to solve larger problems. Such limitations justify the need to develop solution algorithms based on heuristics applied to optimization problems. These efforts will be the focus of our next works.
+In the present work, \hl{a detailed description of the water distribution system of a city in northeastern Brazil and a conceptual and a new mathematical model} for the problem of water distribution in periods of scarcity was presented. The validation of the mathematical model was performed using a solver developed with the \hl{LINGO} software from \hl{LINDO} Sistems. Through the tests carried out, we concluded that the developed model and solver fit perfectly to the studied reality, and are capable of, \hl{in a few seconds,} proposing solutions that make the distribution of water volumes for the different zones fair, in periods of scarcity, through the control of flows and distribution times. Such solutions take into account the restrictions of the system and present alternatives for when the channelings are to be modulated optimally (with flow rates that optimally regulate the distribution). However, it was verified that, for the solver to present good results, it must be used by a suitably qualified employee. What may become less relevant through new advanced studies for high-level calculation of relevance / irrelevance parameters adopted in the model, as well as through the construction of a friendly graphic interface.  Additionally, due to the limitations of the exact methodologies developed so far for solving non-polynomial optimization problems (such as the studied problem), the developed solver naturally presented limitations related to its ability to solve larger problems. Such limitations justify the need to develop solution algorithms based on heuristics applied to optimization problems. These efforts will be the focus of our next works.
 
 %\section*{Acknowledgement}
 %\label{sec:acknowledgement}
