@@ -445,7 +445,7 @@ In order to guarantee a fair distribution, in specific cases where the actual fl
 
 \section{Tests and results}
 
-To validate the proposed model, a LINGO code was developed and ran in the 'global solver' mode, using the parameter values recommended by the software \cite{LINGO} \hl{(with the exception of the Precision parameter, on the Interface tab, whose value was set to 11)}. The tests were carried out based on the considerations presented in the sections \ref{sec:initialConsiderations}, \ref{sec:praticalAspects} and \ref{sec:limitations} and using the data collected during this work, as summarized in the section \ref{sec:data}. The results found as well as an analysis of these results are presented along the following sections together with the considerations studied. 
+To validate the proposed model, a LINGO code was developed and ran in the 'global solver' mode, using the parameter values recommended by the software \cite{LINGO} \hl{(with the exception of the Precision parameter, on the Interface tab, whose value was set to 11)}. \hl{The tests were performed on a notebook with an Intel i7 processor. The input data were prepared} based on the considerations presented in the sections \ref{sec:initialConsiderations}, \ref{sec:praticalAspects} and \ref{sec:limitations} and using the data collected during this work, as summarized in the section \ref{sec:data}. The results found as well as an analysis of these results are presented along the following sections together with the considerations studied. 
 
 \subsection{Data collected}
 \label{sec:data}
@@ -826,6 +826,12 @@ Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the e
 	 19  &  7 & 1  & \hl{90,382,455,15}  & \hl{90,382,454.14}  & \hl{$\approx 0\%$} &  \hl{0.50}   &  \hl{1,480}       \\
 	 20  &  7 & 2  & \hl{132,382,455,15} & \hl{132,382,453.68}  & \hl{$\approx 0\%$}  &  \hl{2.27}   &  \hl{2,059}      \\
 	 21  &  7 & 3  & \hl{174,382,455,15} & \hl{174,382,453.21}  & \hl{$\approx 0\%$}  &  \hl{2.51}   &  \hl{1,445}      \\
+         22  &  8 & 3  & \hl{174,382,455,15} & \hl{199,294,452.93}  & \hl{$\approx \%$}  &  \hl{3.92}   &  \hl{1,470}      \\
+	 23  &  9 & 3  & \hl{174,382,455,15} & \hl{224,206,452.66}  & \hl{$\approx \%$}  &  \hl{5.96}   &  \hl{2,366}      \\
+	 24  & 10 & 3  & \hl{249,118,455.12} & \hl{249,118,455.12}  & \hl{$\approx \%$}  &  \hl{6.41}   &  \hl{2,317}      \\
+	 25  & 15 & 3  & \hl{249,118,455.12} & \hl{373,678,451.00}  & \hl{$\approx \%$}  &  \hl{15.01}   &  \hl{2,434}      \\
+         26  & 20 & 3  & \hl{249,118,455.12} & \hl{498,238,449.58}  & \hl{$\approx \%$}  &  \hl{40.72}   &  \hl{8,151}      \\
+	 27  & 30 & 3  & \hl{249,118,455.12} & \hl{747,358,446.85}  & \hl{$\approx \%$}  &  \hl{135.32}   &  \hl{4,673}      \\
 	
 	\end{tabular}
 \caption{Study on the efficiency of the mathematical model and the solver.}
