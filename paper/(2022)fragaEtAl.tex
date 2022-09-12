@@ -79,6 +79,7 @@ we are enormously grateful for your important contributions. Below is a summary 
 \begin{itemize}
 \item We have improved the literature review, with a better explanation of the contributions and the inclusion of new references.
 \item An adjustment has been made to the subsections of section 3.
+\item The bibliographic references were placed in alphabetical order. For the construction of references, the model file offered by the journal was used and we  followed the rules of the journal.
 
 \end{itemize}
 
@@ -797,48 +798,7 @@ However, \hl{LINGO} is not a magic tool, \hl{LINGO}'s processing power is limite
 
 \label{nonlinerarityExp}{\hl{The model presented in this work is a non-linear, mixed-integer mathematical programming model. Nonlinearity happens due to the objective function and the constraints in}} (\ref{eq:evalInF}), (\ref{eq:evalPDist}) \hl{and} (\ref{eq:idleCapEWSum}). \hl{The non-polynomial nature of the model arises due to the binary decision variables $X_{dsl}$.} In this section, we present an initial discussion about the limitations of the developed solver and mathematical model. It is important to emphasize that many of the limitations presented here could be mitigated through adjustments to the model, or even through a better use of the \hl{LINGO} software. However, this requires a hard work. It may seem like it, but building a robust and adequate mathematical model is not a simple task and \hl{LINGO} offers a wide range of different application possibilities through various parameter adjustments, and we are still familiarizing with all these possibilities. 
 
-Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the efficiency of the developed model and solver. We run the solver for case 01, and for similar cases where only the number of days and shifts have been changed. We used an interval between 1 and 7 days and, for each possibility, we considered 1, 2 and 3 shifts\hl{, and an interval between 8,9,10,15,20, and 30 days with 3 shifts.} The relevance / irrelevance factors referring to fair distribution, valve status and reservoir idle capacity were defined based on an extensive study. Such definition had the following purposes: to define as priorities meeting the demand, then fair distribution and finally filling the reservoirs; in order to test the ruggedness of the model, we also had the clear intention of distributing the flow among all shifts, allowing the valves to be turned off only when flow restrictions impose this condition. 
-
-\begin{table}[h!]
-\begin{center}
-\begin{small}
-	\begin{tabular}{ c c c c c c c c c } 
-         &    &    &                &           &           &   \multicolumn{3}{c}{relevance factors}  \\      
-	case & ND & NS &  optimum &  fitness   & \hl{rel. error} &  time(s)  & \hl{ierations}     \\
-	 01  &  1 & 1  &  \hl{12,910,117.35}  &  \hl{12,910,117.35}  & \hl{0\%} &  \hl{0.43}   &   \hl{3,440}       \\
-	 02  &  1 & 2  &  \hl{18,910,117.35}  &  \hl{18,910,117.35}  & \hl{0\%} &  \hl{0.72}   &   \hl{5,425}    \\
-	 03  &  1 & 3  &  \hl{24,910,117.35}  &  \hl{24,910,117.32}  & \hl{$\approx 0\%$} &  \hl{0.15}   &   \hl{524}     \\
-	 04  &  2 & 1  & \hl{25,822,455.15} & \hl{25,822,454.86}  &  \hl{$\approx 0\%$} &  \hl{0.71}   &   \hl{4,808}    \\
-	 05  &  2 & 2  & \hl{37,822,455.15} & \hl{37,822,454.72}  &  \hl{$\approx 0\%$} &  \hl{0.21}   &   \hl{914}      \\
-	 06  &  2 & 3  & \hl{49,822,455.15} & \hl{49,822,454.59}  &  \hl{$\approx 0\%$} &  \hl{0.26}   &   \hl{789}     \\
-	 07  &  3 & 1  & \hl{38,734,455,15} & \hl{38,734,454.72}  & \hl{$\approx 0\%$} &   \hl{0.11}   &    \hl{517}      \\
-	 08  &  3 & 2  & \hl{56,734,455,15} & \hl{56,734,454.51}  & \hl{$\approx 0\%$} & \hl{0.24}  &  \hl{771}    \\
-	 09  &  3 & 3  & \hl{74,734,455,15} & \hl{74,734,454.32}  & \hl{$\approx 0\%$} &   \hl{0.65} & \hl{1,139}   \\
-	 10  &  4 & 1  & \hl{51,646,455,15} & \hl{51,646,455.14}  & \hl{$\approx 0\%$} &  \hl{0.29}   &  \hl{1511}    \\
-	 11  &  4 & 2  & \hl{75,646,455,15} & \hl{75,646,454.30}  & \hl{$\approx 0\%$} &  \hl{0.43}   &    \hl{976}     \\
-	 12  &  4 & 3  & \hl{99,646,455,15} & \hl{99,646,454.04}  & \hl{$\approx 0\%$} &  \hl{0.94}   &   \hl{1,295}      \\
-	 13  &  5 & 1  & \hl{64,558,455,15} & \hl{64,558,454.43}  & \hl{$\approx 0\%$}  &  \hl{0.30}   &   \hl{916}    \\
-	 14  &  5 & 2  & \hl{94,558,455,15} & \hl{94,558,454.10}  &  \hl{$\approx 0\%$} &  \hl{0.59}   &   \hl{1,130}    \\
-	 15  &  5 & 3  & \hl{124,558,455,15} & \hl{124,558,453.76} & \hl{$\approx 0\%$} &  \hl{1.00}   &   \hl{1,016}       \\
-	 16  &  6 & 1  & \hl{77,470,455,15} & \hl{77,470,454.29}  & \hl{$\approx 0\%$}  &  \hl{0.24}   &   \hl{738}       \\
-	 17  &  6 & 2  & \hl{113,470,455,15} & \hl{113,470,453.89}  & \hl{$\approx 0\%$} &  \hl{0.97}   &   \hl{1,191}      \\
-	 18  &  6 & 3  & \hl{149,470,455,15} & \hl{149,470,455.13}  & \hl{$\approx 0\%$} & \hl{1.63}   &   \hl{1,332}     \\
-	 19  &  7 & 1  & \hl{90,382,455,15}  & \hl{90,382,454.14}  & \hl{$\approx 0\%$} &  \hl{0.50}   &  \hl{1,480}       \\
-	 20  &  7 & 2  & \hl{132,382,455,15} & \hl{132,382,453.68}  & \hl{$\approx 0\%$}  &  \hl{2.27}   &  \hl{2,059}      \\
-	 21  &  7 & 3  & \hl{174,382,455,15} & \hl{174,382,453.21}  & \hl{$\approx 0\%$}  &  \hl{2.51}   &  \hl{1,445}      \\
-         22  &  8 & 3  & \hl{174,382,455,15} & \hl{199,294,452.93}  & \hl{$\approx \%$}  &  \hl{3.92}   &  \hl{1,470}      \\
-	 23  &  9 & 3  & \hl{174,382,455,15} & \hl{224,206,452.66}  & \hl{$\approx \%$}  &  \hl{5.96}   &  \hl{2,366}      \\
-	 24  & 10 & 3  & \hl{249,118,455.12} & \hl{249,118,455.12}  & \hl{$\approx \%$}  &  \hl{6.41}   &  \hl{2,317}      \\
-	 25  & 15 & 3  & \hl{249,118,455.12} & \hl{373,678,451.00}  & \hl{$\approx \%$}  &  \hl{15.01}   &  \hl{2,434}      \\
-         26  & 20 & 3  & \hl{249,118,455.12} & \hl{498,238,449.58}  & \hl{$\approx \%$}  &  \hl{40.72}   &  \hl{8,151}      \\
-	 27  & 30 & 3  & \hl{249,118,455.12} & \hl{747,358,446.85}  & \hl{$\approx \%$}  &  \hl{135.32}   &  \hl{4,673}      \\
-	
-	\end{tabular}
-\caption{Study on the efficiency of the mathematical model and the solver.}
-\label{tab:lingoEvaluation}
-\end{small}
-\end{center}
-\end{table}
+Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the efficiency of the developed model and solver. We run the solver for case 01, and for similar cases where only the number of days and shifts have been changed. We used an interval between 1 and 7 days and, for each possibility, we considered 1, 2 and 3 shifts\hl{, we also used cases considering 8,9,10,15,20, and 30 days with 3 shifts.} The relevance / irrelevance factors referring to fair distribution, valve status and reservoir idle capacity were defined based on an extensive study. Such definition had the following purposes: to define as priorities meeting the demand, then fair distribution and finally filling the reservoirs; in order to test the ruggedness of the model, we also had the clear intention of distributing the flow among all shifts, allowing the valves to be turned off only when flow restrictions impose this condition. 
 
 \begin{table}[h!]
 \begin{center}
@@ -909,6 +869,10 @@ In the present work, \hl{a detailed description of the water distribution system
 %\bibitem[\protect\citeauthoryear{Candido et al.}{2016}]{CandidoEtAl2016}
 %Candido, A.K.B., Lima, M.M.A.E., Fraga T.B. (2016) 'Planejamento da Distribuição de Água em Catende em Períodos de Escassez'. {\it Resumos do II ENExC}, https://www.ufpe.br/proexc/periodicos-e-publicacoes/ii-enexc (Accessed 08 December 2021) 
 
+\bibitem[\protect\citeauthoryear{Creaco et al.}{2019}]{CreacoEtAl2019}
+Creaco E., Campisano, A., Fontana, N.,  Marini, G., Page, P.R. and Walski, T. (2019) 'Real time control of water distribution networks: A state-of-the-art
+review', {\it Water Research}, Vol. 161, pp.517--530
+
 \bibitem[\protect\citeauthoryear{Huang et al.}{2021}]{HangEtAl2021}
 Huang, Z., Yuan, X. and  Liu, X. (2021) 'The key drivers for the changes in global water scarcity: Water withdrawal versus water availability', {\it Journal of Hydrology}, Vol. 601, pp.126658
 
@@ -916,11 +880,18 @@ Huang, Z., Yuan, X. and  Liu, X. (2021) 'The key drivers for the changes in glob
 IBGE. Instituto Brasileiro de Geografia e Estatística. (2021) 'Regional data about the city of Catende',
 https://cidades.ibge.gov.br/brasil/pe/catende/panorama (Accessed 27 November 2021)
 
+\bibitem[\protect\citeauthoryear{Jafari-Asl et al.}{2021}]{JafariEtAl2021}
+Jafari-Asl, J., Azizyan, G., Monfared, S.A.H., Rashki, M., and Andrade-Campos, A.G. (2021) 'An enhanced binary dragonfly algorithm based on a V-shaped
+transfer function for optimization of pump scheduling program in water supply systems (case study of Iran)', {\it Engineering Failure Analysis}, Vol. 123, 105323
+
 \bibitem[\protect\citeauthoryear{Kurian et al.}{2018}]{KurianEtAl2018}
 Kurian, V., Chinnusamy, S., Natarajan A. Narasimhan, S. and Narasimhan S. (2018) 'Optimal operation of water distribution networks with intermediate storage facilities', {\it Computers \& Chemical Engineering}, Vol. 119, pp.215--227
 
 \bibitem[\protect\citeauthoryear{LINGO}{2021}]{LINGO}
 LINGO [online], https://www.lindo.com/index.php/products/lingo-and-optimization-modeling (Accessed 30 November 2021)
+
+\bibitem[\protect\citeauthoryear{Luna et al.}{2019}]{LunaEtAl2019}
+Luna, T., Ribau, J., Figueiredo D and Alves, R. (2019) 'Improving energy efficiency in water supply systems with pump scheduling optimization', {\it Journal of Cleaner Production}, Vol. 213, pp.342--356
 
 \bibitem[\protect\citeauthoryear{Paganine}{2013}]{Paganine2013}
 Paganine, J. (2013) 'Dia Mundial da Água incentiva cooperação entre os países', {\it senadonotícias, Agência Senado}, https://www12.senado.leg.br/noticias/especiais/especial-cidadania/dia-mundial-da-agua-incentiva-cooperacao-entre-os-paises (Accessed 28 November 2021)
@@ -930,17 +901,6 @@ Sankar, G.S., {Mohan Kumar}, S., Narasimhan, S., Narasimhan S. and {Murty Bhalla
 
 \bibitem[\protect\citeauthoryear{Silva et al.}{2019}]{SilvaEtAl2019}
 Silva, J.L.B., Bezerra, A.C., Silva, T.T.F., Batista, P.H.D., Moura, G.B.A. and  Lopes, P.M.O. (2019) 'Quantification Caatinga vegetable coverage and water availability by remote sensing in the Brazilian semiarid', {\it Journal of Hyperspectral Remote Sensing}, Vol. 9, No. 4, pp.166--176
-
-\bibitem[\protect\citeauthoryear{Creaco et al.}{2019}]{CreacoEtAl2019}
-Creaco E., Campisano, A., Fontana, N.,  Marini, G., Page, P.R. and Walski, T. (2019) 'Real time control of water distribution networks: A state-of-the-art
-review', {\it Water Research}, Vol. 161, pp.517--530
-
-\bibitem[\protect\citeauthoryear{Luna et al.}{2019}]{LunaEtAl2019}
-Luna, T., Ribau, J., Figueiredo D and Alves, R. (2019) 'Improving energy efficiency in water supply systems with pump scheduling optimization', {\it Journal of Cleaner Production}, Vol. 213, pp.342--356
-
-\bibitem[\protect\citeauthoryear{Jafari-Asl et al.}{2021}]{JafariEtAl2021}
-Jafari-Asl, J., Azizyan, G., Monfared, S.A.H., Rashki, M., and Andrade-Campos, A.G. (2021) 'An enhanced binary dragonfly algorithm based on a V-shaped
-transfer function for optimization of pump scheduling program in water supply systems (case study of Iran)', {\it Engineering Failure Analysis}, Vol. 123, 105323
 
 \end{thebibliography}
 \end{document}
