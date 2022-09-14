@@ -13,12 +13,15 @@
 \usepackage{float}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage[export]{adjustbox}
 %\usepackage{hyperref}
 \usepackage{soul}
 \newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
 
 \usepackage{colortbl}
 \newcolumntype{a}{>{\columncolor{yellow}}l}
+
+\usepackage{import}
 
 \def\newblock{\hskip .11em plus .33em minus .07em}
 
@@ -535,6 +538,18 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \label{tab:phyDitStr}
 \end{center}
 \end{table}
+
+\subsection{Input data file preparation}
+\label{sec:dataPreparation}
+
+\hl{Fig.} \ref{fig:inputData} \hl{shows an example of the input data files used for SOLVER tests. Note that in the paper some input data and results are presented in liters or liters per hour. However, in order to avoid errors caused by poor scaling, we built the files with the input data using cubic meter and cubic meter per hour as units of measure.}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8, frame]{data.pdf}
+\caption{Example of an input data file}
+\label{fig:inputData}
+\end{figure}
 
 \subsection{Initial considerations}
 \label{sec:initialConsiderations}
