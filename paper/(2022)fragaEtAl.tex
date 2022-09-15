@@ -91,7 +91,7 @@ we are enormously grateful for your important contributions. Below is a summary 
 \begin{itemize}
 \item In order to clarify the symbols used in the model, we created the Table \ref{tab:symbols} (page \pageref{tab:symbols}).
 \item For clarity, the symbols used have been adjusted, and the text throughout the paper has been modified accordingly.
-\item The problem with the numerical scale was solved by adjusting the values used for the model parameters. All tests were redone and the results presented in the paper were changed.
+\item The problem with the numerical scale was solved by changing the measurement units used (liters to cubic meters) and adjusting the values used for the model parameters. All tests were redone and the results presented in the paper were changed.
 \item In order to explain the computational challenges related to the proposed model, we have included the sentence: 'The model presented in this work is a non-linear, mixed-integer mathematical programming model. Nonlinearity happens due to the objective function and the constraints in (\ref{eq:evalInF}), (\ref{eq:evalPDist}) and (\ref{eq:idleCapEWSum}). The non-polynomial nature of the model arises due to the binary decision variables $X_{dsl}$.' (page \pageref{nonlinerarityExp}).
 \item 'remove impurities even existing in the water.' was replaced by 'remove impurities still in the water.' (page \pageref{firstChange}).
 \item 'capacity of treated water, when the abstraction in water sources is at its maximum limit, is 288,000' was replaced by 'capacity of treated water is 288,000' (page \pageref{secondChange}).
@@ -330,17 +330,22 @@ This water distribution problem arises in times of scarcity, in which it becomes
 \end{equation}
 
 \begin{equation}
-	\mathcolorbox{yellow}{OutF_{z} -  \mathrm{D}_z  \leq 0,  \quad \forall z}
+	\mathcolorbox{yellow}{OutF_{d,s,z} -  \mathrm{MaxOutF}_z  \leq 0,  \quad \forall z}
+	\label{eq:outFRRes}
+\end{equation}
+
+\begin{equation}
+	\mathcolorbox{yellow}{InF_{z} -  \mathrm{D}_z  \leq 0,  \quad \forall z}
 	\label{eq:demandRes}
 \end{equation}
 
 \begin{equation}
-	\mathcolorbox{yellow}{OutF_{z} - \sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{OutF_{dsz}} = 0, \quad \forall z}
+	\mathcolorbox{yellow}{InF_{z} - \sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{InF_{dsz}} = 0, \quad \forall z}
 	\label{eq:evalTOutFZone}
 \end{equation}
 
 \begin{equation}
-	\mathcolorbox{yellow}{TDV - \sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{OutF_{z}} = 0}
+	\mathcolorbox{yellow}{TDV - \sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{InF_{z}} = 0}
 	\label{eq:evalTOutF}
 \end{equation}
 
@@ -397,6 +402,7 @@ This water distribution problem arises in times of scarcity, in which it becomes
 		$\mathrm{IAC}$ & represents the average daily consumption per inhabitant \\
 		$\mathrm{MaxInFR}_{l}$ & maximum inflow rate of the pipeline that reaches the reservoir at the location $l$ \\
 		$\mathrm{MinInFR}_{l}$ & minimum inflow rate set for the pipeline that reaches the reservoir at the location $l$ \\
+		$\mathrm{MaxOutFR}_{z}$ & maximum outflow rate for zone $z$ \\
 		$\mathrm{Y}_{rl}$ &  binary variable that informs the physical structure of the water distribution system. \\
 		& $\mathrm{Y}_{rl} = 1$ if water is supplied directly from the reservoir $r$ to the location $l$ and \\
 		& $\mathrm{Y}_{rl} = 0$ if that doesn't happen   \\
@@ -462,20 +468,20 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 
 \noindent housing coefficient ($\mathrm{HC}$) = 3.9 inhabitants / household 
 
-\noindent average daily inflow per inhabitant (\hl{$\mathrm{IAC}$}) = 200 liters / inhabitant * day 
+\noindent average daily inflow per inhabitant (\hl{$\mathrm{IAC}$}) = \hl{0.20 $\mathrm{m^3}$} / inhabitant * day 
 
 \noindent Note: each weir supplies water to an WTP (conventional or mechanical). However, both supply water to the Central Reservoir. For this reason, in this work we consider only a single WTP. 
 
 \begin{table}[H]
 \begin{center}
 	\begin{tabular}{ c  c  c } 
-		weir      & name        & distribution flow rate  ($\mathrm{liters/hour}$)     \\
+		weir      & name        & distribution flow rate  (\hl{$\mathrm{m^3/hour}$})     \\
 		                                                                    \\
-		1              & Santa Rita weir            & 241.200,00          \\
-		2              & Bálsamo das Freiras  weir  & 126.000,00         \\
+		1              & Santa Rita weir            & \hl{241.20}         \\
+		2              & Bálsamo das Freiras  weir  & \hl{126.00}         \\
 							                                                \\
 		\hline
-		Total          &                               & 367.200,00         \\
+		Total          &                               & \hl{367.20}        \\
 		\\
 	\end{tabular}
 \caption{Weirs data - Catende (data from 2016)}
@@ -487,14 +493,14 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \begin{center}
 	\begin{tabular}{ c  c  c  c } 
 		reservoir      & name              & capacity                       & \hl{maximum inflow rate}    \\
-		($r$)          &             	   &  ($\mathrm{C}_{r}$) (\hl{liters})    &  (\hl{$\mathrm{MaxInFR}_{r}$}) ($\mathrm{liters/hour}$) \\
+		($r$)          &             	   &  ($\mathrm{C}_{r}$) (\hl{$\mathrm{m^3}$})    &  (\hl{$\mathrm{MaxInFR}_{r}$}) (\hl{$\mathrm{m^3/hour}$}) \\
 		\\
-		1              & WTP               & 2.500.000            &  367.200,00   \\
-		2              & Central           &   500.000 		&  288.000,00   \\
-		3              & Elevated          &   400.000            & \hl{uninformed} \\
-		4              & Panelas Piranji   &   100.000            & \hl{uninformed} \\
-		5              & Canaã             &   180.000            & \hl{uninformed} \\
-		6              & Oxifan            &    20.000            & \hl{uninformed} \\
+		1              & WTP                &   \hl{2.50}            &  \hl{367.20}   \\
+		2              & Central             &   \hl{0.50} 		&  \hl{288.00}   \\
+		3              & Elevated           &   \hl{0.40}           & \hl{uninformed} \\
+		4              & Panelas Piranji  &   \hl{0.10}           & \hl{uninformed} \\
+		5              & Canaã              &   \hl{0.18}           & \hl{uninformed} \\
+		6              & Oxifan              &   \hl{0.02}            & \hl{uninformed} \\
 		\\
 	\end{tabular}
 \caption{Reservoirs data - Catende (data from 2016)}
@@ -538,18 +544,6 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \label{tab:phyDitStr}
 \end{center}
 \end{table}
-
-\subsection{Input data file preparation}
-\label{sec:dataPreparation}
-
-\hl{Fig.} \ref{fig:inputData} \hl{shows an example of the input data files used for SOLVER tests. Note that in the paper some input data and results are presented in liters or liters per hour. However, in order to avoid errors caused by poor scaling, we built the files with the input data using cubic meter and cubic meter per hour as units of measure.}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.8, frame]{data.pdf}
-\caption{Example of an input data file}
-\label{fig:inputData}
-\end{figure}
 
 \subsection{Initial considerations}
 \label{sec:initialConsiderations}
@@ -811,9 +805,9 @@ As for situation (2), the developed solver does not present a good answer. The v
 
 However, \hl{LINGO} is not a magic tool, \hl{LINGO}'s processing power is limited, due to limitations associated with exact solving techniques for optimization problems, especially when defined as non-linear and NP-Hard. For most problems, the computational effort increases as the number of decision variables increases, according to functions that are not polynomials. In other words, there is an explosion in the number of possible solutions, and current exact methodologies have not yet found a way to deal with this, in the case of problems with larger dimensions. 
 
-\label{nonlinerarityExp}{\hl{The model presented in this work is a non-linear, mixed-integer mathematical programming model. Nonlinearity happens due to the objective function and the constraints in}} (\ref{eq:evalInF}), (\ref{eq:evalPDist}) \hl{and} (\ref{eq:idleCapEWSum}). \hl{The non-polynomial nature of the model arises due to the binary decision variables $X_{dsl}$.} In this section, we present an initial discussion about the limitations of the developed solver and mathematical model. It is important to emphasize that many of the limitations presented here could be mitigated through adjustments to the model, or even through a better use of the \hl{LINGO} software. However, this requires a hard work. It may seem like it, but building a robust and adequate mathematical model is not a simple task and \hl{LINGO} offers a wide range of different application possibilities through various parameter adjustments, and we are still familiarizing with all these possibilities. 
+\label{nonlinerarityExp}{\hl{The model presented in this work is a non-linear, mixed-integer mathematical programming model. Nonlinearity happens due to the objective function and the constraints in}} (\ref{eq:evalInF}), (\ref{eq:evalPDist}) \hl{and} (\ref{eq:idleCapEWSum}). \hl{The non-polynomial nature of the model arises due to the binary decision variables $X_{dsl}$.} In this section, we present an initial discussion about the limitations of the developed solver and mathematical model. It is important to emphasize that many of the limitations presented here could be mitigated through adjustments to the model, or even through a better use of the \hl{LINGO} software. 
 
-Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the efficiency of the developed model and solver. We run the solver for case 01, and for similar cases where only the number of days and shifts have been changed. We used an interval between 1 and 7 days and, for each possibility, we considered 1, 2 and 3 shifts\hl{, we also used cases considering 8,9,10,15,20, and 30 days with 3 shifts.} The relevance / irrelevance factors referring to fair distribution, valve status and reservoir idle capacity were defined based on an extensive study. Such definition had the following purposes: to define as priorities meeting the demand, then fair distribution and finally filling the reservoirs; in order to test the ruggedness of the model, we also had the clear intention of distributing the flow among all shifts, allowing the valves to be turned off only when flow restrictions impose this condition. 
+\hl{Tables} \ref{tab:lingoEvaluation} \hl{and} \ref{tab:lingoEvaluationInflowRest} \hl{present} some tests carried out to analyze the efficiency of the developed model and solver. \hl{Table 11 presents the results for the} case 01, and for similar cases where only the number of days and shifts have been changed. The relevance / irrelevance factors referring to fair distribution, valve status and reservoir idle capacity were defined based on an extensive study. Such definition had the following purposes: to define as priorities meeting the demand, then fair distribution and finally filling the reservoirs; in order to test the ruggedness of the model, we also had the clear intention of distributing the flow among all shifts, allowing the valves to be turned off only when flow restrictions impose this condition. \hl{For the construction of the results of table x, we considered a minimum value of inflow for S6 of 10 $\mathrm{m^3}$. To improve solver performance, we have created a prioritization list for turning on valves, using $f(d,s) = 10*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$. As we can see in this last table, when we include the new flow constraint, the computational effort increases considerably.} 
 
 \begin{table}[h!]
 \begin{center}
@@ -852,6 +846,47 @@ Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the e
 	\end{tabular}
 \caption{Study on the efficiency of the mathematical model and the solver.}
 \label{tab:lingoEvaluation}
+\end{small}
+\end{center}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+\begin{small}
+	\begin{tabular}{ c c c c c c c c c } 
+         &    &    &                &           &           &   \multicolumn{3}{c}{relevance factors}  \\      
+	case & ND & NS &  optimum &  fitness   & \hl{rel. error} &  time(s)  & \hl{ierations}     \\
+	 28  &  1 & 3  &  \hl{}  &  \hl{13,966.64}  & \hl{\%} &  \hl{0.11}   &   \hl{928}       \\
+	 02  &  1 & 2  &  \hl{18,910,117.35}  &  \hl{18,910,117.35}  & \hl{0\%} &  \hl{0.72}   &   \hl{5,425}    \\
+	 03  &  1 & 3  &  \hl{24,910,117.35}  &  \hl{24,910,117.32}  & \hl{$\approx 0\%$} &  \hl{0.15}   &   \hl{524}     \\
+	 04  &  2 & 1  & \hl{25,822,455.15} & \hl{25,822,454.86}  &  \hl{$\approx 0\%$} &  \hl{0.71}   &   \hl{4,808}    \\
+	 05  &  2 & 2  & \hl{37,822,455.15} & \hl{37,822,454.72}  &  \hl{$\approx 0\%$} &  \hl{0.21}   &   \hl{914}      \\
+	 06  &  2 & 3  & \hl{49,822,455.15} & \hl{49,822,454.59}  &  \hl{$\approx 0\%$} &  \hl{0.26}   &   \hl{789}     \\
+	 07  &  3 & 1  & \hl{38,734,455,15} & \hl{38,734,454.72}  & \hl{$\approx 0\%$} &   \hl{0.11}   &    \hl{517}      \\
+	 08  &  3 & 2  & \hl{56,734,455,15} & \hl{56,734,454.51}  & \hl{$\approx 0\%$} & \hl{0.24}  &  \hl{771}    \\
+	 09  &  3 & 3  & \hl{74,734,455,15} & \hl{74,734,454.32}  & \hl{$\approx 0\%$} &   \hl{0.65} & \hl{1,139}   \\
+	 10  &  4 & 1  & \hl{51,646,455,15} & \hl{51,646,455.14}  & \hl{$\approx 0\%$} &  \hl{0.29}   &  \hl{1511}    \\
+	 11  &  4 & 2  & \hl{75,646,455,15} & \hl{75,646,454.30}  & \hl{$\approx 0\%$} &  \hl{0.43}   &    \hl{976}     \\
+	 12  &  4 & 3  & \hl{99,646,455,15} & \hl{99,646,454.04}  & \hl{$\approx 0\%$} &  \hl{0.94}   &   \hl{1,295}      \\
+	 13  &  5 & 1  & \hl{64,558,455,15} & \hl{64,558,454.43}  & \hl{$\approx 0\%$}  &  \hl{0.30}   &   \hl{916}    \\
+	 14  &  5 & 2  & \hl{94,558,455,15} & \hl{94,558,454.10}  &  \hl{$\approx 0\%$} &  \hl{0.59}   &   \hl{1,130}    \\
+	 15  &  5 & 3  & \hl{124,558,455,15} & \hl{124,558,453.76} & \hl{$\approx 0\%$} &  \hl{1.00}   &   \hl{1,016}       \\
+	 16  &  6 & 1  & \hl{77,470,455,15} & \hl{77,470,454.29}  & \hl{$\approx 0\%$}  &  \hl{0.24}   &   \hl{738}       \\
+	 17  &  6 & 2  & \hl{113,470,455,15} & \hl{113,470,453.89}  & \hl{$\approx 0\%$} &  \hl{0.97}   &   \hl{1,191}      \\
+	 18  &  6 & 3  & \hl{149,470,455,15} & \hl{149,470,455.13}  & \hl{$\approx 0\%$} & \hl{1.63}   &   \hl{1,332}     \\
+	 19  &  7 & 1  & \hl{90,382,455,15}  & \hl{90,382,454.14}  & \hl{$\approx 0\%$} &  \hl{0.50}   &  \hl{1,480}       \\
+	 20  &  7 & 2  & \hl{132,382,455,15} & \hl{132,382,453.68}  & \hl{$\approx 0\%$}  &  \hl{2.27}   &  \hl{2,059}      \\
+	 21  &  7 & 3  & \hl{174,382,455,15} & \hl{174,382,453.21}  & \hl{$\approx 0\%$}  &  \hl{2.51}   &  \hl{1,445}      \\
+         22  &  8 & 3  & \hl{174,382,455,15} & \hl{199,294,452.93}  & \hl{$\approx \%$}  &  \hl{3.92}   &  \hl{1,470}      \\
+	 23  &  9 & 3  & \hl{174,382,455,15} & \hl{224,206,452.66}  & \hl{$\approx \%$}  &  \hl{5.96}   &  \hl{2,366}      \\
+	 24  & 10 & 3  & \hl{249,118,455.12} & \hl{249,118,455.12}  & \hl{$\approx \%$}  &  \hl{6.41}   &  \hl{2,317}      \\
+	 25  & 15 & 3  & \hl{249,118,455.12} & \hl{373,678,451.00}  & \hl{$\approx \%$}  &  \hl{15.01}   &  \hl{2,434}      \\
+         26  & 20 & 3  & \hl{249,118,455.12} & \hl{498,238,449.58}  & \hl{$\approx \%$}  &  \hl{40.72}   &  \hl{8,151}      \\
+	 27  & 30 & 3  & \hl{} & \hl{218,159,364.07}  & \hl{$\approx \%$}  &  \hl{121.88}   &  \hl{5,133}      \\
+	
+	\end{tabular}
+\caption{Study on the efficiency of the mathematical model and the solver using $\mathrm{MinInFR}_6 = 10.00 \mathrm{ m^3/hour}$ and $f(d,s) = 10*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$.}
+\label{tab:lingoEvaluationInflowRest}
 \end{small}
 \end{center}
 \end{table}
