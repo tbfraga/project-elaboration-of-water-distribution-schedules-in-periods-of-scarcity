@@ -330,27 +330,22 @@ This water distribution problem arises in times of scarcity, in which it becomes
 \end{equation}
 
 \begin{equation}
-	\mathcolorbox{yellow}{OutF_{d,s,z} -  \mathrm{MaxOutF}_z  \leq 0,  \quad \forall z}
-	\label{eq:outFRRes}
-\end{equation}
-
-\begin{equation}
-	\mathcolorbox{yellow}{InF_{z} -  \mathrm{D}_z  \leq 0,  \quad \forall z}
+	\mathcolorbox{yellow}{OutF_{z} -  \mathrm{D}_z  \leq 0,  \quad \forall z}
 	\label{eq:demandRes}
 \end{equation}
 
 \begin{equation}
-	\mathcolorbox{yellow}{InF_{z} - \sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{InF_{dsz}} = 0, \quad \forall z}
+	\mathcolorbox{yellow}{OutF_{z} - \sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{OutF_{dsz}} = 0, \quad \forall z}
 	\label{eq:evalTOutFZone}
 \end{equation}
 
 \begin{equation}
-	\mathcolorbox{yellow}{TDV - \sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{InF_{z}} = 0}
+	\mathcolorbox{yellow}{TDV - \sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{OutF_{z}} = 0}
 	\label{eq:evalTOutF}
 \end{equation}
 
 \begin{equation}
-	\mathcolorbox{yellow}{PDist_{z} - \dfrac{InF_{z}}{TDV} = 0, \quad \forall z}
+	\mathcolorbox{yellow}{PDist_{z} - \dfrac{OutF_{z}}{TDV} = 0, \quad \forall z}
 	\label{eq:evalPDist}
 \end{equation}
 
@@ -402,7 +397,6 @@ This water distribution problem arises in times of scarcity, in which it becomes
 		$\mathrm{IAC}$ & represents the average daily consumption per inhabitant \\
 		$\mathrm{MaxInFR}_{l}$ & maximum inflow rate of the pipeline that reaches the reservoir at the location $l$ \\
 		$\mathrm{MinInFR}_{l}$ & minimum inflow rate set for the pipeline that reaches the reservoir at the location $l$ \\
-		$\mathrm{MaxOutFR}_{z}$ & maximum outflow rate for zone $z$ \\
 		$\mathrm{Y}_{rl}$ &  binary variable that informs the physical structure of the water distribution system. \\
 		& $\mathrm{Y}_{rl} = 1$ if water is supplied directly from the reservoir $r$ to the location $l$ and \\
 		& $\mathrm{Y}_{rl} = 0$ if that doesn't happen   \\
@@ -435,12 +429,12 @@ This water distribution problem arises in times of scarcity, in which it becomes
 		$IdleC_{dsl}$ & idle capacity of reservoir at location $l$ at the end of the $s$-th shift of the day $d$ \\
 		$IdleCEWSum$ & exponentially weighted sum of idle capacities \\
 	\end{tabular}
-\caption{Symbols used in the mathematical model.}
+\caption{Symbols used in the mathematical model}
 \label{tab:symbols}
 \end{center}
 \end{table}
 
-\hl{The objective function (}\mathcolorbox{yellow}{\ref{eq:objFunc}}\hl{) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves} \footnotemark[1] \footnotetext[1]{\hl{In some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model.}} \hl{remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. And $f(d,s)$ is a function used to prioritize water distribution shifts. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalInF}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalnFR}}\hl{) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution. The constraints in (}\mathcolorbox{yellow}{\ref{eq:evalMaxInfR}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalMinInfR}}\hl{) limit the inflow rates values. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalOutFRes}}\hl{) guarantee that the reservoirs }\hl{outflows are exactly the amount of water that each reservoir distributes to other reservoirs or zones}\footnotemark[2] \footnotetext[2]{\hl{Note that, in the case of zones, each zone $z$ is considered to have a single reservoir, whose capacity is defined by the sum of the capacities of the various housing reservoirs in the zone.}}\hl{. The equations in (}\mathcolorbox{yellow}{\ref{eq:volResT1}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:volRem!T1}}\hl{) are the well-known flow constraints, being the equations in (}\mathcolorbox{yellow}{\ref{eq:volRStart}}\hl{) boundary conditions. The constraints in (}\mathcolorbox{yellow}{\ref{eq:minRV}}\hl{), (}\mathcolorbox{yellow}{\ref{eq:maxRV}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:maxRZV}}\hl{) limit the values of the remaining volumes of the reservoirs. The constraints in (}\mathcolorbox{yellow}{\ref{eq:outFRRes}}\hl{) limit the outflow of zones and the constraints in (}\mathcolorbox{yellow}{\ref{eq:demandRes}}\hl{) ensure that the total volume distributed to each zone will not exceed its total demand. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalTOutFZone}}\hl{), (}\mathcolorbox{yellow}{\ref{eq:evalTOutF}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalPDist}}\hl{) calculate the total volume delivered to each zone, the total volume delivered to all zones and the proportions of volume distributed to each zone, respectively. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalIdleCap}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:idleCapEWSum}}\hl{) calculate the idle capacities of the reservoirs in the last shift of the last day, and an exponentially weighted sum of these values, respectively. Finally, the constraints in (}\mathcolorbox{yellow}{\ref{eq:bv}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:rv}}\hl{) inform the nature of the primary decision variables.}
+\hl{The objective function (}\mathcolorbox{yellow}{\ref{eq:objFunc}}\hl{) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the + sign before the term makes the valves} \footnotemark[1] \footnotetext[1]{\hl{In some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model.}} \hl{remain open as long as possible. The parameters $\mathrm{FRF}$ and $\mathrm{VRF}$ are used to regulate the order of importance of the second and third terms, respectively. $\mathrm{ICIrF}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. And $f(d,s)$ is a function used to prioritize water distribution shifts. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalInF}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalnFR}}\hl{) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution. The constraints in (}\mathcolorbox{yellow}{\ref{eq:evalMaxInfR}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalMinInfR}}\hl{) limit the inflow rates values. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalOutFRes}}\hl{) guarantee that the reservoirs }\hl{outflows are exactly the amount of water that each reservoir distributes to other reservoirs or zones}\footnotemark[2] \footnotetext[2]{\hl{Note that, in the case of zones, each zone $z$ is considered to have a single reservoir, whose capacity is defined by the sum of the capacities of the various housing reservoirs in the zone.}}\hl{. The equations in (}\mathcolorbox{yellow}{\ref{eq:volResT1}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:volRem!T1}}\hl{) are the well-known flow constraints, being the equations in (}\mathcolorbox{yellow}{\ref{eq:volRStart}}\hl{) boundary conditions. The constraints in (}\mathcolorbox{yellow}{\ref{eq:minRV}}\hl{), (}\mathcolorbox{yellow}{\ref{eq:maxRV}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:maxRZV}}\hl{) limit the values of the remaining volumes of the reservoirs. The constraints in (}\mathcolorbox{yellow}{\ref{eq:demandRes}}\hl{) ensure that the total volume distributed to each zone will not exceed its total demand. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalTOutFZone}}\hl{), (}\mathcolorbox{yellow}{\ref{eq:evalTOutF}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:evalPDist}}\hl{) calculate the total volume delivered to each zone, the total volume delivered to all zones and the proportions of volume distributed to each zone, respectively. The equations in (}\mathcolorbox{yellow}{\ref{eq:evalIdleCap}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:idleCapEWSum}}\hl{) calculate the idle capacities of the reservoirs in the last shift of the last day, and an exponentially weighted sum of these values, respectively. Finally, the constraints in (}\mathcolorbox{yellow}{\ref{eq:bv}}\hl{) and (}\mathcolorbox{yellow}{\ref{eq:rv}}\hl{) inform the nature of the primary decision variables.}
 
 \subsection{Distribution time adjustment}
 
@@ -592,41 +586,41 @@ After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, w
 \begin{small}
 	\begin{tabular}{ c r r r r r } 
 		location & \multicolumn{1}{c}{total demand}      & \multicolumn{1}{c}{capacity} & \multicolumn{1}{c}{initial vol.} & \multicolumn{1}{c}{idle capacity **} & \multicolumn{1}{c}{total inflow}  \\
-		      & \multicolumn{1}{c}{(liters)} & \multicolumn{1}{c}{(\hl{liters})}   & \multicolumn{1}{c}{(\hl{liters})}     &  \multicolumn{1}{c}{(\hl{liters})}   &  \multicolumn{1}{c}{(liters)}               \\
+		      & \multicolumn{1}{c}{($\mathrm{m^3}$)} & \multicolumn{1}{c}{($\mathrm{m^3}$)}   & \multicolumn{1}{c}{($\mathrm{m^3}$)}     &  \multicolumn{1}{c}{($\mathrm{m^3}$)}   &  \multicolumn{1}{c}{($\mathrm{m^3}$)}               \\
 		\\
-		WTP   &              & 2,500,000.00 & 0.00 &  \hl{599,200.00} & 8,812,800.00 \\
-		R1    &              &   500,000.00 & 0.00 &    500,000.00 & 6,912,000.00 \\
-		R2    &              &   400,000.00 & 0.00 &    400,000.00 & 1,456,410.77 \\
-		R3    &              &   100,000.00 & 0.00 &    100,000.00 &   331,100.81 \\
-	    R4    &              &   180,000.00 & 0.00 &    180,000.00 & 1,109,440.20  \\
-	    R5    &              &    20,000.00 & 0.00 &     20,000.00 &    97,382.59 \\
-	    Z1    & 4,236,180.00 & 5,431,000.00 & 0.00 &  5,431,000.00 & 3,917,665.62 \\
-	    Z2    &   813,540.00 & 1,043,000.00 & 0.00 &  1,043,000.00 &   752,370.70 \\
-	    Z3    &   761,280.00 &   976,000.00 & 0.00 &    976,000.00 &   704,040.08 \\
-	    Z4    &   358,020.00 &   459,000.00 & 0.00 &    459,000.00 &   331,100.81 \\
-	    Z5    & 1,199,640.00 & 1,538,000.00 & 0.00 &  1,538,000.00 & 1,109,440.20 \\
-	    Z6    &   105,300.00 &   135,000.00 & 0.00 &    135,000.00 &    97,382.59 \\
+		WTP   &              & 2,500.00 & 0.00 &  599,200.00 & 8,812,800.00 \\
+		R1    &              &   500.00 & 0.00 &    500,000.00 & 6,912,000.00 \\
+		R2    &              &   400.00 & 0.00 &    400,000.00 & 1,456,410.77 \\
+		R3    &              &   100.00 & 0.00 &    100,000.00 &   331,100.81 \\
+	    R4    &              &   180.00 & 0.00 &    180,000.00 & 1,109,440.20  \\
+	    R5    &              &    20.00 & 0.00 &     20,000.00 &    97,382.59 \\
+	    Z1    & 4,236.18 & 5,431.00 & 0.00 &  5,431,000.00 & 3,917,665.62 \\
+	    Z2    &   813.54 & 1,043.00 & 0.00 &  1,043,000.00 &   752.37070 \\
+	    Z3    &   761.28 &   976.00 & 0.00 &    976,000.00 &   704.04008 \\
+	    Z4    &   358.02 &   459.00 & 0.00 &    459,000.00 &   331.10090 \\
+	    Z5    & 1,199.64 & 1,538.00 & 0.00 &  1,538,000.00 & 1,109.44010 \\
+	    Z6    &   105.30 &   135.00 & 0.00 &    135,000.00 &    97.38261 \\
 	    \\
-	    total & 7,473,960.00 & \multicolumn{2}{r}{exp. weighted sum:} & \hl{18,826,516.31} &              \\
+	    total & 7,473.96000 & \multicolumn{2}{r}{exp. weighted sum:} & 18,826,516.31 &              \\
 		   \\
 		&  &      &  \multicolumn{1}{c}{location}    & \multicolumn{1}{c}{valve status} & \multicolumn{1}{c}{ideal inflow rate}   \\
-		\multicolumn{2}{c}{shift data}     &   &      & \multicolumn{1}{c}{} & \multicolumn{1}{c}{(liters/hour)} \\
+		\multicolumn{2}{c}{shift data}     &   &      & \multicolumn{1}{c}{} & \multicolumn{1}{c}{($\mathrm{m^3}$/hour)} \\
 		   \\
-		1   &  \multicolumn{1}{l}{day}   &              		& \multicolumn{1}{c}{WTP}    & \multicolumn{1}{c}{open} &  367,200.00* \\
-		1   &  \multicolumn{1}{l}{shif}  &         			    & \multicolumn{1}{c}{R1}     & \multicolumn{1}{c}{open} &  288,000.00* \\
-		24  &  \multicolumn{1}{l}{hours/shift}        &         & \multicolumn{1}{c}{R2}     & \multicolumn{1}{c}{open} &    60,683.78 \\
-	   &      &              									& \multicolumn{1}{c}{R3}     & \multicolumn{1}{c}{open} &    13,795.87 \\
-	   \multicolumn{3}{c}{total zones outflow}                  & \multicolumn{1}{c}{R4}     & \multicolumn{1}{c}{open} &    46,226.68 \\
-	   \multicolumn{3}{c}{(\hl{liters})}              			& \multicolumn{1}{c}{R5}     & \multicolumn{1}{c}{open} &     4,057.61 \\
-	   &      &              									& \multicolumn{1}{c}{Z1}     & \multicolumn{1}{c}{open} &   163,236.07 \\
-	   \multicolumn{3}{c}{\hl{6,912,000.00}}              			& \multicolumn{1}{c}{Z2}     & \multicolumn{1}{c}{open} &    31,348.78 \\
-	      &              &              						& \multicolumn{1}{c}{Z3}     & \multicolumn{1}{c}{open} &    29,335.00 \\
-	   \multicolumn{3}{c}{optimal value (fitness)}              & \multicolumn{1}{c}{Z4}     & \multicolumn{1}{c}{open} &    13,795.87 \\
-	   &             &             						 		& \multicolumn{1}{c}{Z5}     & \multicolumn{1}{c}{open} &    46,226.68 \\
-	   \multicolumn{3}{c}{\hl{12,910,117.35}}              			& \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{open} &     4,057.61 \\
+		1   &  \multicolumn{1}{l}{day}   &              		& \multicolumn{1}{c}{WTP}    & \multicolumn{1}{c}{open} &  367.20000* \\
+		1   &  \multicolumn{1}{l}{shif}  &         			    & \multicolumn{1}{c}{R1}     & \multicolumn{1}{c}{open} &  288.00000* \\
+		24  &  \multicolumn{1}{l}{hours/shift}        &         & \multicolumn{1}{c}{R2}     & \multicolumn{1}{c}{open} &   60.68378 \\
+	   &      &              									& \multicolumn{1}{c}{R3}     & \multicolumn{1}{c}{open} &    13.79587 \\
+	   \multicolumn{3}{c}{total zones outflow}                  & \multicolumn{1}{c}{R4}     & \multicolumn{1}{c}{open} &    46.22667 \\
+	   \multicolumn{3}{c}{($\mathrm{m^3}$)}              			& \multicolumn{1}{c}{R5}     & \multicolumn{1}{c}{open} &     4.05761 \\
+	   &      &              									& \multicolumn{1}{c}{Z1}     & \multicolumn{1}{c}{open} &   163.23607 \\
+	   \multicolumn{3}{c}{6,912.00000}              			& \multicolumn{1}{c}{Z2}     & \multicolumn{1}{c}{open} &    31.34878 \\
+	      &              &              						& \multicolumn{1}{c}{Z3}     & \multicolumn{1}{c}{open} &    29.33500 \\
+	   \multicolumn{3}{c}{optimal value (fitness)}              & \multicolumn{1}{c}{Z4}     & \multicolumn{1}{c}{open} &    13.79587 \\
+	   &             &             						 		& \multicolumn{1}{c}{Z5}     & \multicolumn{1}{c}{open} &    46.22667 \\
+	   \multicolumn{3}{c}{6,911.32770}              			& \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{open} &    4.05761 \\
 	   \\
-	   \multicolumn{3}{c}{\hl{(computational time  = 0.43 sec)}}     & \multicolumn{3}{c}{* values reported for maximum inflow rates} \\
-	   \multicolumn{3}{c}{\hl{(total number of iterations = 3,440)}}   & \multicolumn{3}{c}{** at the end of the evaluated period} 
+	   \multicolumn{3}{c}{(computational time  = 0.17 sec)}     & \multicolumn{3}{c}{* values reported for maximum inflow rates} \\
+	   \multicolumn{3}{c}{(total number of iterations = 1,204)}   & \multicolumn{3}{c}{** at the end of the evaluated period} 
 	\end{tabular}
 		\end{small}
 \caption{Summary of results generated by the solver developed in Lingo for case 01.}
