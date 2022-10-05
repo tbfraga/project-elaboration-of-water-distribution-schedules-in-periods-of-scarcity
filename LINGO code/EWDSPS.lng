@@ -115,14 +115,36 @@ ENDCALC
 
 ! The objective;
 
-[Eq01] MAX = AGDistVol - C2*@SUM( ZONES(z): DIFF(z) ) 
-	   - @SUM( SOLUTION(d,s,l): C3(d,s)*(1-VALVE_STATUS(d,s,l)) )
-	   - C4*IDLE_CAP_EXP_WEIGHTED_SUM;
+[Eq01] MAX = FirstTerm - SecondTerm - ThirdTerm - FourthTerm;
 
 !first term - average gain of distributed volume;
 !in the optimal solution, this term should not vary according to the number of days;
+!normally, in the optimal solution, the value of this term will be as high as possible;
 
-AGDistVol = C1*TOTAL_ZONE_OUTFLOW;
+FirstTerm = C1*TOTAL_ZONE_OUTFLOW;
+
+!second term - cost of inequality in distribution; 
+!in the solution, the second term varies between 0 and C2; 
+!to force a fair distribution, the parameters of the objective function must be defined 
+ so that the second term has a significatife weight;
+!normally we will have SecondTerm = 0 in the optimal solution;
+
+SecondTerm = C2*@SUM( ZONES(z): DIFF(z) );
+
+!third term - cost of closing the valves;
+!normally in the optimal solution, Third Term=0;
+!except when flow restrictions force valves to close to ensure fair distribution; 
+!in the latter case, the lowest possible cost is expected;
+
+ThirdTerm = @SUM( SOLUTION(d,s,l): C3(d,s)*(1-VALVE_STATUS(d,s,l)) );
+
+!fourth term - cost of idle capacity in reservoirs;
+!this term is used to prioritize or not the distribution of remaining water between the reservoirs;
+!increasing the value of C4 will make the filling of the reservoirs prioritized to meet the demand;
+
+FourthTerm = C4*IDLE_CAP_EXP_WEIGHTED_SUM;
+
+!Restrictions;
 
 ! zones;
 
@@ -134,14 +156,10 @@ AGDistVol = C1*TOTAL_ZONE_OUTFLOW;
 @FOR( ZONES(z): [Eq14]
 	ZONE_OUTFLOW(z) - @SUM( DAILY_SHIFTS(d,s): OUTFLOW(d,s,z) ) = 0 );
 
-! ******* and zones;
-
 @FOR ( ZONES(z): [Eq01_2T]
 	DIFF(z) - @ABS( DEMAND_PER(z) - ZONE_OUTFLOW_PER(z)) = 0 );
 
 @FOR( ZONES(z): [Eq16] ZONE_OUTFLOW_PER(z) - ZONE_OUTFLOW(z)/TOTAL_ZONE_OUTFLOW = 0);
-
-!Restrictions;
 
 ! reservoirs;
 
