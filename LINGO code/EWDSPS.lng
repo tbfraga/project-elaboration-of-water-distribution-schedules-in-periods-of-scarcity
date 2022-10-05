@@ -21,7 +21,7 @@ LOCALS: 	IDEAL_INFLOW_RATE,
 		CAPACITY, 
 		RELEVANCE_FACTOR;
 
-DAILY_SHIFTS (DAYS, SHIFTS): c;
+DAILY_SHIFTS (DAYS, SHIFTS): C3;
 
 SOLUTION (DAYS, SHIFTS, LOCALS): 	VALVE_STATUS, 
 						INFLOW, 
@@ -65,8 +65,8 @@ MAX_INFLOW_RATE = @FILE('data.ldt');
 ZONE_AVERAGE_CAPACITY = @FILE('data.ldt');
 CAPACITY = @FILE('data.ldt');
 
-FAIR_RELEVANCE_FACTOR = 10000;
-VALVES_RELEVANCE_FACTOR = 0.001;
+C2 = 10000;
+VALVES_RELEVANCE_FACTOR = 0.0001;
 RELEVANCE_FACTOR = 1.13 1.13 1.12 1.12 1.12 1.12 1.0 1.0 1.0 1.0 1.0 1.0;
 
 
@@ -99,36 +99,30 @@ MAX_INFLOW_RATE_INF = @MAX(LOCALS: MAX_INFLOW_RATE);
 	@IFC( MIN_INFLOW_RATE (l) #LE# 1.2345678: 
 		MIN_INFLOW_RATE(l) = 0.00 ) );
 
+C1 = 1/N_DAYS;
+
 !@FOR (DAILY_SHIFTS(d,s) : 
 	c(d,s) = 1 );
 
 @FOR (DAILY_SHIFTS(d,s) : 
-	c(d,s) = 100*((N_SHIFTS-s)*N_DAYS + N_DAYS - d + 1) );
+	C3(d,s) = 10*((N_SHIFTS-s)*N_DAYS + N_DAYS - d + 1) );
 
 CAP_EXP_WEIGHTED_SUM = @SUM( LOCALS(l) : CAPACITY(l)^RELEVANCE_FACTOR(l)) ;
 
-IRRELEVANCE_FACTOR = 1 / CAP_EXP_WEIGHTED_SUM;
+C4 = 1 / CAP_EXP_WEIGHTED_SUM;
 
 ENDCALC
 
 ! The objective;
 
-[Eq01] MAX = TOTAL_ZONE_OUTFLOW - FAIR_RELEVANCE_FACTOR*@SUM( ZONES(z): DIFF(z) ) - IRRELEVANCE_FACTOR*IDLE_CAP_EXP_WEIGHTED_SUM
-			+ VTERM;
+[Eq01] MAX = AGDistVol - C2*@SUM( ZONES(z): DIFF(z) ) 
+	   - @SUM( SOLUTION(d,s,l): C3(d,s)*(1-VALVE_STATUS(d,s,l)) )
+	   - C4*IDLE_CAP_EXP_WEIGHTED_SUM;
 
-@FOR ( ZONES(z): [Eq01_2T]
-	DIFF(z) - @ABS( DEMAND_PER(z) - ZONE_OUTFLOW_PER(z)) = 0 );
+!first term - average gain of distributed volume;
+!in the optimal solution, this term should not vary according to the number of days;
 
-@FOR( ZONES(z): [Eq16] ZONE_OUTFLOW_PER(z) - ZONE_OUTFLOW(z)/TOTAL_ZONE_OUTFLOW = 0);
-
-VTERM = VALVES_RELEVANCE_FACTOR*@SUM( SOLUTION(d,s,l): c(d,s)*VALVE_STATUS(d,s,l) );
-
-!Restrictions;
-
-! reservoirs;
-
-@FOR ( SOLUTION_RESERVOIRS(d,s,r): [Eq06]
-	OUTFLOW(d,s,r) - @SUM( LOCALS(l): INFLOW(d,s,l) * NET(r,l) ) = 0 );
+AGDistVol = C1*TOTAL_ZONE_OUTFLOW;
 
 ! zones;
 
@@ -139,6 +133,20 @@ VTERM = VALVES_RELEVANCE_FACTOR*@SUM( SOLUTION(d,s,l): c(d,s)*VALVE_STATUS(d,s,l
 
 @FOR( ZONES(z): [Eq14]
 	ZONE_OUTFLOW(z) - @SUM( DAILY_SHIFTS(d,s): OUTFLOW(d,s,z) ) = 0 );
+
+! ******* and zones;
+
+@FOR ( ZONES(z): [Eq01_2T]
+	DIFF(z) - @ABS( DEMAND_PER(z) - ZONE_OUTFLOW_PER(z)) = 0 );
+
+@FOR( ZONES(z): [Eq16] ZONE_OUTFLOW_PER(z) - ZONE_OUTFLOW(z)/TOTAL_ZONE_OUTFLOW = 0);
+
+!Restrictions;
+
+! reservoirs;
+
+@FOR ( SOLUTION_RESERVOIRS(d,s,r): [Eq06]
+	OUTFLOW(d,s,r) - @SUM( LOCALS(l): INFLOW(d,s,l) * NET(r,l) ) = 0 );
 
 ![CALC_AVER_INFLOW] HOUSEHOLD_AVER_INFLOW - TOTAL_ZONE_OUTFLOW / (N_TOTAL_HOUSEHOLDS * N_DAYS) = 0;
 ![CALC_INHABIT_AVER_INFLOW] INHABIT_AVER_INFLOW - HOUSEHOLD_AVER_INFLOW / HOUSING_COEFF = 0;
