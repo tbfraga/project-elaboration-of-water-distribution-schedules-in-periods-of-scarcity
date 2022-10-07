@@ -270,8 +270,8 @@ This water distribution problem arises in times of scarcity, in which it becomes
 
 \begin{eqnarray} 
 \label{eq:objFunc}
-	 \mathcolorbox{yellow}{maximize \quad TVD - \mathrm{FRF}*\sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{|\mathrm{PDem}_{z} - PDist_{z}|}} \\ \nonumber 
-	\mathcolorbox{yellow}{- \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{l=1}^{\mathrm{NL}}{(c(d,s)*(1-X_{dsl}))}}} - \mathrm{ICIrF}*IdleCEWSum}
+	 \mathcolorbox{yellow}{maximize \quad \mathrm{C1}*TVD - \mathrm{C2}*\sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{|\mathrm{PDem}_{z} - PDist_{z}|}} \\ \nonumber 
+	\mathcolorbox{yellow}{- \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{l=1}^{\mathrm{NL}}{(\mathrm{C3}(d,s)*(1-X_{dsl}))}}} - \mathrm{C4}*IdleCEWSum}
 \end{eqnarray}
 
 \hl{\emph{subj. to}}
@@ -541,14 +541,13 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \end{center}
 \end{table}
 
+\subsection{Benchmarks}
+\label{sec:benchmarks}
+
+\hl{For testing the developed SOLVER, we have considered two groups of cases. In the first group (case 01 to case 21), we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). For the construction of the second group (case 22 to case 28), we considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. For all cases we used the following values for the parameters: $\mathrm{C1}= 1$, $\mathrm{C2}= 10,000$, $\mathrm{C3}(d,s)=10*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$, $\mathrm{C4} = 5.270\mathrm{E-}5$, $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$.}
+
 \subsection{Initial considerations}
 \label{sec:initialConsiderations}
-
-
-
-\hl{For testing the developed SOLVER, we have considered two groups of cases. In the first group (case 01 to case 21), we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). For the construction of the second group (case 22 to case 28), we considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. For all cases we used the following values for the parameters: $\mathrm{FRF}= 10,000$,  $\mathrm{ICIrF} = 5.270\mathrm{E-}5$, $c(d,s)=10*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$,  $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$.}
-
-
 
 Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data summarized in the section \ref{sec:data}, calculated with the aid of the 'LibreOffice Calc' software, considering the maximum daily distribution value (in a 24-hour shift), limited by the outflows of the weirs and the WTP.
 
@@ -596,18 +595,18 @@ After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, w
 		location & \multicolumn{1}{c}{total demand}      & \multicolumn{1}{c}{capacity} & \multicolumn{1}{c}{initial vol.} & \multicolumn{1}{c}{idle capacity **} & \multicolumn{1}{c}{total inflow}  \\
 		      & \multicolumn{1}{c}{($\mathrm{m^3}$)} & \multicolumn{1}{c}{($\mathrm{m^3}$)}   & \multicolumn{1}{c}{($\mathrm{m^3}$)}     &  \multicolumn{1}{c}{($\mathrm{m^3}$)}   &  \multicolumn{1}{c}{($\mathrm{m^3}$)}               \\
 		\\
-		WTP   &              & 2,500.00 & 0.00 &  599,200.00 & 8,812,800.00 \\
-		R1    &              &   500.00 & 0.00 &    500,000.00 & 6,912,000.00 \\
-		R2    &              &   400.00 & 0.00 &    400,000.00 & 1,456,410.77 \\
-		R3    &              &   100.00 & 0.00 &    100,000.00 &   331,100.81 \\
-	    R4    &              &   180.00 & 0.00 &    180,000.00 & 1,109,440.20  \\
-	    R5    &              &    20.00 & 0.00 &     20,000.00 &    97,382.59 \\
-	    Z1    & 4,236.18 & 5,431.00 & 0.00 &  5,431,000.00 & 3,917,665.62 \\
-	    Z2    &   813.54 & 1,043.00 & 0.00 &  1,043,000.00 &   752.37070 \\
-	    Z3    &   761.28 &   976.00 & 0.00 &    976,000.00 &   704.04008 \\
-	    Z4    &   358.02 &   459.00 & 0.00 &    459,000.00 &   331.10090 \\
-	    Z5    & 1,199.64 & 1,538.00 & 0.00 &  1,538,000.00 & 1,109.44010 \\
-	    Z6    &   105.30 &   135.00 & 0.00 &    135,000.00 &    97.38261 \\
+		WTP   &              & 2,500.000 & 0.00 &  599,200.00 & 8,812,800.00 \\
+		R1    &              &   500.000 & 0.00 &    500,000.00 & 6,912,000.00 \\
+		R2    &              &   400.000 & 0.00 &    400,000.00 & 1,456,410.77 \\
+		R3    &              &   100.000 & 0.00 &    100,000.00 &   331,100.81 \\
+	    R4    &              &   180.000 & 0.00 &    180,000.00 & 1,109,440.20  \\
+	    R5    &              &    20.000 & 0.00 &     20,000.00 &    97,382.59 \\
+	    Z1    & 4,236.18 & 5,431.000 & 0.00 &  5,431,000.00 & 3,917,665.62 \\
+	    Z2    &   813.54 & 1,043.000 & 0.00 &  1,043,000.00 &   752.37070 \\
+	    Z3    &   761.28 &   976.000 & 0.00 &    976,000.00 &   704.04008 \\
+	    Z4    &   358.02 &   459.000 & 0.00 &    459,000.00 &   331.10090 \\
+	    Z5    & 1,199.64 & 1,538.000 & 0.00 &  1,538,000.00 & 1,109.44010 \\
+	    Z6    &   105.30 &   135.000 & 0.00 &    135,000.00 &    97.38261 \\
 	    \\
 	    total & 7,473.96000 & \multicolumn{2}{r}{exp. weighted sum:} & 18,826,516.31 &              \\
 		   \\
