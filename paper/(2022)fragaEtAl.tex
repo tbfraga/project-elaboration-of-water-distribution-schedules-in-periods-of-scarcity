@@ -13,6 +13,7 @@
 \usepackage[bottom]{footmisc}
 \usepackage{float}
 \usepackage{xcolor}
+\usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage[export]{adjustbox}
 %\usepackage{hyperref}
@@ -450,7 +451,7 @@ In order to guarantee a fair distribution, in specific cases where the actual fl
 
 \section{Tests and results}
 
-To validate the proposed model, a LINGO code was developed and ran in the 'global solver' mode, using the parameter values recommended by the software \cite{LINGO} \hl{(with the exception of the Precision parameter, on the Interface tab, whose value was set to 11)}. \hl{The tests were performed on a notebook with an Intel i7 processor. The input data were prepared} based on the considerations presented in the sections \ref{sec:initialConsiderations}, \ref{sec:praticalAspects} and \ref{sec:limitations} and using the data collected during this work, as summarized in the section \ref{sec:data}. The results found as well as an analysis of these results are presented along the following sections together with the considerations studied. 
+To validate the proposed model, a LINGO code was developed and ran in the 'global solver' mode, using the parameter values recommended by the software \cite{LINGO} \hl{(with the exception of the Precision parameter, on the Interface tab, whose value was set to 9)}. \hl{The tests were performed on a notebook with an Intel i7 processor. The input data were prepared} based on the considerations presented in the sections \ref{sec:initialConsiderations}, \ref{sec:praticalAspects} and \ref{sec:limitations} and using the data collected during this work, as summarized in the section \ref{sec:data}. The results found as well as an analysis of these results are presented along the following sections together with the considerations studied. 
 
 \subsection{Data collected}
 \label{sec:data}
@@ -545,7 +546,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 
 
 
-\hl{For testing the developed SOLVER, we have considered two groups of cases. In the first group (case 01 to case 21), we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). For the construction of the second group (case 22 to case 28), we considered a minimum inflow value for the R5 reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. For all cases we used the following values for the parameters: $\mathrm{FRF}= 10,000$,  $\mathrm{ICIrF} = 0.0001$, $c(d,s)=10*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$,  $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$.}
+\hl{For testing the developed SOLVER, we have considered two groups of cases. In the first group (case 01 to case 21), we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). For the construction of the second group (case 22 to case 28), we considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. For all cases we used the following values for the parameters: $\mathrm{FRF}= 10,000$,  $\mathrm{ICIrF} = 5.270\mathrm{E-}5$, $c(d,s)=10*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$,  $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$.}
 
 
 
@@ -556,11 +557,11 @@ Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data su
 	    \caption{Determination of optimal distribution values with 'LibreOffice Calc', considering a daily 24-hour distribution period.}
 		\label{fig:evalOptimalValues}
 		\centering
-		\includegraphics[width=\textwidth]{figures/evalCase01.png}
+		\includegraphics[width=\textwidth]{figures/case01Evaluation.png}
 	\end{center}
 \end{figure}
 
-As we can see in this figure, the optimal daily water distribution volume per inhabitant, considering a daily 24-hour distribution period, is 184.96 liters / (day * inhabitant). Therefore, we can conclude that, in fact, the flow of the pipeline that transports water from the WTP to the Central Reservoir is not sufficient to meet the average daily consumption of the population informed by the company (200 liters / (day * inhabitant)).
+As we can see in this figure, the optimal daily water distribution volume per inhabitant, considering a daily 24-hour distribution period, is $\approx$ 185.00 liters / (day * inhabitant). Therefore, we can conclude that, in fact, the flow of the pipeline that transports water from the WTP to the Central Reservoir is not sufficient to meet the average daily consumption of the population informed by the company (200 liters / (day * inhabitant)).
 
 Another important piece of information that we observe in this figure are the ideal inflow rates, which would result in a fair distribution for the population of Catende. These values are basically defined as a function of water availability, demands, and initial volumes in the reservoirs. Such values were identified using the following calculation logic:
 
