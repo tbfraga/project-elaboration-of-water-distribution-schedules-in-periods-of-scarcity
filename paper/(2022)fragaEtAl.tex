@@ -586,7 +586,7 @@ Another important piece of information that we observe in this figure are the id
 
 \noindent being the values of \hl{$OutF_{dsr}$} calculated according to the Eqs. in (\ref{eq:evalOutFRes}) recursively, and the ideal rates (not informed) then calculated based on the Eqs. in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}).
 
-After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, we run the solver in \hl{LINGO}, using the same inputs shown in this figure, along with other data reported in the \ref{sec:data} section. The values 367,200.00 and 288,000.00 were used as the values of the maximum inflow rates informed for the WTP and for the Central Reservoir, respectively. No limit values for inflow rates were informed for the other reservoirs and zones. Table \ref{tab:lingoEvalCase01} displays the values found by the solver. As we can see in this table, the solver found the calculated optimal values very quickly \hl{and without any errors observed}. 
+After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, we run the solver in \hl{LINGO}, using the same inputs shown in this figure, along with other data reported in the \ref{sec:data} section. The values 367.200 and 288.000 were used as the values of the maximum inflow rates informed for the WTP and for the Central Reservoir, respectively. No limit values for inflow rates were informed for the other reservoirs and zones. Table \ref{tab:lingoEvalCase01} displays the values found by the solver. As we can see in this table, the solver found the calculated optimal values very quickly \hl{and without any errors observed}. 
 
 \begin{table}[h!]
 \begin{center}
@@ -595,42 +595,42 @@ After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, w
 		location & \multicolumn{1}{c}{total demand}      & \multicolumn{1}{c}{capacity} & \multicolumn{1}{c}{initial vol.} & \multicolumn{1}{c}{idle capacity **} & \multicolumn{1}{c}{total inflow}  \\
 		      & \multicolumn{1}{c}{($\mathrm{m^3}$)} & \multicolumn{1}{c}{($\mathrm{m^3}$)}   & \multicolumn{1}{c}{($\mathrm{m^3}$)}     &  \multicolumn{1}{c}{($\mathrm{m^3}$)}   &  \multicolumn{1}{c}{($\mathrm{m^3}$)}               \\
 		\\
-		WTP   &              & 2,500.000 & 0.00 &  599,200.00 & 8,812,800.00 \\
-		R1    &              &   500.000 & 0.00 &    500,000.00 & 6,912,000.00 \\
-		R2    &              &   400.000 & 0.00 &    400,000.00 & 1,456,410.77 \\
-		R3    &              &   100.000 & 0.00 &    100,000.00 &   331,100.81 \\
-	    R4    &              &   180.000 & 0.00 &    180,000.00 & 1,109,440.20  \\
-	    R5    &              &    20.000 & 0.00 &     20,000.00 &    97,382.59 \\
-	    Z1    & 4,236.18 & 5,431.000 & 0.00 &  5,431,000.00 & 3,917,665.62 \\
-	    Z2    &   813.54 & 1,043.000 & 0.00 &  1,043,000.00 &   752.37070 \\
-	    Z3    &   761.28 &   976.000 & 0.00 &    976,000.00 &   704.04008 \\
-	    Z4    &   358.02 &   459.000 & 0.00 &    459,000.00 &   331.10090 \\
-	    Z5    & 1,199.64 & 1,538.000 & 0.00 &  1,538,000.00 & 1,109.44010 \\
-	    Z6    &   105.30 &   135.000 & 0.00 &    135,000.00 &    97.38261 \\
+		WTP   &           & 2,500.000 & 0.000 &  599.200 & 8,812.800 \\
+		R1    &           &   500.000 & 0.000 &  500.000 & 6,912.000\\
+		R2    &           &   400.000 & 0.000 &  400.000 & 1,456.411 \\
+		R3    &           &   100.000 & 0.000 &  100.000 &   331.101 \\
+	    R4    &           &   180.000 & 0.000 &  180.000 & 1,109.440  \\
+	    R5    &           &    20.000 & 0.000 &   20.000 &    97.383 \\
+	    Z1    & 4,236.180 & 5,431.000 & 0.000 &  5,431.000 & 3,917.666 \\
+	    Z2    &   813.540 & 1,043.000 & 0.000 &  1,043.000 &   752.371 \\
+	    Z3    &   761.280 &   976.000 & 0.000 &    976.000 &   704.040 \\
+	    Z4    &   358.020 &   459.000 & 0.000 &    459.000 &   331.101 \\
+	    Z5    & 1,199.640 & 1,538.000 & 0.000 &  1,538.000 & 1,109.440 \\
+	    Z6    &   105.300 &   135.000 & 0.000 &    135.000 &    97.383 \\
 	    \\
-	    total & 7,473.96000 & \multicolumn{2}{r}{exp. weighted sum:} & 18,826,516.31 &              \\
+	    total & 7,473.960 & \multicolumn{2}{r}{exp. weighted sum:} & 13,438.743 &              \\
 		   \\
 		&  &      &  \multicolumn{1}{c}{location}    & \multicolumn{1}{c}{valve status} & \multicolumn{1}{c}{ideal inflow rate}   \\
 		\multicolumn{2}{c}{shift data}     &   &      & \multicolumn{1}{c}{} & \multicolumn{1}{c}{($\mathrm{m^3}$/hour)} \\
 		   \\
-		1   &  \multicolumn{1}{l}{day}   &              		& \multicolumn{1}{c}{WTP}    & \multicolumn{1}{c}{open} &  367.20000* \\
-		1   &  \multicolumn{1}{l}{shif}  &         			    & \multicolumn{1}{c}{R1}     & \multicolumn{1}{c}{open} &  288.00000* \\
-		24  &  \multicolumn{1}{l}{hours/shift}        &         & \multicolumn{1}{c}{R2}     & \multicolumn{1}{c}{open} &   60.68378 \\
-	   &      &              									& \multicolumn{1}{c}{R3}     & \multicolumn{1}{c}{open} &    13.79587 \\
-	   \multicolumn{3}{c}{total zones outflow}                  & \multicolumn{1}{c}{R4}     & \multicolumn{1}{c}{open} &    46.22667 \\
-	   \multicolumn{3}{c}{($\mathrm{m^3}$)}              			& \multicolumn{1}{c}{R5}     & \multicolumn{1}{c}{open} &     4.05761 \\
-	   &      &              									& \multicolumn{1}{c}{Z1}     & \multicolumn{1}{c}{open} &   163.23607 \\
-	   \multicolumn{3}{c}{6,912.00000}              			& \multicolumn{1}{c}{Z2}     & \multicolumn{1}{c}{open} &    31.34878 \\
-	      &              &              						& \multicolumn{1}{c}{Z3}     & \multicolumn{1}{c}{open} &    29.33500 \\
-	   \multicolumn{3}{c}{optimal value (fitness)}              & \multicolumn{1}{c}{Z4}     & \multicolumn{1}{c}{open} &    13.79587 \\
-	   &             &             						 		& \multicolumn{1}{c}{Z5}     & \multicolumn{1}{c}{open} &    46.22667 \\
-	   \multicolumn{3}{c}{6,911.32770}              			& \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{open} &    4.05761 \\
+1   &  \multicolumn{1}{l}{day} &  & \multicolumn{1}{c}{WTP} & \multicolumn{1}{c}{open} &  367.200* \\
+1   &  \multicolumn{1}{l}{shif} & & \multicolumn{1}{c}{R1}  & \multicolumn{1}{c}{open} &  288.000* \\
+24  &  \multicolumn{1}{l}{hours/shift} & & \multicolumn{1}{c}{R2} & \multicolumn{1}{c}{open} &   60.684\\
+	&      &                  & \multicolumn{1}{c}{R3}     & \multicolumn{1}{c}{open} &    13.796 \\
+\multicolumn{3}{c}{total zones outflow} & \multicolumn{1}{c}{R4} & \multicolumn{1}{c}{open}  &   46.227 \\
+	   \multicolumn{3}{c}{($\mathrm{m^3}$)}              			& \multicolumn{1}{c}{R5}     & \multicolumn{1}{c}{open} &     4.058 \\
+	   &      &              									& \multicolumn{1}{c}{Z1}     & \multicolumn{1}{c}{open} &   163.236 \\
+	   \multicolumn{3}{c}{6,912.000}              			& \multicolumn{1}{c}{Z2}     & \multicolumn{1}{c}{open} &    31.349 \\
+	      &              &              						& \multicolumn{1}{c}{Z3}     & \multicolumn{1}{c}{open} &    29.335 \\
+	   \multicolumn{3}{c}{optimal value (fitness)}              & \multicolumn{1}{c}{Z4}     & \multicolumn{1}{c}{open} &    13.796 \\
+	   &             &             						 		& \multicolumn{1}{c}{Z5}     & \multicolumn{1}{c}{open} &    46.227 \\
+	   \multicolumn{3}{c}{6,911.292}              			& \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{open} &    4.058 \\
 	   \\
-	   \multicolumn{3}{c}{(computational time  = 0.17 sec)}     & \multicolumn{3}{c}{* values reported for maximum inflow rates} \\
-	   \multicolumn{3}{c}{(total number of iterations = 1,204)}   & \multicolumn{3}{c}{** at the end of the evaluated period} 
+	   \multicolumn{3}{c}{(computational time  = 0.29 sec)}     & \multicolumn{3}{c}{* values reported for maximum inflow rates} \\
+	   \multicolumn{3}{c}{(total number of iterations = 925)}   & \multicolumn{3}{c}{** at the end of the evaluated period} 
 	\end{tabular}
 		\end{small}
-\caption{Summary of results generated by the solver developed in Lingo for case 01.}
+\caption{Summary of results generated by the solver developed in LINGO for case 01.}
 \label{tab:lingoEvalCase01}
 \end{center}
 \end{table}
