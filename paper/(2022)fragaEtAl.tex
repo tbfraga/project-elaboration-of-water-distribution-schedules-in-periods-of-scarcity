@@ -743,7 +743,7 @@ In the case of situation (1), as the solver seeks to maximize the volume of wate
 \end{center}
 \end{table}
 
-For situation (3), once a minimum value is indicated for the inflow of a given location, the solver will propose solutions in which the inflow of some locations will be null or concentrated in one or a few shifts. For example, Table \ref{tab:lingoEvaluationsCase23} presents the results found by the solver for case 23, in which the same data used in case 06 were considered, except that a minimum flow rate was reported for the reservoir $\mathrm{R5}$ ($r=6$), \hl{$\mathrm{MinInFR}_6 = $10.000 $\mathrm{m^3}$/hour}. \hl{As we can see in this table, the R5 reservoir and the Z6 zone only receive flow in the third shift of the first and second days}. \hl{The solution found by the solver is not optimal. It would be possible to obtain a better solution, for example, by distributing the volume received by zone Z6 among all shifts.}
+For situation (3), once a minimum value is indicated for the inflow of a given location, the solver will propose solutions in which the inflow of some locations will be null or concentrated in one or a few shifts. For example, Table \ref{tab:lingoEvalCase22} presents the results found by the solver for case 22, in which the same data used in case 03 were considered, except that a minimum flow rate was reported for the reservoir $\mathrm{R5}$ ($r=6$), \hl{$\mathrm{MinInFR}_6 = $10.000 $\mathrm{m^3}$/hour}. In this case, it is expected that the valve of R5 will close in the second and third shifts and that the inflow of R5 will be concentrated only in the first shift (having its value multiplied by three). \hl{As we can see in Table} \ref{tab:lingoEvalCase22} \hl{the solution found by the solver is not optimal. As expected, the restriction related to the minimum inflow in R5 causes the flow to be restricted to a single shift (with tripled inflow value), forcing the valves to be closed in the other two shifts. Even though the R5 inflow values were set correctly, the SOLVER was not able to find the correct closing of the valves}.
 
 \begin{table}[h!]
 \begin{center}
@@ -768,25 +768,25 @@ For situation (3), once a minimum value is indicated for the inflow of a given l
 	    total & 7,473.960 & \multicolumn{2}{r}{exp. weighted sum:} & 13,438.743 &              \\
 		   \\
 		&  &      &  \multicolumn{1}{c}{location}    & \multicolumn{1}{c}{valve status} & \multicolumn{1}{c}{ideal inflow rate}   \\
-		\multicolumn{2}{c}{shift data}     &   &      & \multicolumn{1}{c}{T1, T2 and T3} & \multicolumn{1}{c}{($\mathrm{m^3}$/hour)} \\
+		\multicolumn{2}{c}{shift data}     &   &      & \multicolumn{1}{c}{closed} & \multicolumn{1}{c}{($\mathrm{m^3}$/hour)} \\
 		   \\
-1   &  \multicolumn{1}{l}{day} &  & \multicolumn{1}{c}{WTP} & \multicolumn{1}{c}{open} &  367.200* \\
-3   &  \multicolumn{1}{l}{shif} & & \multicolumn{1}{c}{R1}  & \multicolumn{1}{c}{open} &  288.000* \\
-24  &  \multicolumn{1}{l}{hours/shift} & & \multicolumn{1}{c}{R2} & \multicolumn{1}{c}{open} &   60.684\\
-	&      &                  & \multicolumn{1}{c}{R3}     & \multicolumn{1}{c}{open} &    13.796 \\
-\multicolumn{3}{c}{total zones outflow} & \multicolumn{1}{c}{R4} & \multicolumn{1}{c}{open}  &   46.227 \\
-\multicolumn{3}{c}{($\mathrm{m^3}$)}& \multicolumn{1}{c}{R5}     & \multicolumn{1}{c}{open} &     4.058 \\
-	   &      &              		& \multicolumn{1}{c}{Z1}     & \multicolumn{1}{c}{open} &   163.236 \\
-\multicolumn{3}{c}{6,912.000}       & \multicolumn{1}{c}{Z2}     & \multicolumn{1}{c}{open} &    31.349 \\
-	   &      &              		& \multicolumn{1}{c}{Z3}     & \multicolumn{1}{c}{open} &    29.335 \\\multicolumn{3}{c}{optimal value (fitness)} & \multicolumn{1}{c}{Z4} & \multicolumn{1}{c}{open} &13.796 \\
-	   &      &             	    & \multicolumn{1}{c}{Z5}     & \multicolumn{1}{c}{open} &    46.227 \\
-\multicolumn{3}{c}{6,911.292}       & \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{open} &     4.058 \\\\
-\multicolumn{3}{c}{(computational time  = 0.21 sec)}     & \multicolumn{3}{c}{* values reported for maximum inflow rates} \\
-\multicolumn{3}{c}{(total number of iterations = 451)}   & \multicolumn{3}{c}{** at the end of the evaluated period} 
+1   &  \multicolumn{1}{l}{day} &  & \multicolumn{1}{c}{WTP} & \multicolumn{1}{c}{-} &  367.200* \\
+3   &  \multicolumn{1}{l}{shif} & & \multicolumn{1}{c}{R1}  & \multicolumn{1}{c}{-} &  288.000* \\
+24  &  \multicolumn{1}{l}{hours/shift} & & \multicolumn{1}{c}{R2} & \multicolumn{1}{c}{-} &   60.684\\
+	&      &                  & \multicolumn{1}{c}{R3}     & \multicolumn{1}{c}{-} &    13.796 \\
+\multicolumn{3}{c}{total zones outflow} & \multicolumn{1}{c}{R4} & \multicolumn{1}{c}{-}  &   46.227 \\
+\multicolumn{3}{c}{($\mathrm{m^3}$)}& \multicolumn{1}{c}{R5}     & \multicolumn{1}{c}{D1-S1 / D1-S2} &    12.173 \\
+	   &      &              		& \multicolumn{1}{c}{Z1}     & \multicolumn{1}{c}{-} &   163.236 \\
+\multicolumn{3}{c}{6,912.000}       & \multicolumn{1}{c}{Z2}     & \multicolumn{1}{c}{-} &    31.349 \\
+	   &      &              		& \multicolumn{1}{c}{Z3}     & \multicolumn{1}{c}{-} &    29.335 \\\multicolumn{3}{c}{optimal value (fitness)} & \multicolumn{1}{c}{Z4} & \multicolumn{1}{c}{-} &13.796 \\
+	   &      &             	    & \multicolumn{1}{c}{Z5}     & \multicolumn{1}{c}{-} &    46.227 \\
+\multicolumn{3}{c}{6,811.292}       & \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{D1-S1 / D1-S2} &    12.173 \\\\
+\multicolumn{3}{c}{(computational time  = 10.81 sec)}     & \multicolumn{3}{c}{* values reported for maximum inflow rates} \\
+\multicolumn{3}{c}{(total number of iterations = 72,287)}   & \multicolumn{3}{c}{** at the end of the evaluated period} 
 	\end{tabular}
 \end{small}
-\caption{Summary of results generated by the solver developed in LINGO for case 23.}
-\label{tab:lingoEvalCase23}
+\caption{Summary of results generated by the solver developed in LINGO for case 22.}
+\label{tab:lingoEvalCase22}
 \end{center}
 \end{table}
 
