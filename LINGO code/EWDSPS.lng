@@ -65,7 +65,7 @@ MAX_INFLOW_RATE = @FILE('data.ldt');
 ZONE_AVERAGE_CAPACITY = @FILE('data.ldt');
 CAPACITY = @FILE('data.ldt');
 
-C2 = 10000;
+C2 = 100000;
 RELEVANCE_FACTOR = 1.13 1.13 1.12 1.12 1.12 1.12 1.0 1.0 1.0 1.0 1.0 1.0;
 
 
@@ -98,13 +98,13 @@ MAX_INFLOW_RATE_INF = @MAX(LOCALS: MAX_INFLOW_RATE);
 	@IFC( MIN_INFLOW_RATE (l) #LE# 1.2345678: 
 		MIN_INFLOW_RATE(l) = 0.00 ) );
 
-C1 = 1/N_DAYS;
+C1 = 10/N_DAYS;
 
 !@FOR (DAILY_SHIFTS(d,s) : 
 	c(d,s) = 1 );
 
 @FOR (DAILY_SHIFTS(d,s) : 
-	C3(d,s) = 10*((N_SHIFTS-s)*N_DAYS + N_DAYS - d + 1) );
+	C3(d,s) = 1*((N_SHIFTS-s)*N_DAYS + N_DAYS - d + 1) );
 
 CAP_EXP_WEIGHTED_SUM = @SUM( LOCALS(l) : CAPACITY(l)^RELEVANCE_FACTOR(l)) ;
 
