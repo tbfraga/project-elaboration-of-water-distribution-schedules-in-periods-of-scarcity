@@ -544,7 +544,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \subsection{Benchmarks}
 \label{sec:benchmarks}
 
-\hl{For testing the developed SOLVER, we have considered two groups of cases. In the first group (case 01 to case 21), we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). For the construction of the second group (case 22 to case 28), we considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. For all cases we used the following values for the parameters: $\mathrm{C1}= 1/\mathrm{ND}$, $\mathrm{C2}= 10,000$, $\mathrm{C3}(d,s)=10*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$, $\mathrm{C4} = 5.270\mathrm{E-}5$, $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$.}
+\hl{For testing the developed SOLVER, we have considered 36 cases. In cases 01 to 21 we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). In cases 22 to 28, we also considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. Case 29 is like case 03, except that a maximum flow rate was informed for Centro's zone ($z = 7$),} \hl{$\mathrm{MaxInFR}_7 = $130.00} \hl{$\mathrm{m^3}$/hour. Case 30 to case 36 are like cases 22 to 28, respectvely, except that a maximum flow rate was informed for Centro's zone, as in case 29. For all cases we used the following values for the parameters: $\mathrm{C1}= 10/\mathrm{ND}$, $\mathrm{C2}= 100,000$, $\mathrm{C3}(d,s)=a*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$, with $a=1$ or $a=2$, $\mathrm{C4} = 5.27\mathrm{E-}5$, $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$. A template for the data file (data.ldt), as well as the SOLVER in LINGO (EWDSPS.lng) and the files with the results found (results/*.lgr) can be consulted at "https://github.com/tbfraga/project-elaboration-of-water-distribution-schedules-in-periods-of-scarcity/tree/main/LINGO code".}
 
 \subsection{Initial considerations}
 \label{sec:initialConsiderations}
@@ -693,7 +693,7 @@ It would be ideal if the company could regulate the flow rates for water distrib
 
 Situations (1) and (3) can be easily solved by indicating maximum and minimum values, respectively, for the inflow rates calculated by the solver. However, care must be taken not to set values that make the problem unresolvable. The planner must always keep in mind that the water distribution network and the flow rates form a single system, with values that are essentially integrated.
 
-In the case of situation (1), as the solver seeks to maximize the volume of water distributed to the zones, the volume of distribution (limited by the inflow rate) in a given location will be transferred to other locations seeking to meet the demand and, later, distributed to filling the idle capacity of the reservoirs. For example, Table \ref{tab:lingoEvaluationsCase29} presents the results found by the solver for case 29, in which the same data used in case 06 were considered, except that a maximum flow rate was informed for zone $\mathrm{Z1}$ ($z = 7$), \hl{$\mathrm{MaxInFR}_7 = $130.000} $\mathrm{m^3}$/hour (case 06 is just like case 03 but with 2 days).
+In the case of situation (1), as the solver seeks to maximize the volume of water distributed to the zones, the volume of distribution (limited by the inflow rate) in a given location will be transferred to other locations seeking to meet the demand and, later, distributed to filling the idle capacity of the reservoirs. For example, Table \ref{tab:lingoEvaluationsCase29} presents the results found by the solver for case 29, in which the same data used in \hl{case 03} were considered, except that a maximum flow rate was informed for \hl{Centro's zone ($z = 7$)}, \hl{$\mathrm{MaxInFR}_7 = $130.00} $\mathrm{m^3}$/hour.
 
 \begin{table}[h!]
 \begin{center}
@@ -854,81 +854,47 @@ However, \hl{LINGO} is not a magic tool, \hl{LINGO}'s processing power is limite
 \begin{table}[h!]
 \begin{center}
 \begin{small}
-	\begin{tabular}{ c c c c c c c c c } 
-         &    &    &                &           &           &   \multicolumn{3}{c}{relevance factors}  \\      
-	case & ND & NS &  optimum &  fitness   & \hl{rel. error} &  time(s)  & \hl{ierations}     \\
-	 01  &  1 & 1  &  \hl{12,910,117.35}  &  \hl{12,910,117.35}  & \hl{0\%} &  \hl{0.43}   &   \hl{3,440}       \\
-	 02  &  1 & 2  &  \hl{18,910,117.35}  &  \hl{18,910,117.35}  & \hl{0\%} &  \hl{0.72}   &   \hl{5,425}    \\
-	 03  &  1 & 3  &  \hl{24,910,117.35}  &  \hl{24,910,117.32}  & \hl{$\approx 0\%$} &  \hl{0.15}   &   \hl{524}     \\
-	 04  &  2 & 1  & \hl{25,822,455.15} & \hl{25,822,454.86}  &  \hl{$\approx 0\%$} &  \hl{0.71}   &   \hl{4,808}    \\
-	 05  &  2 & 2  & \hl{37,822,455.15} & \hl{37,822,454.72}  &  \hl{$\approx 0\%$} &  \hl{0.21}   &   \hl{914}      \\
-	 06  &  2 & 3  & \hl{49,822,455.15} & \hl{49,822,454.59}  &  \hl{$\approx 0\%$} &  \hl{0.26}   &   \hl{789}     \\
-	 07  &  3 & 1  & \hl{38,734,455,15} & \hl{38,734,454.72}  & \hl{$\approx 0\%$} &   \hl{0.11}   &    \hl{517}      \\
-	 08  &  3 & 2  & \hl{56,734,455,15} & \hl{56,734,454.51}  & \hl{$\approx 0\%$} & \hl{0.24}  &  \hl{771}    \\
-	 09  &  3 & 3  & \hl{74,734,455,15} & \hl{74,734,454.32}  & \hl{$\approx 0\%$} &   \hl{0.65} & \hl{1,139}   \\
-	 10  &  4 & 1  & \hl{51,646,455,15} & \hl{51,646,455.14}  & \hl{$\approx 0\%$} &  \hl{0.29}   &  \hl{1511}    \\
-	 11  &  4 & 2  & \hl{75,646,455,15} & \hl{75,646,454.30}  & \hl{$\approx 0\%$} &  \hl{0.43}   &    \hl{976}     \\
-	 12  &  4 & 3  & \hl{99,646,455,15} & \hl{99,646,454.04}  & \hl{$\approx 0\%$} &  \hl{0.94}   &   \hl{1,295}      \\
-	 13  &  5 & 1  & \hl{64,558,455,15} & \hl{64,558,454.43}  & \hl{$\approx 0\%$}  &  \hl{0.30}   &   \hl{916}    \\
-	 14  &  5 & 2  & \hl{94,558,455,15} & \hl{94,558,454.10}  &  \hl{$\approx 0\%$} &  \hl{0.59}   &   \hl{1,130}    \\
-	 15  &  5 & 3  & \hl{124,558,455,15} & \hl{124,558,453.76} & \hl{$\approx 0\%$} &  \hl{1.00}   &   \hl{1,016}       \\
-	 16  &  6 & 1  & \hl{77,470,455,15} & \hl{77,470,454.29}  & \hl{$\approx 0\%$}  &  \hl{0.24}   &   \hl{738}       \\
-	 17  &  6 & 2  & \hl{113,470,455,15} & \hl{113,470,453.89}  & \hl{$\approx 0\%$} &  \hl{0.97}   &   \hl{1,191}      \\
-	 18  &  6 & 3  & \hl{149,470,455,15} & \hl{149,470,455.13}  & \hl{$\approx 0\%$} & \hl{1.63}   &   \hl{1,332}     \\
-	 19  &  7 & 1  & \hl{90,382,455,15}  & \hl{90,382,454.14}  & \hl{$\approx 0\%$} &  \hl{0.50}   &  \hl{1,480}       \\
-	 20  &  7 & 2  & \hl{132,382,455,15} & \hl{132,382,453.68}  & \hl{$\approx 0\%$}  &  \hl{2.27}   &  \hl{2,059}      \\
-	 21  &  7 & 3  & \hl{174,382,455,15} & \hl{174,382,453.21}  & \hl{$\approx 0\%$}  &  \hl{2.51}   &  \hl{1,445}      \\
-         22  &  8 & 3  & \hl{174,382,455,15} & \hl{199,294,452.93}  & \hl{$\approx \%$}  &  \hl{3.92}   &  \hl{1,470}      \\
-	 23  &  9 & 3  & \hl{174,382,455,15} & \hl{224,206,452.66}  & \hl{$\approx \%$}  &  \hl{5.96}   &  \hl{2,366}      \\
-	 24  & 10 & 3  & \hl{249,118,455.12} & \hl{249,118,455.12}  & \hl{$\approx \%$}  &  \hl{6.41}   &  \hl{2,317}      \\
-	 25  & 15 & 3  & \hl{249,118,455.12} & \hl{373,678,451.00}  & \hl{$\approx \%$}  &  \hl{15.01}   &  \hl{2,434}      \\
-         26  & 20 & 3  & \hl{249,118,455.12} & \hl{498,238,449.58}  & \hl{$\approx \%$}  &  \hl{40.72}   &  \hl{8,151}      \\
-	 27  & 30 & 3  & \hl{} & \hl{218,159,364.07}  & \hl{$\approx \%$}  &  \hl{121.88}   &  \hl{5,133}      \\
-	
+	\begin{tabular}{ c c c c c c c c c c }     
+	case & ND & NS &  FT & ST & TT & FT &  fitness  &  time(s)  & \hl{ierations}     \\
+	 01  &  1 & 1  &  \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.71}   &   \hl{69,119.29}  & \hl{0.41} & \hl{1,342}     \\
+	 02  &  1 & 2  &  \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.71}   &   \hl{69,119.29}  & \hl{0.17} & \hl{550}     \\
+	 03  &  1 & 3  &  \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.71}   &   \hl{69,119.29}  & \hl{0.21} & \hl{661}     \\
+	 04  &  2 & 1  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.17} & \hl{539}     \\
+	 05  &  2 & 2  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.35} & \hl{1,086}     \\
+	 06  &  2 & 3  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.53} & \hl{1,298}     \\
+	 07  &  3 & 1  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.24} & \hl{778}     \\
+	 08  &  3 & 2  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.53} & \hl{1,342}     \\
+	 09  &  3 & 3  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{2.45} & \hl{4,827}     \\
+	 10  &  4 & 1  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.42} & \hl{1,447}     \\
+	 11  &  4 & 2  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.81} & \hl{1,576}     \\
+	 12  &  4 & 3  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{2.08} & \hl{2,890}     \\
+	 13  &  5 & 1  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.50} & \hl{1,385}     \\
+	 14  &  5 & 2  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{1.28} & \hl{2,235}     \\
+	 15  &  5 & 3  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{724.17} & \hl{272,631}     \\
+	 16  &  6 & 1  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.50} & \hl{1,148} \\
+	 17  &  6 & 2  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{547.28} & \hl{134,540} \\
+	 18  &  6 & 3  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{1,151.80} & \hl{134,540} \\
+	 19  &  7 & 1  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.59} & \hl{1,257} \\
+	 20  &  7 & 2  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{121.04} & \hl{105,430} \\
+	 21  &  7 & 3  & \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.64}   &   \hl{69,119.36}  & \hl{926.15} & \hl{442,965} \\
+     22  &  1 & 3  & \hl{69,120.00}  &  \hl{0.00}  & \hl{10.00} &  \hl{0.71}   &   \hl{69,109.29}  & \hl{5.35} & \hl{39,685} \\
+	 23  &  2 & 3  & \hl{69,120.00}  &  \hl{0.00}  & \hl{30.00} &  \hl{0.64}   &   \hl{69,089.36}  & \hl{64.51} & \hl{347,190} \\
+	 24  & 3 & 3  & \hl{69,120.00}  &  \hl{0.00}  & \hl{58.00} &  \hl{0.64}   &   \hl{69,061.36}  & \hl{1,772.19} & \hl{2,288,288} \\
+	 25  & 4 & 3  & \hl{69,120.00}  &  \hl{0.00}  & \hl{94.00} &  \hl{0.64}   &   \hl{69,025.36}  & \hl{2,262.42} & \hl{5,290,914} \\
+     26*  & 5 & 3  & \hl{69,120.00}  &  \hl{0.00}  & \hl{244.00} &  \hl{0.64}   &   \hl{68,875.36}  & \hl{4,070.41} & \hl{3,272,716} \\
+	 27*  & 6 & 3  & \hl{69,120.00}  &  \hl{0.00}  & \hl{344.00} &  \hl{0.64}   &   \hl{68,775.36}  & \hl{16,119.14} & \hl{37,967,422} \\
+	 28  & 7 & 3  & \hl{69,120.00}  &  \hl{0.00}  & \hl{230.00} &  \hl{0.64}   &   \hl{68,889.36}  & \hl{14,008.77} & \hl{49,650,061} \\
+	 29  & 1 & 3  & \hl{55,046.69}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.55}   &   \hl{55,046.14}  & \hl{0.49} & \hl{702} \\
+	 30  & 1 & 3  & \hl{55,046.66}  &  \hl{0.00}  & \hl{2.00} &  \hl{0.54}   &   \hl{55,044.11}  & \hl{4.69} & \hl{41,568} \\
+	 31  & 2 & 3  & \hl{55,046.70}  &  \hl{0.00}  & \hl{12.00} &  \hl{0.42}   &   \hl{55,034.28}  & \hl{109.09} & \hl{403,389} \\
+	 32  & 3 & 3  & \hl{48,930.37}  &  \hl{0.00}  & \hl{128.00} &  \hl{0.37}   &   \hl{48,802.00}  & \hl{888.26} & \hl{750,189} \\
+	 33  & 4 & 3  & \hl{}  &  \hl{0.00}  & \hl{} &  \hl{0.37}   &   \hl{}  & \hl{} & \hl{} \\
+	 34  & 5 & 3  & \hl{}  &  \hl{0.00}  & \hl{} &  \hl{0.37}   &   \hl{}  & \hl{} & \hl{} \\
+	 35  & 6 & 3  & \hl{}  &  \hl{0.00}  & \hl{} &  \hl{0.37}   &   \hl{}  & \hl{} & \hl{} \\
+	 36  & 7 & 3  & \hl{}  &  \hl{0.00}  & \hl{} &  \hl{0.37}   &   \hl{}  & \hl{} & \hl{} \\
 	\end{tabular}
 \caption{Study on the efficiency of the mathematical model and the solver.}
 \label{tab:lingoEvaluation}
-\end{small}
-\end{center}
-\end{table}
-
-\begin{table}[h!]
-\begin{center}
-\begin{small}
-	\begin{tabular}{ c c c c c c c c c } 
-         &    &    &                &           &           &   \multicolumn{3}{c}{relevance factors}  \\      
-	case & ND & NS &  optimum &  fitness   & \hl{rel. error} &  time(s)  & \hl{ierations}     \\
-	 28  &  1 & 3  &  \hl{}  &  \hl{13,966.64}  & \hl{\%} &  \hl{0.11}   &   \hl{928}       \\
-	 02  &  1 & 2  &  \hl{18,910,117.35}  &  \hl{18,910,117.35}  & \hl{0\%} &  \hl{0.72}   &   \hl{5,425}    \\
-	 03  &  1 & 3  &  \hl{24,910,117.35}  &  \hl{24,910,117.32}  & \hl{$\approx 0\%$} &  \hl{0.15}   &   \hl{524}     \\
-	 04  &  2 & 1  & \hl{25,822,455.15} & \hl{25,822,454.86}  &  \hl{$\approx 0\%$} &  \hl{0.71}   &   \hl{4,808}    \\
-	 05  &  2 & 2  & \hl{37,822,455.15} & \hl{37,822,454.72}  &  \hl{$\approx 0\%$} &  \hl{0.21}   &   \hl{914}      \\
-	 06  &  2 & 3  & \hl{49,822,455.15} & \hl{49,822,454.59}  &  \hl{$\approx 0\%$} &  \hl{0.26}   &   \hl{789}     \\
-	 07  &  3 & 1  & \hl{38,734,455,15} & \hl{38,734,454.72}  & \hl{$\approx 0\%$} &   \hl{0.11}   &    \hl{517}      \\
-	 08  &  3 & 2  & \hl{56,734,455,15} & \hl{56,734,454.51}  & \hl{$\approx 0\%$} & \hl{0.24}  &  \hl{771}    \\
-	 09  &  3 & 3  & \hl{74,734,455,15} & \hl{74,734,454.32}  & \hl{$\approx 0\%$} &   \hl{0.65} & \hl{1,139}   \\
-	 10  &  4 & 1  & \hl{51,646,455,15} & \hl{51,646,455.14}  & \hl{$\approx 0\%$} &  \hl{0.29}   &  \hl{1511}    \\
-	 11  &  4 & 2  & \hl{75,646,455,15} & \hl{75,646,454.30}  & \hl{$\approx 0\%$} &  \hl{0.43}   &    \hl{976}     \\
-	 12  &  4 & 3  & \hl{99,646,455,15} & \hl{99,646,454.04}  & \hl{$\approx 0\%$} &  \hl{0.94}   &   \hl{1,295}      \\
-	 13  &  5 & 1  & \hl{64,558,455,15} & \hl{64,558,454.43}  & \hl{$\approx 0\%$}  &  \hl{0.30}   &   \hl{916}    \\
-	 14  &  5 & 2  & \hl{94,558,455,15} & \hl{94,558,454.10}  &  \hl{$\approx 0\%$} &  \hl{0.59}   &   \hl{1,130}    \\
-	 15  &  5 & 3  & \hl{124,558,455,15} & \hl{124,558,453.76} & \hl{$\approx 0\%$} &  \hl{1.00}   &   \hl{1,016}       \\
-	 16  &  6 & 1  & \hl{77,470,455,15} & \hl{77,470,454.29}  & \hl{$\approx 0\%$}  &  \hl{0.24}   &   \hl{738}       \\
-	 17  &  6 & 2  & \hl{113,470,455,15} & \hl{113,470,453.89}  & \hl{$\approx 0\%$} &  \hl{0.97}   &   \hl{1,191}      \\
-	 18  &  6 & 3  & \hl{149,470,455,15} & \hl{149,470,455.13}  & \hl{$\approx 0\%$} & \hl{1.63}   &   \hl{1,332}     \\
-	 19  &  7 & 1  & \hl{90,382,455,15}  & \hl{90,382,454.14}  & \hl{$\approx 0\%$} &  \hl{0.50}   &  \hl{1,480}       \\
-	 20  &  7 & 2  & \hl{132,382,455,15} & \hl{132,382,453.68}  & \hl{$\approx 0\%$}  &  \hl{2.27}   &  \hl{2,059}      \\
-	 21  &  7 & 3  & \hl{174,382,455,15} & \hl{174,382,453.21}  & \hl{$\approx 0\%$}  &  \hl{2.51}   &  \hl{1,445}      \\
-         22  &  8 & 3  & \hl{174,382,455,15} & \hl{199,294,452.93}  & \hl{$\approx \%$}  &  \hl{3.92}   &  \hl{1,470}      \\
-	 23  &  9 & 3  & \hl{174,382,455,15} & \hl{224,206,452.66}  & \hl{$\approx \%$}  &  \hl{5.96}   &  \hl{2,366}      \\
-	 24  & 10 & 3  & \hl{249,118,455.12} & \hl{249,118,455.12}  & \hl{$\approx \%$}  &  \hl{6.41}   &  \hl{2,317}      \\
-	 25  & 15 & 3  & \hl{249,118,455.12} & \hl{373,678,451.00}  & \hl{$\approx \%$}  &  \hl{15.01}   &  \hl{2,434}      \\
-         26  & 20 & 3  & \hl{249,118,455.12} & \hl{498,238,449.58}  & \hl{$\approx \%$}  &  \hl{40.72}   &  \hl{8,151}      \\
-	 27  & 30 & 3  & \hl{} & \hl{218,159,364.07}  & \hl{$\approx \%$}  &  \hl{121.88}   &  \hl{5,133}      \\
-	
-	\end{tabular}
-\caption{Study on the efficiency of the mathematical model and the solver using $\mathrm{MinInFR}_6 = 10.00 \mathrm{ m^3/hour}$ and $f(d,s) = 10*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$.}
-\label{tab:lingoEvaluationInflowRest}
 \end{small}
 \end{center}
 \end{table}
