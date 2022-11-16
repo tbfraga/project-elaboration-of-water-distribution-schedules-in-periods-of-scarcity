@@ -544,12 +544,12 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \subsection{Benchmarks}
 \label{sec:benchmarks}
 
-\hl{For testing the developed SOLVER, we have considered 36 cases. In cases 01 to 21 we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). In cases 22 to 28, we also considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. Case 29 is like case 03, except that a maximum flow rate was informed for Centro's zone ($z = 7$),} \hl{$\mathrm{MaxInFR}_7 = $130.00} \hl{$\mathrm{m^3}$/hour. Case 30 to case 36 are like cases 22 to 28, respectvely, except that a maximum flow rate was informed for Centro's zone, as in case 29. For all cases we used the following values for the parameters: $\mathrm{C1}= 10/\mathrm{ND}$, $\mathrm{C2}= 100,000$, $\mathrm{C3}(d,s)=a*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$, with $a=1$ or $a=2$, $\mathrm{C4} = 5.27\mathrm{E-}5$, $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$. A template for the data file (data.ldt), as well as the SOLVER in LINGO (EWDSPS.lng) and the files with the results found (results/*.lgr) can be consulted at "https://github.com/tbfraga/project-elaboration-of-water-distribution-schedules-in-periods-of-scarcity/tree/main/LINGO code".}
+\hl{For testing the developed SOLVER, we have considered 36 cases. In cases 01 to 21 we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). In cases 22 to 28, we also considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. Case 29 is like case 03, except that a maximum flow rate was informed for Centro's zone ($z = 7$),} \hl{$\mathrm{MaxInFR}_7 = $130.00} \hl{$\mathrm{m^3}$/hour. Case 30 to case 36 are like cases 22 to 28, respectvely, except that a maximum flow rate was informed for Centro's zone, as in case 29. For all cases we used the following values for the parameters: $\mathrm{C1}= 10/\mathrm{ND}$, $\mathrm{C2}= 100,000$, $\mathrm{C3}(d,s)=a*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$, with $a=1$ or $a=2$, $\mathrm{C4} = 5.27\mathrm{E-}5$, $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$. A template for the data file (data.ldt), as well as the SOLVER in LINGO (EWDSPS.lng) and the files with the results found (results/*.lgr) can be consulted at "https://github.com/blinded".}
 
 \subsection{Initial considerations}
 \label{sec:initialConsiderations}
 
-Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data summarized in the section \ref{sec:data}, calculated with the aid of the 'LibreOffice Calc' software, considering the maximum daily distribution value (in a 24-hour shift), limited by the outflows of the weirs and the WTP.
+Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data summarized in the section \ref{sec:data} and \hl{using the parameter values presented in section} \ref{sec:benchmarks} \hl{(with $\mathrm{ND}=1, \mathrm{NS}=1$ and $a=1$),} calculated with the aid of the 'LibreOffice Calc' software, considering the maximum daily distribution value (in a 24-hour shift), limited by the outflows of the weirs and the WTP.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -586,7 +586,7 @@ Another important piece of information that we observe in this figure are the id
 
 \noindent being the values of \hl{$OutF_{dsr}$} calculated according to the Eqs. in (\ref{eq:evalOutFRes}) recursively, and the ideal rates (not informed) then calculated based on the Eqs. in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}).
 
-After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, we run the solver in \hl{LINGO}, using the same inputs shown in this figure, along with other data reported in the \ref{sec:data} section. The values 367.200 and 288.000 were used as the values of the maximum inflow rates informed for the WTP and for the Central Reservoir, respectively. No limit values for inflow rates were informed for the other reservoirs and zones. Table \ref{tab:lingoEvalCase01} displays the values found by the solver. As we can see in this table, the solver found the calculated optimal values very quickly \hl{and without any errors observed}. 
+After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, we run the solver in \hl{LINGO}, using the same inputs. The values 367.200 and 288.000 were used as the values of the maximum inflow rates informed for the WTP and for the Central Reservoir, respectively. No limit values for inflow rates were informed for the other reservoirs and zones. Table \ref{tab:lingoEvalCase01} displays the values found by the solver. As we can see in this table, the solver found the calculated optimal values very quickly \hl{and without any errors observed}. 
 
 \begin{table}[h!]
 \begin{center}
@@ -623,9 +623,9 @@ After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, w
 \multicolumn{3}{c}{6,912.000}       & \multicolumn{1}{c}{Z2}     & \multicolumn{1}{c}{open} &    31.349 \\
 	   &      &              		& \multicolumn{1}{c}{Z3}     & \multicolumn{1}{c}{open} &    29.335 \\\multicolumn{3}{c}{optimal value (fitness)} & \multicolumn{1}{c}{Z4} & \multicolumn{1}{c}{open} &13.796 \\
 	   &      &             	    & \multicolumn{1}{c}{Z5}     & \multicolumn{1}{c}{open} &    46.227 \\
-\multicolumn{3}{c}{6,911.292}       & \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{open} &     4.058 \\\\
-\multicolumn{3}{c}{(computational time  = 0.29 sec)}     & \multicolumn{3}{c}{* values reported for maximum inflow rates} \\
-\multicolumn{3}{c}{(total number of iterations = 925)}   & \multicolumn{3}{c}{** at the end of the evaluated period} 
+\multicolumn{3}{c}{69,119.292}       & \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{open} &     4.058 \\\\
+\multicolumn{3}{c}{(computational time  = 0.41 sec)}     & \multicolumn{3}{c}{* values reported for maximum inflow rates} \\
+\multicolumn{3}{c}{(total number of iterations = 1,342)}   & \multicolumn{3}{c}{** at the end of the evaluated period} 
 	\end{tabular}
 \end{small}
 \caption{Summary of results generated by the solver developed in LINGO for case 01.}
@@ -670,9 +670,9 @@ After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, w
 \multicolumn{3}{c}{6,912.000}       & \multicolumn{1}{c}{Z2}     & \multicolumn{1}{c}{open} &    31.349 \\
 	   &      &              		& \multicolumn{1}{c}{Z3}     & \multicolumn{1}{c}{open} &    29.335 \\\multicolumn{3}{c}{optimal value (fitness)} & \multicolumn{1}{c}{Z4} & \multicolumn{1}{c}{open} &13.796 \\
 	   &      &             	    & \multicolumn{1}{c}{Z5}     & \multicolumn{1}{c}{open} &    46.227 \\
-\multicolumn{3}{c}{6,911.292}       & \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{open} &     4.058 \\\\
+\multicolumn{3}{c}{69,119.292}       & \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{open} &     4.058 \\\\
 \multicolumn{3}{c}{(computational time  = 0.21 sec)}     & \multicolumn{3}{c}{* values reported for maximum inflow rates} \\
-\multicolumn{3}{c}{(total number of iterations = 451)}   & \multicolumn{3}{c}{** at the end of the evaluated period} 
+\multicolumn{3}{c}{(total number of iterations = 661)}   & \multicolumn{3}{c}{** at the end of the evaluated period} 
 	\end{tabular}
 \end{small}
 \caption{Summary of results generated by the solver developed in LINGO for case 03.}
@@ -855,7 +855,7 @@ However, \hl{LINGO} is not a magic tool, \hl{LINGO}'s processing power is limite
 \begin{center}
 \begin{small}
 	\begin{tabular}{ c c c c c c c c c c }     
-	case & ND & NS &  $1^o$ T & $2^o$ T & $3^o$ T & $4^o$ T &  fitness  &  time(s)  & \hl{ierations}     \\
+	case & ND & NS &  $1^o$ Term & $2^o$ T & $3^o$ T & $4^o$ T &  fitness  &  time(s)  & \hl{ierations}     \\
 	 01  &  1 & 1  &  \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.71}   &   \hl{69,119.29}  & \hl{0.41} & \hl{1,342}     \\
 	 02  &  1 & 2  &  \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.71}   &   \hl{69,119.29}  & \hl{0.17} & \hl{550}     \\
 	 03  &  1 & 3  &  \hl{69,120.00}  &  \hl{0.00}  & \hl{0.00} &  \hl{0.71}   &   \hl{69,119.29}  & \hl{0.21} & \hl{661}     \\
@@ -891,7 +891,7 @@ However, \hl{LINGO} is not a magic tool, \hl{LINGO}'s processing power is limite
 	 33  & 4 & 3  & \hl{55,046.72}  &  \hl{0.00}  & \hl{66.00} &  \hl{0.29}   &   \hl{54,980.43}  & \hl{1,259.60} & \hl{2,047,134} \\
 	 34  & 5 & 3  & \hl{55,105.90}  &  \hl{121.94}  & \hl{86.00} &  \hl{0.29}   &   \hl{54,897.67}  & \hl{1,539.64} & \hl{1,116,250} \\
 	 35  & 6 & 3  & \hl{}  &  \hl{0.00}  & \hl{} &  \hl{0.37}   &   \hl{}  & \hl{} & \hl{} \\
-	 36  & 7 & 3  & \hl{}  &  \hl{0.00}  & \hl{} &  \hl{0.37}   &   \hl{}  & \hl{} & \hl{} \\
+	 36  & 7 & 3  & \hl{55,046.66}  &  \hl{0.00}  & \hl{198.00} &  \hl{0.29}   &   \hl{54,848.37}  & \hl{3,622.19} & \hl{4,535,449} \\
 	\end{tabular}
 \caption{Study on the efficiency of the mathematical model and the solver.}
 \label{tab:lingoEvaluation}
