@@ -104,7 +104,7 @@ C1 = 10/N_DAYS;
 	c(d,s) = 1 );
 
 @FOR (DAILY_SHIFTS(d,s) : 
-	C3(d,s) = 1*((N_SHIFTS-s)*N_DAYS + N_DAYS - d + 1) );
+	C3(d,s) = 3*((N_SHIFTS-s)*N_DAYS + N_DAYS - d + 1) );
 
 CAP_EXP_WEIGHTED_SUM = @SUM( LOCALS(l) : CAPACITY(l)^RELEVANCE_FACTOR(l)) ;
 
