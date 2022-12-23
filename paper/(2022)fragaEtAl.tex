@@ -514,7 +514,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \subsection{Benchmarks}
 \label{sec:benchmarks}
 
-For testing the developed SOLVER, we have considered 36 cases. In cases 01 to 21 we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). In cases 22 to 28, we also considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. Case 29 is like case 03, except that a maximum flow rate was informed for Centro's zone ($z = 7$),$\mathrm{MaxInFR}_7 = $130.00 $\mathrm{m^3}$/hour. Case 30 to case 36 are like cases 22 to 28, respectvely, except that a maximum flow rate was informed for Centro's zone, as in case 29. For all cases we used the following values for the parameters: $\mathrm{C1}= 10/\mathrm{ND}$, $\mathrm{C2}= 100,000$, $\mathrm{C3}(d,s)=a*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$, with $a=1$, *$a=2$ or **$a=3$, $\mathrm{C4} = 5.27\mathrm{E-}5$, $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$. A template for the data file (data.ldt), as well as the SOLVER in LINGO (EWDSPS.lng) and the files with the results found (results/*.lgr) can be consulted at "https://github.com/blinded".
+For testing the developed SOLVER, we have considered 36 cases. In cases 01 to 21 we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). In cases 22 to 28, we also considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. Case 29 is like case 03, except that a maximum flow rate was informed for Centro's zone ($z = 7$),$\mathrm{MaxInFR}_7 = $130.00 $\mathrm{m^3}$/hour. Case 30 to case 36 are like cases 22 to 28, respectvely, except that a maximum flow rate was informed for Centro's zone, as in case 29. For all cases we used the following values for the parameters: $\mathrm{C1}= 10/\mathrm{ND}$, $\mathrm{C2}= 100,000$, $\mathrm{C3}(d,s)=a*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$, with $a=1$, *$a=2$ or **$a=3$, $\mathrm{C4} = 5.27\mathrm{E-}5$, $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$. A template for the data file (data.ldt) is available at "https://github.com/tbfraga/gamos-journal/tree/main/EWDSPS".
 
 \subsection{Initial considerations}
 \label{sec:initialConsiderations}
@@ -777,22 +777,22 @@ Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the e
 \begin{center}
 \begin{small}
 	\begin{tabular}{ c c c c c c c c c c }     
-	case & ND & NS &  $1^o$ Term & $2^o$ T & $3^o$ T & $4^o$ T &  fitness  &  time  & \hl{ierations}     \\
-	 01  &  1 & 1  &  69,120.00 &  0.00  & 0.00 &  \hl{0.71}   &   \hl{69,119.29}  & \hl{0.41 s} & \hl{1,342}     \\
-	 02  &  1 & 2  &  \hl{69,120.00}  &  0.00  & 0.00 &  \hl{0.71}   &   \hl{69,119.29}  & \hl{0.17 s} & \hl{550}     \\
-	 03  &  1 & 3  &  \hl{69,120.00}  &  0.00  & 0.00 &  \hl{0.71}   &   \hl{69,119.29}  & \hl{0.21 s} & \hl{661}     \\
-	 04  &  2 & 1  & \hl{69,120.00}  &  0.00  & 0.00 &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.17 s} & \hl{539}     \\
-	 05  &  2 & 2  & \hl{69,120.00}  &  0.00  & 0.00 &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.35 s} & \hl{1,086}     \\
-	 06  &  2 & 3  & \hl{69,120.00}  &  0.00  & 0.00 &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.53 s} & \hl{1,298}     \\
-	 07  &  3 & 1  & \hl{69,120.00}  &  0.00  & 0.00 &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.24 s} & \hl{778}     \\
-	 08  &  3 & 2  & \hl{69,120.00}  &  0.00 & 0.00 &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.53 s} & \hl{1,342}     \\
-	 09  &  3 & 3  & \hl{69,120.00}  &  0.00  & 0.00 &  \hl{0.64}   &   \hl{69,119.36}  & \hl{2.45 s} & \hl{4,827}     \\
-	 10  &  4 & 1  & \hl{69,120.00}  & 0.00  & 0.00 &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.42 s} & \hl{1,447}     \\
-	 11  &  4 & 2  & \hl{69,120.00}  & 0.00  & 0.00 &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.81 s} & \hl{1,576}     \\
-	 12  &  4 & 3  & \hl{69,120.00}  &  0.00  & 0.00 &  \hl{0.64}   &   \hl{69,119.36}  & \hl{2.08 s} & \hl{2,890}     \\
-	 13  &  5 & 1  & \hl{69,120.00}  &  0.00  & 0.00 &  \hl{0.64}   &   \hl{69,119.36}  & \hl{0.50 s} & \hl{1,385}     \\
-	 14  &  5 & 2  & \hl{69,120.00}  &  0.00 & 0.00 &  \hl{0.64}   &   \hl{69,119.36}  & \hl{1.28 s} & \hl{2,235}     \\
-	 15  &  5 & 3  & \hl{69,120.00}  &  0.00  & 0.00 &  \hl{0.64}   &   \hl{69,119.36}  & \hl{12.07 m} & \hl{272,631}     \\
+	case & ND & NS &  $1^o$ Term & $2^o$ T & $3^o$ T & $4^o$ T &  fitness  &  time  & ierations     \\
+	 01  &  1 & 1  &  69,120.00 &  0.00  & 0.00 &  0.71 & 69,119.29  & 0.41 s & 1,342     \\
+	 02  &  1 & 2  & 69,120.00 &  0.00  & 0.00 & 0.71 &   69,119.29 & 0.17 s & 550  \\
+	 03  &  1 & 3  & 69,120.00 &  0.00  & 0.00 & 0.71 &   69,119.29  & 0.21 s & 661   \\
+	 04  &  2 & 1  & 69,120.00 & 0.00  & 0.00 & 0.64 & 69,119.36 & 0.17 s & 539     \\
+	 05  &  2 & 2  & 69,120.00 &  0.00  & 0.00 & 0.64  & 69,119.36 & 0.35 s & 1,086     \\
+	 06  &  2 & 3  & 69,120.00 &  0.00  & 0.00 & 0.64 & 69,119.36 & 0.53 s & 1,298     \\
+	 07  &  3 & 1  & 69,120.00  &  0.00  & 0.00 & 0.64  & 69,119.36 & 0.24 s & 778     \\
+	 08  &  3 & 2  & 69,120.00 &  0.00 & 0.00 & 0.64  & 69,119.36  & 0.53 s & 1,342     \\
+	 09  &  3 & 3  & 69,120.00 &  0.00  & 0.00 &  0.64 &   69,119.36  & 2.45 s & 4,827 \\
+	 10  &  4 & 1  & 69,120.00 & 0.00  & 0.00 & 0.64 &  69,119.36  & 0.42 s & 1,447   \\
+	 11  &  4 & 2  & 69,120.00  & 0.00  & 0.00 &  0.64  &   69,119.36  & 0.81 s & 1,576     \\
+	 12  &  4 & 3  & 69,120.00  &  0.00  & 0.00 &  0.64 &   69,119.36  & 2.08 s & 2,890  \\
+	 13  &  5 & 1  & 69,120.00 &  0.00  & 0.00 &  0.64 & 69,119.36 & 0.50 s & 1,385    \\
+	 14  &  5 & 2  & 69,120.00 &  0.00 & 0.00 & 0.64 &  69,119.36 & 1.28 s & 2,235 \\
+	 15  &  5 & 3  & 69,120.00 &  0.00  & 0.00 & 0.64 &   69,119.36  & 12.07 m & 272,631    \\
 	 16  &  6 & 1  & 69,120.00 & 0.00  & 0.00 & 0.64 & 69,119.36 & 0.50 s & 1,148 \\
 	 17  &  6 & 2  & 69,120.00 & 0.00  & 0.00 &  0.64 & 69,119.36  & 9,12 m & 134,540 \\
 	 18  &  6 & 3  & 69,120.00 &  0.00  & 0.00 & 0.64 &   69,119.36  & 19.20 m & 134,540 \\
@@ -823,17 +823,17 @@ Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the e
 
 An important issue to be considered is that the adjustment of the parameters C1, C2, C3 and C4 strongly influence the efficiency of the solver as well as the solution found. The main aspect of the relevance / irrelevance parameters adopted is that they allow the planner to interfere in the solution presented by the solver, so that this solution meets the planning objectives (e.g., prioritization of filling reservoirs or meeting demand). However, this requires that the planner has good experience in applying the solver and a good understanding of how the solver reacts to the adjustment of these parameters. Therefore, the good performance of the developed solver will depend largely on the qualification of the planner for this purpose. We understand that it is possible to build formulas for automatic calculation of suitable values for these parameters, using quantitative and qualitative analyzes referring to the decision-making process (e.g., formulas defined according to answers given for some questionnaire). It is also possible, of course, to develop a user-friendly graphical interface. These efforts would make using the solver much simpler, however they depend on the continuity of this project, with a strong commitment of time and dedication of qualified professionals.
 
-The solver developed in lingo language as well as the files generated with the results are available at https://github.com/blinded.
+The solver developed in LINGO language (EWDSPS.lng) as well as the files generated with the results found (results/*.lgr) are available at "https://github.com/tbfraga/gamos-journal/tree/main/EWDSPS".
 
 \section{Conclusions and future works}
 \label{sec:conclusions}
 
-In the present work, a detailed description of the water distribution system of a city in northeastern Brazil and a conceptual and a new mathematical model for the problem of water distribution in periods of scarcity was presented. The validation of the mathematical model was performed using a solver developed with the LINGO software from LINDO Systems. Through the tests carried out, we concluded that the developed model and solver fit perfectly to the studied reality, and are capable of, \hl{in a short time,} proposing solutions that make the distribution of water volumes for the different zones fair, in periods of scarcity, through the control of flows and distribution times. Such solutions take into account the restrictions of the system and present alternatives for when the channelings are to be modulated optimally (with flow rates that optimally regulate the distribution). However, it was verified that, for the solver to present good results, it must be used by a suitably qualified employee. What may become less relevant through new advanced studies for high-level calculation of relevance / irrelevance parameters adopted in the model, as well as through the construction of a friendly graphic interface.  Additionally, due to the limitations of the exact methodologies developed so far for solving non-polynomial optimization problems (such as the studied problem), the developed solver naturally presented limitations related to its ability to solve larger problems. Such limitations justify the need to develop solution algorithms based on heuristics applied to optimization problems. These efforts will be the focus of our next works.
+In the present work, a detailed description of the water distribution system of a city in northeastern Brazil and a conceptual and a new mathematical model for the problem of water distribution in periods of scarcity was presented. The validation of the mathematical model was performed using a solver developed with the LINGO software from LINDO Systems. Through the tests carried out, we concluded that the developed model and solver fit perfectly to the studied reality, and are capable of, in a short time, proposing solutions that make the distribution of water volumes for the different zones fair, in periods of scarcity, through the control of flows and distribution times. Such solutions take into account the restrictions of the system and present alternatives for when the channelings are to be modulated optimally (with flow rates that optimally regulate the distribution). However, it was verified that, for the solver to present good results, it must be used by a suitably qualified employee. What may become less relevant through new advanced studies for high-level calculation of relevance / irrelevance parameters adopted in the model, as well as through the construction of a friendly graphic interface.  Additionally, due to the limitations of the exact methodologies developed so far for solving non-polynomial optimization problems (such as the studied problem), the developed solver naturally presented limitations related to its ability to solve larger problems. Such limitations justify the need to develop solution algorithms based on heuristics applied to optimization problems. These efforts will be the focus of our next works.
 
-%\section*{Acknowledgement}
-%\label{sec:acknowledgement}
+\section*{Acknowledgement}
+\label{sec:acknowledgement}
 
-%We are enormously grateful to CAPES (Coordenação de Aperfeiçoamento de Pessoal de Nível Superior)) and to CNPq (Conselho Nacional de Desenvolvimento Científico e Tecnológico) for the financial support provided to our projects. We also thank LINDO Systems for the LINGO software license, without which this work would not have been possible and the managers of the municipality of Catende, for having provided us with such rich and relevant information. Finally, we would like to thank PROExC (Pró-reitoria de Extensão e Cultura da UFPE) and the Research Director of Propesqi (Pró-reitoria de Pesquisa e Inovação da UFPE) for their support and recognition of our work, and dear Profs. Antônio José da Silva Neto and João Flávio Vieira de Vasconcellos from IPRJ/UERJ, who contributed significantly to the formation of essential skills for the development of our projects. 
+We are enormously grateful to CAPES (Coordenação de Aperfeiçoamento de Pessoal de Nível Superior) and to CNPq (Conselho Nacional de Desenvolvimento Científico e Tecnológico) for the financial support provided to our projects. We also thank LINDO Systems for their important contributions and for the LINGO software license, without which this work would not have been possible and the managers of the municipality of Catende, for having provided us with such rich and relevant information. Finally, we would like to thank PROExC (Pró-reitoria de Extensão e Cultura da UFPE) and the Research Director of Propesqi (Pró-reitoria de Pesquisa e Inovação da UFPE) for their support and recognition of our work, and dear Profs. Antônio José da Silva Neto and João Flávio Vieira de Vasconcellos from IPRJ/UERJ, who contributed significantly to the formation of essential skills for the development of our projects. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -843,11 +843,8 @@ In the present work, a detailed description of the water distribution system of 
 
 \begin{thebibliography}{10}
 
-\bibitem[\protect\citeauthoryear{Blinded}{2016}]{CandidoEtAl2016}
-(2016) 'Blinded'.
-
-%\bibitem[\protect\citeauthoryear{Candido et al.}{2016}]{CandidoEtAl2016}
-%Candido, A.K.B., Lima, M.M.A.E., Fraga T.B. (2016) 'Planejamento da Distribuição de Água em Catende em Períodos de Escassez'. {\it Resumos do II ENExC}, https://www.ufpe.br/proexc/periodicos-e-publicacoes/ii-enexc (Accessed 08 December 2021) 
+\bibitem[\protect\citeauthoryear{Candido et al.}{2016}]{CandidoEtAl2016}
+Candido, A.K.B., Lima, M.M.A.E., Fraga T.B. (2016) 'Planejamento da Distribuição de Água em Catende em Períodos de Escassez'. {\it Resumos do II ENExC}, https://www.ufpe.br/proexc/periodicos-e-publicacoes/ii-enexc (Accessed 08 December 2021) 
 
 \bibitem[\protect\citeauthoryear{Creaco et al.}{2019}]{CreacoEtAl2019}
 Creaco E., Campisano, A., Fontana, N.,  Marini, G., Page, P.R. and Walski, T. (2019) 'Real time control of water distribution networks: A state-of-the-art
