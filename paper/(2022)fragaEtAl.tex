@@ -322,7 +322,7 @@ The symbols used in the model are shown in the Table (\ref{tab:symbols}). And th
 \end{equation}
 
 \begin{equation}
-	IdleC_{dsl} - \mathrm{C}_{l} + VRes_{dsl} = 0, \quad s = \mathrm{NS}, \quad \forall{d, l}
+	IdleC_{dsl} - \mathrm{C}_{l} + VRes_{dsl} = 0, \quad s = \mathrm{NS}, \quad d = \mathrm{ND}, \quad \forall{l}
 	\label{eq:evalIdleCap}
 \end{equation}
 
@@ -381,7 +381,7 @@ The symbols used in the model are shown in the Table (\ref{tab:symbols}). And th
 
 		$\mathrm{D}_z$ &  demand of zone $z$, $\mathrm{D}_z = \mathrm{IAC}*\mathrm{NH}_z*\mathrm{HC}*\mathrm{ND} $\\
 		$\mathrm{TD}$ & total demand, $\mathrm{TD} = \sum_{z=1}^{\mathrm{NZ}}{\mathrm{D}_z}$ \\ 
-		$\mathrm{PD}_z$ & $z$ zone percentage demand, $\mathrm{PD}_z = \dfrac{\mathrm{D}_z}{\mathrm{TD}}$ \\ & \\
+		$\mathrm{PDem}_z$ & $z$ zone percentage demand, $\mathrm{PDem}_z = \dfrac{\mathrm{D}_z}{\mathrm{TD}}$ \\ & \\
 
 		\multicolumn{2}{a}{\emph{decision and secondary variables}} \\ & \\ 
 
@@ -514,7 +514,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \subsection{Benchmarks}
 \label{sec:benchmarks}
 
-For testing the developed SOLVER, we have considered 36 cases. In cases 01 to 21 we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). In cases 22 to 28, we also considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. Case 29 is like case 03, except that a maximum flow rate was informed for Centro's zone ($z = 7$),$\mathrm{MaxInFR}_7 = $130.00 $\mathrm{m^3}$/hour. Case 30 to case 36 are like cases 22 to 28, respectvely, except that a maximum flow rate was informed for Centro's zone, as in case 29. For all cases we used the following values for the parameters: $\mathrm{C1}= 10/\mathrm{ND}$, $\mathrm{C2}= 100,000$, $\mathrm{C3}(d,s)=a*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$, with $a=1$, *$a=2$ or **$a=3$, $\mathrm{C4} = 5.27\mathrm{E-}5$, $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$. A template for the data file (data.ldt) is available at "https://github.com/tbfraga/gamos-journal/tree/main/EWDSPS".
+For testing the developed SOLVER, we have considered 36 cases. In cases 01 to 21 we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). In cases 22 to 28, we also considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. Case 29 is like case 03, except that a maximum flow rate was informed for Centro's zone ($z = 7$), $\mathrm{MaxInFR}_7 = $130.00 $\mathrm{m^3}$/hour. Case 30 to case 36 are like cases 22 to 28, respectvely, except that a maximum flow rate was informed for Centro's zone, as in case 29. For all cases we used the following values for the parameters: $\mathrm{C1}= 10/\mathrm{ND}$, $\mathrm{C2}= 100,000$, $\mathrm{C3}(d,s)=a*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$, with $a=1$, *$a=2$ or **$a=3$, $\mathrm{C4} = 5.27\mathrm{E-}5$, $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$. A template for the data file (data.ldt) is available at "https://github.com/tbfraga/gamos-journal/tree/main/EWDSPS".
 
 \subsection{Initial considerations}
 \label{sec:initialConsiderations}
@@ -544,8 +544,8 @@ Another important piece of information that we observe in this figure are the id
 \noindent 2) the total availability of water, released by the Central Reservoir, which directly or indirectly supplies all other reservoirs and zones, is less than the total demand. Therefore, the volume of water received by the Central Reservoir is completely distributed to the zones (and not to fill the reservoirs), with the fair distribution being proportional to the number of households in each zone: 
 
 \begin{equation}
-	InF_{dsz} = InF_{dsr} * \dfrac{\mathrm{D}_z}{ \mathrm{TD},
-	\quad d = 1, \quad s = 1, \quad r = 2, \quad \forall z}  
+	InF_{dsz} = InF_{dsr} * \dfrac{\mathrm{D}_z}{ \mathrm{TD}},
+	\quad d = 1, \quad s = 1, \quad r = 2, \quad \forall z  
 \end{equation}
 
 \noindent and, 3) as the volumes received by the reservoirs are completely distributed: 
