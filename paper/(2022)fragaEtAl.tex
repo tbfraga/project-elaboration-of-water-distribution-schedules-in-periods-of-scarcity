@@ -81,7 +81,7 @@ Vol. \theVOL, No. \theISSUE, \thePUBYEAR\hfill\thepage}}
 
 \setcounter{page}{1}
 
-%\LRH{Fraga et~al.}
+\LRH{Fraga et~al. (2023)}
 
 \RRH{Elaboration of Water Distribution Schedules in Periods of Scarcity}
 
@@ -98,6 +98,31 @@ Vol. \theVOL, No. \theISSUE, \thePUBYEAR\hfill\thepage}}
 \subtitle{}
 
 \title{Elaboration of Water Distribution Schedules in Periods of Scarcity}
+
+%
+\authorA{Tatiana Balbi Fraga}
+%
+\affA{CAA / Universidade Federal de Pernambuco,\\ Caruaru, PE, BR \\
+E-mail: tatiana.balbi@ufpe.br}
+%
+%
+\authorB{Aldênia Karla Barrêto Candido}
+%
+\affB{CAA / Universidade Federal de Pernambuco,\\ Caruaru, PE, BR \\
+E-mail: aldenia.k@hotmail.com}
+%
+%
+\authorC{Marcos Luiz Henrique}
+%
+\affC{CAA / Universidade Federal de Pernambuco,\\ Caruaru, PE, BR \\
+E-mail: marcos.henrique@ufpe.br}
+%
+%
+\authorD{Abdeladhim Tahimi}
+%
+\affD{CECA / Universidade Federal de Alagoas,\\ Rio Largo, AL, BR \\
+E-mail: abdeladhim.tahimi@ceca.ufal.br}
+%
 
 \begin{abstract}
 
@@ -213,7 +238,7 @@ Through the visits carried out at the WTP in Catende in 2016, it was also possib
 		Canaã               & 1,538          &  1,199.64 \\
 		Oxifan              &  135          &   105.30 \\
 		\\
-		Total               & 9582          &  7,473.96 \\
+		Total               & 9,582          &  7,473.96 \\
 		\hline
 	\end{tabular}
 \caption{Demand by sector - Catende (data from 2016)}
@@ -514,7 +539,7 @@ Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatend
 \subsection{Benchmarks}
 \label{sec:benchmarks}
 
-For testing the developed SOLVER, we have considered 36 cases. In cases 01 to 21 we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). In cases 22 to 28, we also considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. Case 29 is like case 03, except that a maximum flow rate was informed for Centro's zone ($z = 7$), $\mathrm{MaxInFR}_7 = $130.00 $\mathrm{m^3}$/hour. Case 30 to case 36 are like cases 22 to 28, respectvely, except that a maximum flow rate was informed for Centro's zone, as in case 29. For all cases we used the following values for the parameters: $\mathrm{C1}= 10/\mathrm{ND}$, $\mathrm{C2}= 100,000$, $\mathrm{C3}(d,s)=a*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$, with $a=1$, *$a=2$ or **$a=3$, $\mathrm{C4} = 5.27\mathrm{E-}5$, $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$. A template for the data file (data.ldt) is available at "https://github.com/tbfraga/gamos-journal/tree/main/EWDSPS".
+For testing the developed SOLVER, we have considered 36 cases. In cases 01 to 21 we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). In cases 22 to 28, we also considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. Case 29 is like case 03, except that a maximum inflow rate was informed for Centro's zone ($z = 7$), $\mathrm{MaxInFR}_7 = $130.00 $\mathrm{m^3}$/hour. Case 30 to case 36 are like cases 22 to 28, respectvely, except that a maximum inflow rate was informed for Centro's zone, as in case 29. For all cases we used the following values for the parameters: $\mathrm{C1}= 10/\mathrm{ND}$, $\mathrm{C2}= 100,000$, $\mathrm{C3}(d,s)=a*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$, with $a=1$, *$a=2$ or **$a=3$, $\mathrm{C4} = 5.27\mathrm{E-}5$, $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$. A template for the data file (data.ldt) is available at "https://github.com/tbfraga/gamos-journal/tree/main/EWDSPS".
 
 \subsection{Initial considerations}
 \label{sec:initialConsiderations}
@@ -663,7 +688,7 @@ It would be ideal if the company could regulate the flow rates for water distrib
 
 Situations (1) and (3) can be easily solved by indicating maximum and minimum values, respectively, for the inflow rates calculated by the solver. However, care must be taken not to set values that make the problem unresolvable. The planner must always keep in mind that the water distribution network and the flow rates form a single system, with values that are essentially integrated.
 
-In the case of situation (1), the volume of distribution (limited by the inflow rate) in a given location will be transferred to other locations seeking to meet the demand and \slash or distributed to reduce the idle capacity of the reservoirs, according to the setting of the parameter values. For example, Table \ref{tab:lingoEvaluationsCase29} presents the results found by the solver for case 29, in which the same data used in case 03 were considered, except that a maximum flow rate was informed for Centro's zone ($z = 7$), $\mathrm{MaxInFR}_7 = $130.00 $\mathrm{m^3}$/hour.
+In the case of situation (1), the volume of distribution (limited by the inflow rate) in a given location will be transferred to other locations seeking to meet the demand and \slash or distributed to reduce the idle capacity of the reservoirs, according to the setting of the parameter values. For example, Table \ref{tab:lingoEvaluationsCase29} presents the results found by the solver for case 29, in which the same data used in case 03 were considered, except that a maximum inflow rate was informed for Centro's zone ($z = 7$), $\mathrm{MaxInFR}_7 = $130.00 $\mathrm{m^3}$/hour.
 
 \begin{table}[h!]
 \begin{center}
@@ -713,7 +738,7 @@ In the case of situation (1), the volume of distribution (limited by the inflow 
 \end{center}
 \end{table}
 
-For situation (3), once a minimum value is indicated for the inflow of a given location, the solver will propose solutions in which the inflow of some locations will be null or concentrated in one or a few shifts. For example, Table \ref{tab:lingoEvalCase22} presents the results found by the solver for case 22, in which the same data used in case 03 were considered, except that a minimum flow rate was reported for the reservoir $\mathrm{R5}$ ($r=6$), $\mathrm{MinInFR}_6 = $10.000 $\mathrm{m^3}$/hour. As we can see in Table \ref{tab:lingoEvalCase22} the restriction related to the minimum inflow in R5 causes the flow to be restricted to a single shift (with tripled inflow value), forcing the valves to be closed in the other two shifts.
+For situation (3), once a minimum value is indicated for the inflow of a given location, the solver will propose solutions in which the inflow of some locations will be null or concentrated in one or a few shifts. For example, Table \ref{tab:lingoEvalCase22} presents the results found by the solver for case 22, in which the same data used in case 03 were considered, except that a minimum inflow rate was reported for the reservoir $\mathrm{R5}$ ($r=6$), $\mathrm{MinInFR}_6 = $10.000 $\mathrm{m^3}$/hour. As we can see in Table \ref{tab:lingoEvalCase22} the restriction related to the minimum inflow in R5 causes the flow to be restricted to a single shift (with tripled inflow value), forcing the valves to be closed in the other two shifts.
 
 \begin{table}[h!]
 \begin{center}
