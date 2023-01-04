@@ -152,7 +152,7 @@ The city of Catende is located in the interior of Pernambuco and has a total are
 
 \subsection{Water collection and treatment}
 
-The collection of water distributed in Catende is carried out in the Santa Rita and Bálsamo das Freiras weirs. The Santa Rita weir is located in the district of Roçadinho, with a maximum water storage volume of 2,500,000 m$^3$ . The Bálsamo das Freiras weir is located on the border between Catende and the Municipality of Jaqueira, with a maximum storage volume of 1,500,000 m$^3$.
+The collection of water distributed in Catende is carried out in the Santa Rita and Bálsamo das Freiras weirs. The Santa Rita weir is located in the district of Roçadinho, with a maximum water storage volume of 2,500,000 m$^3$. The Bálsamo das Freiras weir is located on the border between Catende and the Municipality of Jaqueira, with a maximum storage volume of 1,500,000 m$^3$.
 
 Water treatment is carried out at the Catende Water Treatment Plant (WTP) (Figure \ref{fig:WTP}) in a conventional and mechanical manner (Figure \ref{fig:WTPConvMec}). The collection of water is carried out in the weirs arriving at the treatment plant by gravity. With an average flow of 67 l/s, the water from the Santa Rita reservoir goes to conventional treatment, and with a flow of 35 l/s, the water from the Bálsamo das Freiras reservoir is directed to the mechanical treatment plant. 
 
@@ -208,7 +208,7 @@ Central Reservoir through pumping, but distributes to the aforementioned neighbo
 \includegraphics[width=\textwidth]{figures/reservoirs.png}
 \end{figure}
 
-The Central Reservoir, in addition to supplying water to the Elevated Reservoir (in the WTP), also supplies three more reservoirs of the elevated type in the Panelas Piranji, Canaã and Oxifan neighborhoods, with storage capacities of 100 m$^3$, 180 m$^3$ and 20 m$^3$, respectively. The first two mentioned are supplied with the help of two pairs of pumps while the third reservoir is also supplied by gravitational force. The city center, on the other hand, receives water from the central reservoir through gravitational force, as it is directly linked to the WTP. 
+The Central Reservoir, in addition to supplying water to the Elevated Reservoir (in the WTP), also supplies three more reservoirs of the elevated type in the Panelas Piranji, Canaã and Oxifan neighborhoods, with storage capacities of 100 m$^3$, 180 m$^3$ and 20 m$^3$, respectively. The first two mentioned are supplied with the help of two pairs of pumps while the third reservoir is also supplied by gravitational force. The city center, on the other hand, receives water from the Central Reservoir through gravitational force, as it is directly linked to the WTP. 
 
 Figure \ref{fig:WDSCatende} shows a representation of the water supply network described above. The supplier managers regulates the water supply in Catende, by opening or closing the valves that control the distribution flow. Currently, the company leaves these valves permanently open, maintaining a continuous flow of this resource, with the supply being interrupted only to maintain the treatment filters or the distribution network. 
 
@@ -405,7 +405,7 @@ The symbols used in the model are shown in the Table (\ref{tab:symbols}). And th
 		$\mathrm{C4}$ &  irrelevance factor for idle capacity \\ 
 
 		$\mathrm{D}_z$ &  demand of zone $z$, $\mathrm{D}_z = \mathrm{IAC}*\mathrm{NH}_z*\mathrm{HC}*\mathrm{ND} $\\
-		$\mathrm{TD}$ & total demand, $\mathrm{TD} = \sum_{z=1}^{\mathrm{NZ}}{\mathrm{D}_z}$ \\ 
+		$\mathrm{TD}$ & total demand, $\mathrm{TD} = \sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{\mathrm{D}_z}$ \\ 
 		$\mathrm{PDem}_z$ & $z$ zone percentage demand, $\mathrm{PDem}_z = \dfrac{\mathrm{D}_z}{\mathrm{TD}}$ \\ & \\
 
 		\multicolumn{2}{a}{\emph{decision and secondary variables}} \\ & \\ 
@@ -858,7 +858,7 @@ In the present work, a detailed description of the water distribution system of 
 \section*{Acknowledgement}
 \label{sec:acknowledgement}
 
-We are enormously grateful to CAPES (Coordenação de Aperfeiçoamento de Pessoal de Nível Superior) and to CNPq (Conselho Nacional de Desenvolvimento Científico e Tecnológico) for the financial support provided to our projects. We also thank LINDO Systems for their important contributions and for the LINGO software license, without which this work would not have been possible and the managers of the municipality of Catende, for having provided us with such rich and relevant information. Finally, we would like to thank PROExC (Pró-reitoria de Extensão e Cultura da UFPE) and the Research Director of Propesqi (Pró-reitoria de Pesquisa e Inovação da UFPE) for their support and recognition of our work, and dear Profs. Antônio José da Silva Neto and João Flávio Vieira de Vasconcellos from IPRJ/UERJ, who contributed significantly to the formation of essential skills for the development of our projects. 
+We are enormously grateful to CAPES (Coordenação de Aperfeiçoamento de Pessoal de Nível Superior) and to CNPq (Conselho Nacional de Desenvolvimento Científico e Tecnológico) for the financial support provided to our projects. We also thank LINDO Systems team for their important contributions and for the LINGO software license, without which this work would not have been possible and the managers of the municipality of Catende, for having provided us with such rich and relevant information. Finally, we would like to thank PROExC (Pró-reitoria de Extensão e Cultura da UFPE) and the Research Director of Propesqi (Pró-reitoria de Pesquisa e Inovação da UFPE) for their support and recognition of our work, and dear Profs. Antônio José da Silva Neto and João Flávio Vieira de Vasconcellos from IPRJ/UERJ, who contributed significantly to the formation of essential skills for the development of our projects. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
