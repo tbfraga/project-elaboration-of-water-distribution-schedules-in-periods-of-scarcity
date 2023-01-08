@@ -1,0 +1,908 @@
+% scientific paper written by Tatiana Balbi Fraga
+% approved for publication in Int. J. of Industrial and Systems Engineering
+% final version for publication (in preparation)
+
+%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{singlecol}
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[utf8]{inputenc}
+\usepackage[LY1]{fontenc}
+
+\usepackage{natbib,stfloats}
+\usepackage{mathrsfs}
+\usepackage[bottom]{footmisc}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+%\usepackage{hyperref}
+\usepackage{soul}
+\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+
+\usepackage{colortbl}
+%\newcolumntype{a}{>{\columncolor{yellow}}l}
+\newcolumntype{a}{l}
+
+\usepackage{import}
+
+\def\newblock{\hskip .11em plus .33em minus .07em}
+
+\theoremstyle{TH}{
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{corrolary}[lemma]{Corrolary}
+\newtheorem{conjecture}[lemma]{Conjecture}
+\newtheorem{proposition}[lemma]{Proposition}
+\newtheorem{claim}[lemma]{Claim}
+\newtheorem{stheorem}[lemma]{Wrong Theorem}
+\newtheorem{algorithm}{Algorithm}
+}
+
+\theoremstyle{THrm}{
+\newtheorem{definition}{Definition}[section]
+\newtheorem{question}{Question}[section]
+\newtheorem{remark}{Remark}
+\newtheorem{scheme}{Scheme}
+}
+
+\theoremstyle{THhit}{
+\newtheorem{case}{Case}[section]
+}
+
+\makeatletter
+\def\theequation{\arabic{equation}}
+
+\JOURNALNAME{\TEN{\it  	Int. J. of Industrial and Systems Engineering,
+Vol. \theVOL, No. \theISSUE, \thePUBYEAR\hfill\thepage}}
+%
+%\def\BottomCatch{%
+%\vskip -10pt
+%\thispagestyle{empty}%
+%\begin{table}[b]%
+%\NINE\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcr@{}}%
+%\\[-12pt]
+%Copyright \copyright\ 2012 Inderscience Enterprises Ltd. & &%
+%\end{tabular*}%
+%\vskip -30pt%
+%%%\vskip -35pt%
+%\end{table}%
+%}
+\makeatother
+
+%%%%%%%%%%%%%%%%%
+\begin{document}%
+%%%%%%%%%%%%%%%%%
+
+\RRH{Elaboration of Water Distribution Schedules in Periods of Scarcity}
+
+\newpage
+
+\setcounter{page}{1}
+
+\LRH{Fraga et~al. (2023)}
+
+\RRH{Elaboration of Water Distribution Schedules in Periods of Scarcity}
+
+\VOL{x}
+
+\ISSUE{x}
+
+\PUBYEAR{201X}
+
+\BottomCatch
+
+\CLline
+
+\subtitle{}
+
+\title{Elaboration of Water Distribution Schedules in Periods of Scarcity}
+
+%
+\authorA{Tatiana Balbi Fraga}
+%
+\affA{CAA / Universidade Federal de Pernambuco,\\ Caruaru, PE, BR \\
+E-mail: tatiana.balbi@ufpe.br}
+%
+%
+\authorB{Aldênia Karla Barrêto Candido}
+%
+\affB{CAA / Universidade Federal de Pernambuco,\\ Caruaru, PE, BR \\
+E-mail: aldenia.k@hotmail.com}
+%
+%
+\authorC{Marcos Luiz Henrique}
+%
+\affC{CAA / Universidade Federal de Pernambuco,\\ Caruaru, PE, BR \\
+E-mail: marcos.henrique@ufpe.br}
+%
+%
+\authorD{Abdeladhim Tahimi}
+%
+\affD{CECA / Universidade Federal de Alagoas,\\ Rio Largo, AL, BR \\
+E-mail: abdeladhim.tahimi@ceca.ufal.br}
+%
+
+\begin{abstract}
+
+Scarcity of treated water is a global problem that directly impacts the quality of life and, therefore, brings to light the need for more careful management of water resources in locations that are affected. Although there is a vast literature on the problem of design and operation of treated water distribution networks, few studies consider the issue of scarcity. In the present paper, we carry out a study on the real water distribution problem of a city located in Northeastern Brazil. In this study, we conceptually and mathematically model the problem addressed as a new specific water distribution optimization problem, and implement the model developed using LINGO software from LINDO Systems. We conclude the study showing that the developed solver is a practical, effective and efficient tool, which can be easily used by a suitably qualified employee.
+\end{abstract}
+
+\KEYWORD{Mathematical Modeling; Water Distribution Schedules; Water Distribution System; Water Scarcity; LINGO.}
+
+\maketitle
+
+
+ \section{Introduction}
+
+%The needs for data sharing
+	Water scarcity is a global problem that has been growing over the years due to factors such as population growth, climate variations and living standards \citep{HangEtAl2021}. Specifically in Brazil, in semi-arid regions (such as some regions of Northeast Brazil), this problem is aggravated due to the high variability of rainfall, with rainfall concentrated over time and little spatial distribution \citep{SilvaEtAl2019}. Such aggravation ends up generating conflicts for the use of water resources, and water distribution becomes a priority concern for public management.
+
+Several scientific studies address the water distribution problem, including the design, calibration, simulation, operation and control of water distribution systems. According to \cite{SankarEtAl2015}, when it comes to distribution operation and control, the main objectives considered are: minimizing the cost of energy required for pumping; regulating pressures for preventing/reducing leakages; and maximizing the quality of water supplied to the users by reducing the residence time of water in the network. Few studies have sought to consider the issue of water scarcity. In this scenario, the problem of water distribution is usually restricted to the operation / control of an intermitent water distribution system with storage facilities. According to \cite{SankarEtAl2015}, in the case of water deficient situations it is not possible to meet the demand, so it is also necessary to identify the optimal outflow from demand nodes and it becomes important that the control strategy allocates water so as to minimize the shortfall in supply, and supplies the available water in as equitable a manner as possible. Based on that purpose, the autors present a nonlinear model predictive control (NMPC) technique that determines the optimal control valve settings, and so the optimal outflow rates from demand nodes. \cite{CreacoEtAl2019} present an extensive literature review for real-time control of water distribution networks. As explained by the authors, a real-time control system periodically reports corrective actions to the distribution system, based on the measured values of the control variables. These corrective actions can be: a) discrete actions, such as turning a pump on or off, or fully opening or closing a valve, or b) continuous adjustments to the valve closing setting or pump speed. However, the real-time control of a water distribution network requires implementation of hardware elements in the network, such as various types of sensors and actuators, controllers, and data transmission systems. Usually, in Brazil, the problem of water deficiency is solved with the adoption of distribution schedules and not through dinamic system adjustment. In this context, \cite{KurianEtAl2018} present a mathematical model and a three step decomposition approach to solve the valves and pumps ON/OFF operation problem. The model proposed by the authors determines distribution schedules seeking to minimize energy consumption and meet demand. \cite{LunaEtAl2019} and, more recently, \cite{JafariEtAl2021} proposed, repectively, a hybrid genetic algorithm and an enhanced binary dragonfly algorithm, coupled with the EPANET hydraulic simulation model, for optimization of pump scheduling programs in water supply systems, also aiming to reduce energy consumption and meet demand. Both pappers present an extensive literature review on pump scheduling problems and \cite{JafariEtAl2021} compare the results found by several algorithms. In our work, we focus on the specific understudied class of water distribution problems described in detail by \cite{KurianEtAl2018}, considering, however, conceptual differences related to the definition of the problem.
+
+As a contribution to this domain, we present a detailed description of the Water Distribution System (WDS) in the city of Catende - PE (Brazil) and a new mathematical model for the problem of elaborating water distribution schedules that was specifically developed based on the studied system. The mathematical model was built in parallel to the development of a solver in LINGO. Our objective was to build a model that could be applied with this solver, generating optimal solutions quickly, in order to offer practical support to the water distribution planning of the municipality. As result, we were able to develop a new general mathematical model whose main scientific contribution is its simplicity. This model has the following features: a) it seeks to determine the status of the valves (ON/OFF) and the ideal values for the flows; b) the aim of the problem is to achieve a distribution as equitable as possible; c) the valves are located at the entrance of reservoirs/zones served; d) parameters are incorporated into the model to define priority rules; e) complex calculations are replaced by the definition of maximum and minimum values for the flows rates; and f) flexibility variables were proposed (time of availability of water per shift), which allows the 'ideal' planning to be performed in practice. 
+
+In the next sections we present: a detailed description of the WDS of Catende; the mathematical model developed; a summary of results of the tests performed using actual company data; a qualitative discussion about aspects of the model and the solver; a brief assessment of the limitation of the solver developed; and finally, conclusions and suggestions for future works. 
+
+\section{Catende Water Distribution System}
+\label{sec:CatendeWDS}
+
+The city of Catende is located in the interior of Pernambuco and has a total area of 207,244 km. According to IBGE data obtained from the large Census carried out in 2010 \citep{IBGECatende}, the population of the city of Catende on that date was 37,820 inhabitants. Of these, 28,861 were located in the urban area. In this city, the municipality is responsible for supplying the population with treated water. The next sections present in detail the process of collecting, treating and distributing water in the city of Catende, as well as issues related to demand. 
+
+\subsection{Water collection and treatment}
+
+The collection of water distributed in Catende is carried out in the Santa Rita and Bálsamo das Freiras weirs. The Santa Rita weir is located in the district of Roçadinho, with a maximum water storage volume of 2,500,000 m$^3$. The Bálsamo das Freiras weir is located on the border between Catende and the Municipality of Jaqueira, with a maximum storage volume of 1,500,000 m$^3$.
+
+Water treatment is carried out at the Catende Water Treatment Plant (WTP) (Figure \ref{fig:WTP}) in a conventional and mechanical manner (Figure \ref{fig:WTPConvMec}). The collection of water is carried out in the weirs arriving at the treatment plant by gravity. With an average flow of 67 l/s, the water from the Santa Rita reservoir goes to conventional treatment, and with a flow of 35 l/s, the water from the Bálsamo das Freiras reservoir is directed to the mechanical treatment plant. 
+
+\begin{figure}[h]
+\caption{Catende Water Treatment Plant.}
+\label{fig:WTP}
+\centering
+\includegraphics[width=\textwidth]{figures/ETACatende.png}
+%\centerline{\epsffile{ETACatende.eps}}
+\end{figure}
+
+
+\begin{figure}[h]
+\caption{Conventional (left) and mechanical (right) treatment plants.}
+\label{fig:WTPConvMec}
+\centering
+\includegraphics[width=\textwidth]{figures/ETAConvMec.png}
+\end{figure}
+
+After the adduction, the water captured at the Santa Rita weir, goes to the treatment phases, being received at the WTP through channels, and passing through a flow meter called Calha Pashall. In this trough aluminum sulphate and chlorine are added (Figure \ref{fig:WTPParshall}). These two chemicals help in the coagulation step by reacting with particles that are suspended in raw water. At this stage, the water goes through shares called flocculators, where the added reagents transform the impurities into larger particles to be removed during decantation. 
+
+\begin{figure}[h]
+\caption{Parshall gutter, addition of chlorine and aluminum sulphate.}
+\label{fig:WTPParshall}
+\centering
+\includegraphics[width=\textwidth]{figures/calhaPashall.png}
+\end{figure}
+
+The water, then flocculated, goes to another phase, passing through larger layers called decanters, where the flakes formed are deposited in tubular modules similar to a beehive, making the water almost suitable for consumption. In these stages of treatment, almost all contamination factors are eliminated, filtration is then carried out to further improve the decanted water which, by gravity, passes through filters made of a porous medium with the ability to retain and \label{firstChange}{remove impurities still in the water}. In disinfection, physical or chemical agents are used, such as chlorine, used for the destruction of pathogenic organisms that cause diseases, ending with the correction of pH, where products are also added so that the treated water has a suitable pH for consumption. After being treated, the water is deposited in a supported type reservoir with a capacity of 500 m$^3$ of storage (Central Reservoir). Treatment is carried out in continuous flow. 
+
+The water collected from the Bálsamo das Freiras Reservoir is treated in mechanical filters, where the addition of chemical products is carried out automatically. The disposal of the water treated in these filters is also carried out in the Central Reservoir. 
+
+\subsection{Water distribution in Catende}
+
+For the planning of water distribution, the city of Catende was divided into 6 zones (Figure \ref{fig:SectorsCatende}). 
+
+\begin{figure}[h]
+\caption{Catende map by supply zones. Source: Adapted from the Archives of the Municipality of Catende, consulted in 2016 (subtitles in Portuguese - ETA Catende is the WTP and the neighborhoods are the distribution zones).}
+\label{fig:SectorsCatende}
+\centering
+\includegraphics[width=\textwidth]{figures/setores.png}
+\end{figure}
+ 
+In order to allow water resources to reach consumer units in the most distant neighborhoods from the WTP, capacity studies were carried out, considering the population increase. Based on these studies, the distribution managers identified the need to install reservoirs that serve as water redistribution points. 
+
+The water treated at the WTP - Catende is deposited in a central elevated reservoir (named Central Reservoir), which has a capacity of 500 m$^3$. From this reservoir, it is distributed to another elevated type reservoir with a capacity of 400 m$^3$, both located in the WTP. The Elevated Reservoir is responsible for distributing water to the Nova Catende and Jaqueira districts. This reservoir receives water from the
+Central Reservoir through pumping, but distributes to the aforementioned neighborhoods through gravitational force. 
+
+\begin{figure}[h]
+\caption{Reservoirs raised (left) and elevated (right).} 
+\label{fig:reservoiresCatende}
+\centering
+\includegraphics[width=\textwidth]{figures/reservoirs.png}
+\end{figure}
+
+The Central Reservoir, in addition to supplying water to the Elevated Reservoir (in the WTP), also supplies three more reservoirs of the elevated type in the Panelas Piranji, Canaã and Oxifan neighborhoods, with storage capacities of 100 m$^3$, 180 m$^3$ and 20 m$^3$, respectively. The first two mentioned are supplied with the help of two pairs of pumps while the third reservoir is also supplied by gravitational force. The city center, on the other hand, receives water from the Central Reservoir through gravitational force, as it is directly linked to the WTP. 
+
+Figure \ref{fig:WDSCatende} shows a representation of the water supply network described above. The supplier managers regulates the water supply in Catende, by opening or closing the valves that control the distribution flow. Currently, the company leaves these valves permanently open, maintaining a continuous flow of this resource, with the supply being interrupted only to maintain the treatment filters or the distribution network. 
+
+\begin{figure}[h]
+\caption{Water Distribution Scheme in Catende (subtitles in Portuguese).}
+\label{fig:WDSCatende}
+\centering
+\includegraphics[width=\textwidth]{figures/esquemaDist.png}
+\end{figure}
+ 
+\subsection{Demand from consumer units}
+
+Based on data obtained from the UN (United Nations), \cite{Paganine2013} informs that 110 liters of water per day are enough to meet a person's basic needs. However, in interviews conducted with WTP administrators in Catende, it was informed that the average consumption per inhabitant in the city was around 200 liters per day. Considering the average consumption reported and data from \cite{IBGECatende} obtained from the 2010 Census, it was estimated that an average of 7,473,960.00 liters of water per day is needed to serve the population of Catende. 
+
+Through the visits carried out at the WTP in Catende in 2016, it was also possible to obtain information on the daily production capacity and the number of households served, separated by the supply zones. Table \ref{tab:SectorsCatende} shows the water demand for each zone (neighborhood), where the necessary amount of water per household was defined considering that each household resides on average 3.9 inhabitants (average established by \cite{IBGECatende} through the last large demographic census of 2010). Information on the number of households/zones and the average water consumption per inhabitant were provided by the WTP managers, considering the average use of 200 liters of water per inhabitant. It was also informed that almost 100\% of households have reservoirs ranging between 500 and 1000 liters. These are activated when water is not supplied, either due to maintenance in the distribution network, or in periods when the water flow for treatment is low, thus limiting the daily supply. 
+
+\begin{table}[H]
+\begin{center}
+	\begin{tabular}{ c  r  r } 
+		supply sector       &  \multicolumn{1}{c}{number of}     &   \multicolumn{1}{c}{average consumption}  \\
+		                    &  \multicolumn{1}{c}{households}    &  \multicolumn{1}{c}{($\mathrm{m^3}$/day)}   \\
+		\\
+		Centro              & 5,431          &  4,236.18 \\
+		Nova Catende        & 1,043 	   &    813.54  \\
+		Jaqueira            &  976          &    761.28 \\
+		Panelas Piranji     &  459          &   358.02 \\
+		Canaã               & 1,538          &  1,199.64 \\
+		Oxifan              &  135          &   105.30 \\
+		\\
+		Total               & 9,582          &  7,473.96 \\
+		\hline
+	\end{tabular}
+\caption{Demand by sector - Catende (data from 2016)}
+\label{tab:SectorsCatende}
+\end{center}
+\end{table}
+
+Although Catende is located in a region that does not suffer so much from the lack of water, it has been observed over the years, a considerable drop in its water sources, alerting the population and managers about the need to save this resource. The production \label{secondChange}{capacity of treated water is 288.00 $\mathrm{m^3}$ of water per hour}. Observing the total daily demand required, it is concluded that the productive capacity does not meet the daily needs of the population, which highlights the need for good management of water distribution.
+
+Based on this issue, the water distribution problem was then defined, as discussed in the next section. 
+
+\section{Problem of Elaborating Water Distribution Schedules in Periods of Scarcity} 
+\label{sec:EWDSPSP}
+
+This water distribution problem arises in times of scarcity, in which it becomes necessary to draw up a distribution schedule for the different zones of the city, based on the limitation of this precious resource. Such schedule informs the shifts in which the inhabitants will be able to acquire treated water, generating their reserves for the periods in which there will be no supply. The following section presents a mathematical model for the problem considered in this work.
+
+\subsection{Mathematical modeling}
+\label{sec:problemModel}
+ 
+The symbols used in the model are shown in the Table (\ref{tab:symbols}). And the mathematical model is presented as follows:
+
+\begin{eqnarray} 
+\label{eq:objFunc}
+	 maximize \quad 
+	 \mathrm{C1}*TVD 
+	 - \mathrm{C2}*\sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{|\mathrm{PDem}_{z} 
+	 - PDist_{z}|} \\ \nonumber 
+	- \sum_{d=1}^{\mathrm{ND}}{\sum_{s=1}^{\mathrm{NS}}{\sum_{l=1}^{\mathrm{NL}}{(\mathrm{C3}(d,s)*(1-X_{dsl}))}}} - \mathrm{C4}*IdleCEWSum
+\end{eqnarray}
+
+\emph{subj. to}
+
+\begin{equation}
+	InF_{dsl} - V_{l} * X_{dsl} = 0, \quad \forall{d, s, l}
+	\label{eq:evalInF}
+\end{equation}
+
+\begin{equation}
+	V_l - {InFR}_l * \mathrm{T} = 0, \quad \forall{l}
+	\label{eq:evalnFR}
+\end{equation}
+
+\begin{equation}
+	{InFR}_l - \mathrm{MaxInFR}_{l} \leq 0, \quad \forall{l}
+	\label{eq:evalMaxInfR}
+\end{equation} 
+
+\begin{equation}
+	{InFR}_l - \mathrm{MinInFR}_{l} \geq 0, \quad \forall{l}
+	\label{eq:evalMinInfR}
+\end{equation}
+
+\begin{equation} 
+	OutF_{dsr} - \sum_{l=1}^{\mathrm{NL}}{(InF_{dsl}*\mathrm{Y}_{rl})} = 0, \quad \forall{d, s, r}
+	 \label{eq:evalOutFRes}
+\end{equation}
+
+\begin{equation}
+	VRes_{dsl} - VRes_{(d-1)(\mathrm{NS})l} - InF_{dsl} + OutF_{dsl} = 0, \quad s=1, \quad \forall{d,l}
+ 	\label{eq:volResT1}
+\end{equation}
+
+\begin{equation}
+	VRes_{dsl} - VRes_{d(s-1)l} - InF_{dsl} + OutF_{dsl} = 0, \quad s=2,...,\mathrm{NS}, \quad \forall{d,l}
+	\label{eq:volRem!T1}
+\end{equation}
+
+\begin{equation}
+	VRes_{dsl} - \mathrm{IRV}_l = 0, \quad d = 0, \quad s = \mathrm{NS}, \quad \forall{l}
+	\label{eq:volRStart}
+\end{equation}
+
+\begin{equation}
+	VRes_{dsl} \geq 0, \quad \forall{d,s,l}
+	\label{eq:minRV}
+\end{equation}
+
+\begin{equation}
+	VRes_{dsr} - \mathrm{C}_{r} \leq 0, \quad \forall{d,s,r}
+	\label{eq:maxRV}
+\end{equation}
+
+\begin{equation}
+	VRes_{dsz} - \mathrm{AZC}_z*\mathrm{NH}_z \leq 0, \quad \forall{d,s,z}
+	\label{eq:maxRZV}
+\end{equation}
+
+\begin{equation}
+	OutF_{z} -  \mathrm{D}_z  \leq 0,  \quad \forall z
+	\label{eq:demandRes}
+\end{equation}
+
+\begin{equation}
+	OutF_{z} - \sum_{d=1}^{\mathrm{ND}}\sum_{s=1}^{\mathrm{NS}}{OutF_{dsz}} = 0, \quad \forall z
+	\label{eq:evalTOutFZone}
+\end{equation}
+
+\begin{equation}
+	TDV - \sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{OutF_{z}} = 0
+	\label{eq:evalTOutF}
+\end{equation}
+
+\begin{equation}
+	PDist_{z} - \dfrac{OutF_{z}}{TDV} = 0, \quad \forall z
+	\label{eq:evalPDist}
+\end{equation}
+
+\begin{equation}
+	IdleC_{dsl} - \mathrm{C}_{l} + VRes_{dsl} = 0, \quad s = \mathrm{NS}, \quad d = \mathrm{ND}, \quad \forall{l}
+	\label{eq:evalIdleCap}
+\end{equation}
+
+\begin{equation}
+	IdleCEWSum - \sum_{l=1}^{\mathrm{NL}}{ (IdleC_{({\mathrm{ND}})({\mathrm{NS}})l})^{\mathrm{RF}_l }    } = 0
+	\label{eq:idleCapEWSum}
+\end{equation}
+
+\begin{equation}
+	X_{dsl} \in \{0, 1\}
+	\label{eq:bv}
+\end{equation}
+
+\begin{equation}
+	V_{l} \in \mathbb{R}_+
+	\label{eq:rv}
+\end{equation}
+
+\begin{table}[h!]
+\begin{center}
+\footnotesize
+	\begin{tabular}{ a a } 
+		\multicolumn{2}{a}{\emph{indexes}} \\ & \\ 
+
+		$d$ & used to designate a day, $d = 1, ..., \mathrm{ND}$ \\
+		$s$ & used to designate a shift of a day, $s = 1, ..., \mathrm{NS}$ \\
+		$l$ & used to designate a location that are part of the water supply system  \\
+		& (either zones, reservoirs or WTPs), $l  = 1, ..., \mathrm{NL}$\\ 
+		$r$ & used to designate a WTP or a reservoir, $r = 1, ..., \mathrm{NR}$ \\
+		$z$ & used to designate a zone, $z=\mathrm{NR}+1, ..., \mathrm{NL}$ \\ & \\
+		
+		\multicolumn{2}{a}{\emph{parameters}} \\ & \\ 
+
+		$\mathrm{ND}$ & number of days \\
+		$\mathrm{NS}$ & number of daily distribution shifts \\
+		$\mathrm{NL}$ & number of locations \\ 
+		$\mathrm{NR}$ & number of reservoirs (reservoirs and WTPs) \\
+		$\mathrm{T}$ & time per shift \\
+		$\mathrm{IRV}_l$ & initial volume of reservoir at the location $l$ \\
+		$\mathrm{C}_{l}$ & capacity of reservoir at the location $l$ \\
+		$\mathrm{AZC}_z$ & average reservoir capacities of the households in the zone $z$ \\
+		$\mathrm{NH}_z$ & number of households in the zone $z$ \\
+		$\mathrm{HC}$ & housing coefficient \\ 
+		$\mathrm{IAC}$ & represents the average daily consumption per inhabitant \\
+		$\mathrm{MaxInFR}_{l}$ & maximum inflow rate of the pipeline that reaches the reservoir at the location $l$ \\
+		$\mathrm{MinInFR}_{l}$ & minimum inflow rate set for the pipeline that reaches the reservoir at the location $l$ \\
+		$\mathrm{Y}_{rl}$ &  binary variable that informs the physical structure of the water distribution system. \\
+		& $\mathrm{Y}_{rl} = 1$ if water is supplied directly from the reservoir $r$ to the location $l$ and \\
+		& $\mathrm{Y}_{rl} = 0$ if that doesn't happen   \\
+		$\mathrm{RF}_l$ & importance attributed to maintaining water in reservoir at location $l$,\\
+		&  since there is a surplus of water to fill the reservoirs. It is important \\
+		& that the values of these parameters are greater than and close to 1.00.  \\
+		$\mathrm{C1, C2}$ & relevance factors for the total volume distributed and fair distribution, respectively \\
+		$\mathrm{C3}(d,s)$ & relevance factor for the adjustment of the valves \\
+		$\mathrm{C4}$ &  irrelevance factor for idle capacity \\ 
+
+		$\mathrm{D}_z$ &  demand of zone $z$, $\mathrm{D}_z = \mathrm{IAC}*\mathrm{NH}_z*\mathrm{HC}*\mathrm{ND} $\\
+		$\mathrm{TD}$ & total demand, $\mathrm{TD} = \sum_{z=\mathrm{NR}+1}^{\mathrm{NL}}{\mathrm{D}_z}$ \\ 
+		$\mathrm{PDem}_z$ & $z$ zone percentage demand, $\mathrm{PDem}_z = \dfrac{\mathrm{D}_z}{\mathrm{TD}}$ \\ & \\
+
+		\multicolumn{2}{a}{\emph{decision and secondary variables}} \\ & \\ 
+
+		$X_{dsl}$ & binary variable that receives value 1 when the inlet valve of location $l$ is open on \\
+		& the $s$-th shift of day $d$, and receives value 0 when it is closed in the same period \\
+		$V_l$ & ideal volume of water distributed to the location $l$ in any shift in which \\
+		& the corresponding valve remains open \\ & \\ 
+
+		$InF_{dsl}$ & water inflow received by location $l$ on the $s$-th shift of day $d$ \\
+		$OutF_{dsr}$ & water outflow delivered by reservoir $r$ on the $s$-th shift of day $d$ \\
+		${InFR}_l$ & ideal inflow rate of location $l$ \\ 
+		$VRes_{dsl}$ &  volume of water remaining in the reservoir at location $l$ at the end of the $s$-th shift \\
+		& of the day $d$ \\ 
+		$OutF_{z}$ & total outflow of zone $z$ \\
+		$TVD$ & total volume distributed \\
+		$PDist_{z}$ & percentage distributed to zone $z$ \\
+		$IdleC_{dsl}$ & idle capacity of reservoir at location $l$ at the end of the $s$-th shift of the day $d$ \\
+		$IdleCEWSum$ & exponentially weighted sum of idle capacities \\
+	\end{tabular}
+\caption{Symbols used in the mathematical model}
+\label{tab:symbols}
+\end{center}
+\end{table}
+
+The objective function (\ref{eq:objFunc}) at the same time: a) maximizes the volume distributed to the zones (first term); b) makes the distribution of water between the different zones as fair as possible (second term); and c) minimizes the idle capacity of the reservoirs (fourth term). The third term is used to force the uniqueness of the solution (or at least reduce the number of possible solutions). Using the - sign before the term makes the valves \footnotemark[1] \footnotetext[1]{In some cases the valves are replaced by pumps. In these cases, the pumps can be compared to open valves, when activated, and closed valves, when not activated. Therefore, the simplification adopted (considering only valves) does not generate any implications for the developed model.}remain open as long as possible. The parameters $\mathrm{C1}$ and $\mathrm{C2}$ are used to regulate the order of importance of the first and second terms. $\mathrm{C4}$ is used to ensure that the algorithm prioritizes meeting demand and that the remaining volume in the reservoirs becomes a secondary concern. And $\mathrm{C3}(d,s)$ is a function used to prioritize water distribution shifts. The equations in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}) are used to, respectively, determine the water inflow and ideal inflow rate based on the evaluated solution. The constraints in (\ref{eq:evalMaxInfR}) and (\ref{eq:evalMinInfR}) limit the inflow rates values. The equations in (\ref{eq:evalOutFRes}) guarantee that the reservoirs outflows are exactly the amount of water that each reservoir distributes to other reservoirs or zones\footnotemark[2] \footnotetext[2]{Note that, in the case of zones, each zone $z$ is considered to have a single reservoir, whose capacity is defined by the sum of the capacities of the various housing reservoirs in the zone.}. The equations in (\ref{eq:volResT1}) and (\ref{eq:volRem!T1}) are the well-known flow constraints, being the equations in (\ref{eq:volRStart}) boundary conditions. The constraints in (\ref{eq:minRV}), (\ref{eq:maxRV}) and (\ref{eq:maxRZV}) limit the values of the remaining volumes of the reservoirs. The constraints in (\ref{eq:demandRes}) ensure that the total volume distributed to each zone will not exceed its total demand. The equations in (\ref{eq:evalTOutFZone}), (\ref{eq:evalTOutF}) and (\ref{eq:evalPDist}) calculate the total volume delivered to each zone, the total volume delivered to all zones and the proportions of volume distributed to each zone, respectively. The equations in (\ref{eq:evalIdleCap}) and (\ref{eq:idleCapEWSum}) calculate the idle capacities of the reservoirs in the last shift of the last day, and an exponentially weighted sum of these values, respectively. Finally, the constraints in (\ref{eq:bv}) and (\ref{eq:rv}) inform the nature of the primary decision variables.
+
+\subsection{Distribution time adjustment}
+
+In order to guarantee a fair distribution, in specific cases where the actual flows are greater than the ideal flows informed in the initial model solution, and cannot be reduced in practice, it is necessary to limit the water distribution time for certain locations. In this case, the proper distribution time per shift for local $l$, $T^*_{l}$, can be defined according to equations in (\ref{eq:evalTimeAdq}). In practice, once delivery times are adequately limited, water delivery will proceed as planned.
+
+
+\begin{equation}
+	T^*_{l} = \mathrm{T} * ({InFR}_l / \mathrm{MaxInFR}_{l}), \quad \forall l
+	\label{eq:evalTimeAdq}
+\end{equation}
+
+
+\section{Tests and results}
+
+To validate the proposed model, a LINGO code was developed and ran in the 'global solver' mode, using the parameter values recommended by the software \cite{LINGO} (with the exception of the Precision parameter, on the Interface tab, whose value was set to 9). The tests were performed on a notebook with an Intel i7 processor. The input data were prepared based on the considerations presented in the sections \ref{sec:initialConsiderations}, \ref{sec:praticalAspects} and \ref{sec:limitations} and using the data collected during this work, as summarized in the section \ref{sec:data}. The results found as well as an analysis of these results are presented along the following sections together with the considerations studied. 
+
+\subsection{Data collected}
+\label{sec:data}
+
+Tables \ref{tab:weirsCatende}, \ref{tab:reservoirsCatende}, \ref{tab:zonesCatende} and \ref{tab:phyDitStr} present a synthesis of the data referring to the weirs, reservoirs, zones and the network of studied water distribution, respectively. The conceptual and mathematical model presented in this paper, as well as the solver used to validate the model, were developed through a recent effort. However, the data presented in this section were collected in 2016 as part of an extension project carried out by the authors of this article, through which a detailed study of the water distribution process presented in the section \ref{sec:CatendeWDS} was carried out \citep{CandidoEtAl2016}. 
+
+\noindent number of locations (NL) = 12 (6 zones) 
+
+\noindent number of reservoirs (NR) = 6 (1 WTP) 
+
+\noindent housing coefficient ($\mathrm{HC}$) = 3.9 inhabitants / household 
+
+\noindent average daily inflow per inhabitant ($\mathrm{IAC}$) = 0.20 $\mathrm{m^3}$ / inhabitant * day 
+
+\noindent Note: each weir supplies water to an WTP (conventional or mechanical). However, both supply water to the Central Reservoir. For this reason, in this work we consider only a single WTP. 
+
+\begin{table}[H]
+\begin{center}
+	\begin{tabular}{ c  c  c } 
+		weir      & name        & distribution flow rate  ($\mathrm{m^3/hour}$)     \\
+		                                                                    \\
+		1              & Santa Rita weir            & 241.20         \\
+		2              & Bálsamo das Freiras  weir  & 126.00         \\
+							                                                \\
+		\hline
+		Total          &                               & 367.20       \\
+		\\
+	\end{tabular}
+\caption{Weirs data - Catende (data from 2016)}
+\label{tab:weirsCatende}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\begin{tabular}{ c  c  c  c } 
+		reservoir      & name              & capacity                       & maximum inflow rate    \\
+		($r$)          &             	   &  ($\mathrm{C}_{r}$) ($\mathrm{m^3}$)    &  ($\mathrm{MaxInFR}_{r}$) ($\mathrm{m^3/hour}$) \\
+		\\
+		1              & WTP                &   2,500.00           &  367.20  \\
+		2              & Central             &   500.00		&  288.00  \\
+		3              & Elevated           &   400.00          & uninformed \\
+		4              & Panelas Piranji  &   100.00            & uninformed  \\
+		5              & Canaã              &   180.00          & uninformed  \\
+		6              & Oxifan              &   20.00          & uninformed  \\
+		\\
+	\end{tabular}
+\caption{Reservoirs data - Catende (data from 2016)}
+\label{tab:reservoirsCatende}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\begin{tabular}{ c  c  c } 
+		zone          & name         & number of households \\
+		($z$)          &              & ($\mathrm{NH}_{z}$)   \\
+		                                               \\
+		7              & Centro           & 5,431 \\
+		8              & Nova Catende     & 1,043 \\
+		9              & Jaqueira         &   976 \\
+	   10              & Panelas Piranji  &   459 \\
+	   11              & Canaã            & 1,538 \\
+	   12              & Oxifan           &   135 \\
+	   \\
+	\end{tabular}
+\caption{Zones data - Catende (data from 2016)}
+\label{tab:zonesCatende}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\begin{tabular}{ c c c c c c c c c c c c c } 
+
+		($\mathrm{Y}_{rl}$)	& 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12  \\
+		                                                                      \\
+		1	              	& 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 &  0 &  0 &  0  \\
+		2                 	& 0 & 0 & 1 & 1 & 1 & 1 & 1 & 0 & 0 &  0 &  0 &  0  \\
+		3                 	& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 &  0 &  0 &  0  \\
+		4                 	& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 &  1 &  0 &  0  \\
+		5                 	& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 &  0 &  1 &  0  \\
+	    6                 	& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 &  0 &  0 &  1  \\
+	\end{tabular}
+\caption{Physical distribution structure - Catende (data from 2016)}
+\label{tab:phyDitStr}
+\end{center}
+\end{table}
+
+\subsection{Benchmarks}
+\label{sec:benchmarks}
+
+For testing the developed SOLVER, we have considered 36 cases. In cases 01 to 21 we used the data from section 4.1, varying the number of days (between 1 and 7) and the number of shifts (between 1 and 3). In cases 22 to 28, we also considered a minimum inflow value for the Oxifan's reservoir ($\mathrm{MinInFR}_6 = 10.00$ m$^3$/hour), varying the number of days (between 1 and 7) and using 3 shifts. Case 29 is like case 03, except that a maximum inflow rate was informed for Centro's zone ($z = 7$), $\mathrm{MaxInFR}_7 = $130.00 $\mathrm{m^3}$/hour. Case 30 to case 36 are like cases 22 to 28, respectvely, except that a maximum inflow rate was informed for Centro's zone, as in case 29. For all cases we used the following values for the parameters: $\mathrm{C1}= 10/\mathrm{ND}$, $\mathrm{C2}= 100,000$, $\mathrm{C3}(d,s)=a*((\mathrm{NS}-s)*\mathrm{ND} + \mathrm{ND} - d + 1)$, with $a=1$, *$a=2$ or **$a=3$, $\mathrm{C4} = 5.27\mathrm{E-}5$, $\mathrm{RF}_r = 1.13, r=1,2$;  $\mathrm{RF}_r = 1.12,  \forall r | r \neq 1,2$; and $\mathrm{RF}_z =1.00, \forall z$. A template for the data file (data.ldt) is available at "https://github.com/tbfraga/gamos-journal/tree/main/EWDSPS".
+
+\subsection{Initial considerations}
+\label{sec:initialConsiderations}
+
+Figure \ref{fig:evalOptimalValues} presents the optimal solution for the data summarized in the section \ref{sec:data} and using the parameter values presented in section \ref{sec:benchmarks} (with $\mathrm{ND}=1, \mathrm{NS}=1$ and $a=1$), calculated with the aid of the 'LibreOffice Calc' software, considering the maximum daily distribution value (in a 24-hour shift), limited by the outflows of the weirs and the WTP.
+
+\begin{figure}[h!]
+	\begin{center}
+	    \caption{Determination of optimal distribution values with 'LibreOffice Calc', considering a daily 24-hour distribution period.}
+		\label{fig:evalOptimalValues}
+		\centering
+		\includegraphics[width=\textwidth]{figures/case01Evaluation.png}
+	\end{center}
+\end{figure}
+
+As we can see in this figure, the optimal daily water distribution volume per inhabitant, considering a daily 24-hour distribution period, is $\approx$ 185.00 liters / (day * inhabitant). Therefore, we can conclude that, in fact, the flow of the pipeline that transports water from the WTP to the Central Reservoir is not sufficient to meet the average daily consumption of the population informed by the company (200 liters / (day * inhabitant)).
+
+Another important piece of information that we observe in this figure are the ideal inflow rates, which would result in a fair distribution for the population of Catende. These values are basically defined as a function of water availability, demands, and initial volumes in the reservoirs. Such values were identified using the following calculation logic:
+
+\noindent 1) as the part of the inflow received by the WTP and not distributed is completely used to fill its reservoir and, as the inflow rate of the Central Reservoir is lower than the inflow rate of the WTP, so $InF_{dsr}$, for the WTP ($r=1$) and the Central Reservoir  ($r=2$), are calculated according to Eqs. in \ref{eq:volInFRCentral}: 
+
+\begin{equation}
+	InF_{dsr} = \mathrm{MaxInFR}_r * \mathrm{T}, \quad d = 1, \quad s = 1, \quad r = 1,2
+	\label{eq:volInFRCentral}
+\end{equation}
+
+\noindent 2) the total availability of water, released by the Central Reservoir, which directly or indirectly supplies all other reservoirs and zones, is less than the total demand. Therefore, the volume of water received by the Central Reservoir is completely distributed to the zones (and not to fill the reservoirs), with the fair distribution being proportional to the number of households in each zone: 
+
+\begin{equation}
+	InF_{dsz} = InF_{dsr} * \dfrac{\mathrm{D}_z}{ \mathrm{TD}},
+	\quad d = 1, \quad s = 1, \quad r = 2, \quad \forall z  
+\end{equation}
+
+\noindent and, 3) as the volumes received by the reservoirs are completely distributed: 
+
+\begin{equation}
+	InF_{dsr} = OutF_{dsr} \quad d = 1, \quad s = 1, \quad r=3, ..., \mathrm{NR}
+\end{equation}
+
+\noindent being the values of $OutF_{dsr}$ calculated according to the Eqs. in (\ref{eq:evalOutFRes}) recursively, and the ideal rates (not informed) then calculated based on the Eqs. in (\ref{eq:evalInF}) and (\ref{eq:evalnFR}).
+
+After performing the calculations shown in Figure \ref{fig:evalOptimalValues}, we run the solver in LINGO, using the same inputs. The values 367.200 and 288.000 were used as the values of the maximum inflow rates informed for the WTP and for the Central Reservoir, respectively. No limit values for inflow rates were informed for the other reservoirs and zones. Table \ref{tab:lingoEvalCase01} displays the values found by the solver. As we can see in this table, the solver found the calculated optimal values very quickly and without any errors observed. 
+
+\begin{table}[h!]
+\begin{center}
+\begin{small}
+	\begin{tabular}{ c r r r r r } 
+		location & \multicolumn{1}{c}{total demand}      & \multicolumn{1}{c}{capacity} & \multicolumn{1}{c}{initial vol.} & \multicolumn{1}{c}{idle capacity **} & \multicolumn{1}{c}{total inflow}  \\
+		      & \multicolumn{1}{c}{($\mathrm{m^3}$)} & \multicolumn{1}{c}{($\mathrm{m^3}$)}   & \multicolumn{1}{c}{($\mathrm{m^3}$)}     &  \multicolumn{1}{c}{($\mathrm{m^3}$)}   &  \multicolumn{1}{c}{($\mathrm{m^3}$)}               \\
+		\\
+		WTP   &           & 2,500.000 & 0.000 &  599.200 & 8,812.800 \\
+		R1    &           &   500.000 & 0.000 &  500.000 & 6,912.000\\
+		R2    &           &   400.000 & 0.000 &  400.000 & 1,456.411 \\
+		R3    &           &   100.000 & 0.000 &  100.000 &   331.101 \\
+	    R4    &           &   180.000 & 0.000 &  180.000 & 1,109.440  \\
+	    R5    &           &    20.000 & 0.000 &   20.000 &    97.383 \\
+	    Z1    & 4,236.180 & 5,431.000 & 0.000 &  5,431.000 & 3,917.666 \\
+	    Z2    &   813.540 & 1,043.000 & 0.000 &  1,043.000 &   752.371 \\
+	    Z3    &   761.280 &   976.000 & 0.000 &    976.000 &   704.040 \\
+	    Z4    &   358.020 &   459.000 & 0.000 &    459.000 &   331.101 \\
+	    Z5    & 1,199.640 & 1,538.000 & 0.000 &  1,538.000 & 1,109.440 \\
+	    Z6    &   105.300 &   135.000 & 0.000 &    135.000 &    97.383 \\
+	    \\
+	    total & 7,473.960 & \multicolumn{2}{r}{exp. weighted sum:} & 13,438.743 &              \\
+		   \\
+		&  &      &  \multicolumn{1}{c}{location}    & \multicolumn{1}{c}{valve status} & \multicolumn{1}{c}{ideal inflow rate}   \\
+		\multicolumn{2}{c}{shift data}     &   &      & \multicolumn{1}{c}{} & \multicolumn{1}{c}{($\mathrm{m^3}$/hour)} \\
+		   \\
+1   &  \multicolumn{1}{l}{day} &  & \multicolumn{1}{c}{WTP} & \multicolumn{1}{c}{open} &  367.200* \\
+1   &  \multicolumn{1}{l}{shif} & & \multicolumn{1}{c}{R1}  & \multicolumn{1}{c}{open} &  288.000* \\
+24  &  \multicolumn{1}{l}{hours/shift} & & \multicolumn{1}{c}{R2} & \multicolumn{1}{c}{open} &   60.684\\
+	&      &                  & \multicolumn{1}{c}{R3}     & \multicolumn{1}{c}{open} &    13.796 \\
+\multicolumn{3}{c}{total zones outflow} & \multicolumn{1}{c}{R4} & \multicolumn{1}{c}{open}  &   46.227 \\
+\multicolumn{3}{c}{($\mathrm{m^3}$)}& \multicolumn{1}{c}{R5}     & \multicolumn{1}{c}{open} &     4.058 \\
+	   &      &              		& \multicolumn{1}{c}{Z1}     & \multicolumn{1}{c}{open} &   163.236 \\
+\multicolumn{3}{c}{6,912.000}       & \multicolumn{1}{c}{Z2}     & \multicolumn{1}{c}{open} &    31.349 \\
+	   &      &              		& \multicolumn{1}{c}{Z3}     & \multicolumn{1}{c}{open} &    29.335 \\\multicolumn{3}{c}{optimal value (fitness)} & \multicolumn{1}{c}{Z4} & \multicolumn{1}{c}{open} &13.796 \\
+	   &      &             	    & \multicolumn{1}{c}{Z5}     & \multicolumn{1}{c}{open} &    46.227 \\
+\multicolumn{3}{c}{69,119.292}       & \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{open} &     4.058 \\\\
+\multicolumn{3}{c}{(computational time  = 0.41 sec)}     & \multicolumn{3}{c}{* values reported for maximum inflow rates} \\
+\multicolumn{3}{c}{(total number of iterations = 1,342)}   & \multicolumn{3}{c}{** at the end of the evaluated period} 
+	\end{tabular}
+\end{small}
+\caption{Summary of results generated by the solver developed in LINGO for case 01.}
+\label{tab:lingoEvalCase01}
+\end{center}
+\end{table}
+
+The same values were found for volumes distribution when the solver in LINGO was run considering 3 shifts of 8h (case 03). In this case, the inflow is distributed between the shifts, keeping the same ideal inflow rates.
+
+\begin{table}[h!]
+\begin{center}
+\begin{small}
+	\begin{tabular}{ c r r r r r } 
+		location & \multicolumn{1}{c}{total demand}      & \multicolumn{1}{c}{capacity} & \multicolumn{1}{c}{initial vol.} & \multicolumn{1}{c}{idle capacity **} & \multicolumn{1}{c}{total inflow}  \\
+		      & \multicolumn{1}{c}{($\mathrm{m^3}$)} & \multicolumn{1}{c}{($\mathrm{m^3}$)}   & \multicolumn{1}{c}{($\mathrm{m^3}$)}     &  \multicolumn{1}{c}{($\mathrm{m^3}$)}   &  \multicolumn{1}{c}{($\mathrm{m^3}$)}               \\
+		\\
+		WTP   &           & 2,500.000 & 0.000 &  599.200 & 8,812.800 \\
+		R1    &           &   500.000 & 0.000 &  500.000 & 6,912.000\\
+		R2    &           &   400.000 & 0.000 &  400.000 & 1,456.411 \\
+		R3    &           &   100.000 & 0.000 &  100.000 &   331.101 \\
+	    R4    &           &   180.000 & 0.000 &  180.000 & 1,109.440  \\
+	    R5    &           &    20.000 & 0.000 &   20.000 &    97.383 \\
+	    Z1    & 4,236.180 & 5,431.000 & 0.000 &  5,431.000 & 3,917.666 \\
+	    Z2    &   813.540 & 1,043.000 & 0.000 &  1,043.000 &   752.371 \\
+	    Z3    &   761.280 &   976.000 & 0.000 &    976.000 &   704.040 \\
+	    Z4    &   358.020 &   459.000 & 0.000 &    459.000 &   331.101 \\
+	    Z5    & 1,199.640 & 1,538.000 & 0.000 &  1,538.000 & 1,109.440 \\
+	    Z6    &   105.300 &   135.000 & 0.000 &    135.000 &    97.383 \\
+	    \\
+	    total & 7,473.960 & \multicolumn{2}{r}{exp. weighted sum:} & 13,438.743 &              \\
+		   \\
+		&  &      &  \multicolumn{1}{c}{location}    & \multicolumn{1}{c}{valve status} & \multicolumn{1}{c}{ideal inflow rate}   \\
+		\multicolumn{2}{c}{shift data}     &   &      & \multicolumn{1}{c}{T1, T2 and T3} & \multicolumn{1}{c}{($\mathrm{m^3}$/hour)} \\
+		   \\
+1   &  \multicolumn{1}{l}{day} &  & \multicolumn{1}{c}{WTP} & \multicolumn{1}{c}{open} &  367.200* \\
+3   &  \multicolumn{1}{l}{shif} & & \multicolumn{1}{c}{R1}  & \multicolumn{1}{c}{open} &  288.000* \\
+24  &  \multicolumn{1}{l}{hours/shift} & & \multicolumn{1}{c}{R2} & \multicolumn{1}{c}{open} &   60.684\\
+	&      &                  & \multicolumn{1}{c}{R3}     & \multicolumn{1}{c}{open} &    13.796 \\
+\multicolumn{3}{c}{total zones outflow} & \multicolumn{1}{c}{R4} & \multicolumn{1}{c}{open}  &   46.227 \\
+\multicolumn{3}{c}{($\mathrm{m^3}$)}& \multicolumn{1}{c}{R5}     & \multicolumn{1}{c}{open} &     4.058 \\
+	   &      &              		& \multicolumn{1}{c}{Z1}     & \multicolumn{1}{c}{open} &   163.236 \\
+\multicolumn{3}{c}{6,912.000}       & \multicolumn{1}{c}{Z2}     & \multicolumn{1}{c}{open} &    31.349 \\
+	   &      &              		& \multicolumn{1}{c}{Z3}     & \multicolumn{1}{c}{open} &    29.335 \\\multicolumn{3}{c}{optimal value (fitness)} & \multicolumn{1}{c}{Z4} & \multicolumn{1}{c}{open} &13.796 \\
+	   &      &             	    & \multicolumn{1}{c}{Z5}     & \multicolumn{1}{c}{open} &    46.227 \\
+\multicolumn{3}{c}{69,119.292}       & \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{open} &     4.058 \\\\
+\multicolumn{3}{c}{(computational time  = 0.21 sec)}     & \multicolumn{3}{c}{* values reported for maximum inflow rates} \\
+\multicolumn{3}{c}{(total number of iterations = 661)}   & \multicolumn{3}{c}{** at the end of the evaluated period} 
+	\end{tabular}
+\end{small}
+\caption{Summary of results generated by the solver developed in LINGO for case 03.}
+\label{tab:lingoEvalCase03}
+\end{center}
+\end{table}
+
+\subsection{Practical aspects}
+\label{sec:praticalAspects}
+
+It would be ideal if the company could regulate the flow rates for water distribution, adjusting these rates according to each ideal solution found by the solver for the different cases evaluated by the planners. However, in practice this becomes very difficult. The following situations will be faced when looking for solutions to real problems:
+
+\begin{itemize}
+\item (1) real flow rates of the pipelines smaller than the calculated ideal flow rates;
+\item (2) actual pipelines flow rates greater than the calculated ideal flow rates;
+\item and (3) very small ideal flow rates, making the supply unsatisfactory.
+\end{itemize}
+
+Situations (1) and (3) can be easily solved by indicating maximum and minimum values, respectively, for the inflow rates calculated by the solver. However, care must be taken not to set values that make the problem unresolvable. The planner must always keep in mind that the water distribution network and the flow rates form a single system, with values that are essentially integrated.
+
+In the case of situation (1), the volume of distribution (limited by the inflow rate) in a given location will be transferred to other locations seeking to meet the demand and \slash or distributed to reduce the idle capacity of the reservoirs, according to the setting of the parameter values. For example, Table \ref{tab:lingoEvaluationsCase29} presents the results found by the solver for case 29, in which the same data used in case 03 were considered, except that a maximum inflow rate was informed for Centro's zone ($z = 7$), $\mathrm{MaxInFR}_7 = $130.00 $\mathrm{m^3}$/hour.
+
+\begin{table}[h!]
+\begin{center}
+\begin{small}
+	\begin{tabular}{ c r r r r r } 
+		location & \multicolumn{1}{c}{total demand}      & \multicolumn{1}{c}{capacity} & \multicolumn{1}{c}{initial vol.} & \multicolumn{1}{c}{idle capacity **} & \multicolumn{1}{c}{total inflow}  \\
+		      & \multicolumn{1}{c}{($\mathrm{m^3}$)} & \multicolumn{1}{c}{($\mathrm{m^3}$)}   & \multicolumn{1}{c}{($\mathrm{m^3}$)}     &  \multicolumn{1}{c}{($\mathrm{m^3}$)}   &  \multicolumn{1}{c}{($\mathrm{m^3}$)}               \\
+		\\
+		WTP   &            & 2,500.000 & 0.000 &   391.868 & 8,812.800 \\
+		R1    &            &   500.000 & 0.000 &     0.000 & 6,704.668 \\
+		R2    &            &   400.000 & 0.000 &     0.000 & 1,559.877 \\
+		R3    &            &   100.000 & 0.000 &     0.000 &   363.686 \\
+	    R4    &            &   180.000 & 0.000 &     0.000 & 1,063.550 \\
+	    R5    &            &    20.000 & 0.000 &     0.000 &    97.555 \\
+	    Z1    &  4,236.180 & 5,431.000 & 0.000 & 5,431.000 & 3,120.000 \\
+	    Z2    &    813.540 & 1,043.000 & 0.000 & 1,043.000 &   599.185 \\
+	    Z3    &    761.280 &   976.000 & 0.000 &   976.000 &   560.693 \\
+	    Z4    &    358.020 &   459.000 & 0.000 &   459.000 &   263.686 \\
+	    Z5    &  1,199.640 & 1,538.000 & 0.000 & 1,538.000 &   883.550 \\
+	    Z6    &    105.300 &   135.000 & 0.000 &   135.000 &    77.555 \\
+	    \\
+	    total & 7,473.960 & \multicolumn{2}{r}{exp. weighted sum:} & 10,433.624 & \\
+		   \\
+		&  &      &  \multicolumn{1}{c}{location}    & \multicolumn{1}{c}{valve status}         & \multicolumn{1}{c}{ideal inflow rate}   \\
+		\multicolumn{2}{c}{shift data}     &   &      & \multicolumn{1}{c}{S1, S2 and S3}        & \multicolumn{1}{c}{($\mathrm{m^3}$/hour)}  \\
+		   \\
+		1   &  \multicolumn{1}{l}{day}   &              		& \multicolumn{1}{c}{WTP}    & \multicolumn{1}{c}{open} &  367.200* \\
+		3   &  \multicolumn{1}{l}{shift}  &         			& \multicolumn{1}{c}{R1}     & \multicolumn{1}{c}{open} &  279.361  \\
+		8   &  \multicolumn{1}{l}{hours/shift}        &         & \multicolumn{1}{c}{R2}     & \multicolumn{1}{c}{open} &   64.995  \\
+	   &      &              									& \multicolumn{1}{c}{R3}     & \multicolumn{1}{c}{open} &   15.154  \\
+	   \multicolumn{3}{c}{total zones outflow}                  & \multicolumn{1}{c}{R4}     & \multicolumn{1}{c}{open} &   44.315  \\
+	   \multicolumn{3}{c}{($\mathrm{m^3}$)}              				& \multicolumn{1}{c}{R5}     & \multicolumn{1}{c}{open} &    4.065  \\
+	   &      &              									& \multicolumn{1}{c}{Z1}     & \multicolumn{1}{c}{open} &  130.000* \\
+	   \multicolumn{3}{c}{5,504.669}              			& \multicolumn{1}{c}{Z2}     & \multicolumn{1}{c}{open} &   24.966  \\
+	      &              &              						& \multicolumn{1}{c}{Z3}     & \multicolumn{1}{c}{open} &   23.362  \\
+	   \multicolumn{3}{c}{optimal value (fitness)}              & \multicolumn{1}{c}{Z4}     & \multicolumn{1}{c}{open} &   10.987  \\
+	   &             &             						 		& \multicolumn{1}{c}{Z5}     & \multicolumn{1}{c}{open} &   36.815  \\
+	   \multicolumn{3}{c}{55,046.139}              			& \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{open} &    3.231 \\
+	   \\
+	   \multicolumn{3}{c}{(computational time = 0.49 sec)} & \multicolumn{3}{c}{* values reported for maximum inflow rates} \\
+	   \multicolumn{3}{c}{(total number of iterations = 702)} & \multicolumn{3}{c}{** at the end of the evaluated period} 
+
+	\end{tabular}
+\caption{Summary of results generated by the solver developed in LINGO for case 29.}
+\label{tab:lingoEvaluationsCase29}
+\end{small}
+\end{center}
+\end{table}
+
+For situation (3), once a minimum value is indicated for the inflow of a given location, the solver will propose solutions in which the inflow of some locations will be null or concentrated in one or a few shifts. For example, Table \ref{tab:lingoEvalCase22} presents the results found by the solver for case 22, in which the same data used in case 03 were considered, except that a minimum inflow rate was reported for the reservoir $\mathrm{R5}$ ($r=6$), $\mathrm{MinInFR}_6 = $10.000 $\mathrm{m^3}$/hour. As we can see in Table \ref{tab:lingoEvalCase22} the restriction related to the minimum inflow in R5 causes the flow to be restricted to a single shift (with tripled inflow value), forcing the valves to be closed in the other two shifts.
+
+\begin{table}[h!]
+\begin{center}
+\begin{small}
+	\begin{tabular}{ c r r r r r } 
+		location & \multicolumn{1}{c}{total demand}      & \multicolumn{1}{c}{capacity} & \multicolumn{1}{c}{initial vol.} & \multicolumn{1}{c}{idle capacity **} & \multicolumn{1}{c}{total inflow}  \\
+		      & \multicolumn{1}{c}{($\mathrm{m^3}$)} & \multicolumn{1}{c}{($\mathrm{m^3}$)}   & \multicolumn{1}{c}{($\mathrm{m^3}$)}     &  \multicolumn{1}{c}{($\mathrm{m^3}$)}   &  \multicolumn{1}{c}{($\mathrm{m^3}$)}               \\
+		\\
+		WTP   &           & 2,500.000 & 0.000 &  599.200 & 8,812.800 \\
+		R1    &           &   500.000 & 0.000 &  500.000 & 6,912.000\\
+		R2    &           &   400.000 & 0.000 &  400.000 & 1,456.411 \\
+		R3    &           &   100.000 & 0.000 &  100.000 &   331.101 \\
+	    R4    &           &   180.000 & 0.000 &  180.000 & 1,109.440  \\
+	    R5    &           &    20.000 & 0.000 &   20.000 &    97.383 \\
+	    Z1    & 4,236.180 & 5,431.000 & 0.000 &  5,431.000 & 3,917.666 \\
+	    Z2    &   813.540 & 1,043.000 & 0.000 &  1,043.000 &   752.371 \\
+	    Z3    &   761.280 &   976.000 & 0.000 &    976.000 &   704.040 \\
+	    Z4    &   358.020 &   459.000 & 0.000 &    459.000 &   331.101 \\
+	    Z5    & 1,199.640 & 1,538.000 & 0.000 &  1,538.000 & 1,109.440 \\
+	    Z6    &   105.300 &   135.000 & 0.000 &    135.000 &    97.383 \\
+	    \\
+	    total & 7,473.960 & \multicolumn{2}{r}{exp. weighted sum:} & 13,438.743 &              \\
+		   \\
+		&  &      &  \multicolumn{1}{c}{location}    & \multicolumn{1}{c}{valve status} & \multicolumn{1}{c}{ideal inflow rate}   \\
+		\multicolumn{2}{c}{shift data}     &   &      & \multicolumn{1}{c}{closed} & \multicolumn{1}{c}{($\mathrm{m^3}$/hour)} \\
+		   \\
+1   &  \multicolumn{1}{l}{day} &  & \multicolumn{1}{c}{WTP} & \multicolumn{1}{c}{-} &  367.200* \\
+3   &  \multicolumn{1}{l}{shif} & & \multicolumn{1}{c}{R1}  & \multicolumn{1}{c}{-} &  288.000* \\
+24  &  \multicolumn{1}{l}{hours/shift} & & \multicolumn{1}{c}{R2} & \multicolumn{1}{c}{-} &   60.684\\
+	&      &                  & \multicolumn{1}{c}{R3}     & \multicolumn{1}{c}{-} &    13.796 \\
+\multicolumn{3}{c}{total zones outflow} & \multicolumn{1}{c}{R4} & \multicolumn{1}{c}{-}  &   46.227 \\
+\multicolumn{3}{c}{($\mathrm{m^3}$)}& \multicolumn{1}{c}{R5}     & \multicolumn{1}{c}{S1 / S2} &    12.173 \\
+	   &      &              		& \multicolumn{1}{c}{Z1}     & \multicolumn{1}{c}{-} &   163.236 \\
+\multicolumn{3}{c}{6,912.000}       & \multicolumn{1}{c}{Z2}     & \multicolumn{1}{c}{-} &    31.349 \\
+	   &      &              		& \multicolumn{1}{c}{Z3}     & \multicolumn{1}{c}{-} &    29.335 \\\multicolumn{3}{c}{optimal value (fitness)} & \multicolumn{1}{c}{Z4} & \multicolumn{1}{c}{-} &13.796 \\
+	   &      &             	    & \multicolumn{1}{c}{Z5}     & \multicolumn{1}{c}{-} &    46.227 \\
+\multicolumn{3}{c}{69,109.292}       & \multicolumn{1}{c}{Z6}     & \multicolumn{1}{c}{S1 / S2} &    12.173 \\\\
+\multicolumn{3}{c}{(computational time  = 5.35 sec)}     & \multicolumn{3}{c}{* values reported for maximum inflow rates} \\
+\multicolumn{3}{c}{(total number of iterations = 39,685)}   & \multicolumn{3}{c}{** at the end of the evaluated period} 
+	\end{tabular}
+\end{small}
+\caption{Summary of results generated by the solver developed in LINGO for case 22.}
+\label{tab:lingoEvalCase22}
+\end{center}
+\end{table}
+
+As for situation (2), the developed solver does not present a good answer. The value found by the solver will always be an ideal value, based on the informed restrictions. If the ideal value is lower than the real value, the respective zone will have an excess amount of water. And there will be no sure way to prevent the volume consumed by that zone from being the desired volume. Except limiting distribution time. In this case, the ideal distribution time (within the period of a shift) can be calculated using the equations in (\ref{eq:evalTimeAdq}). 
+
+\subsection{Solver and model limitations}
+\label{sec:limitations}
+
+LINGO is an incredible software, indispensable for mathematical modeling of any real problem. With the help of LINGO, it is possible to notice a series of initial errors in the model, which could easily go unnoticed. Additionally, the elaborated mathematical model strongly influences the solver efficiency. This forces the modeler to think about issues that limit the model's solutions, and to work with functions that make the model robust and functional.
+
+However, LINGO is not a magic tool, LINGO's processing power is limited, due to limitations associated with exact solving techniques for optimization problems, especially when defined as non-linear and NP-Hard. For most problems, the computational effort increases as the number of decision variables increases, according to functions that are not polynomials. In other words, there is an explosion in the number of possible solutions, and current exact methodologies have not yet found a way to deal with this, in the case of problems with larger dimensions. 
+
+\label{nonlinerarityExp}{The model presented in this work is a non-linear, mixed-integer mathematical programming model. Nonlinearity happens due to the objective function and the constraints in} (\ref{eq:evalInF}), (\ref{eq:evalPDist}) and (\ref{eq:idleCapEWSum}). The non-polynomial nature of the model arises due to the binary decision variables $X_{dsl}$. In this section, we present an initial discussion about the limitations of the developed solver and mathematical model. It is important to emphasize that many of the limitations presented here could be mitigated through adjustments to the model, or even through a better use of the LINGO software. 
+
+Table \ref{tab:lingoEvaluation} presents some tests carried out to analyze the efficiency of the developed model and solver. C1, C2, C3 and C4 relevance / irrelevance parameters referring to total distributed volume, fair distribution, valve status and reservoir idle capacity were defined based on an extensive study. Such definition had the following purposes: to define as priorities meeting the demand, then fair distribution and finally filling the reservoirs; in order to test the ruggedness of the model, we also had the clear intention of distributing the flow among all shifts, allowing the valves to be turned off only when flow restrictions impose this condition. As we can see in this table, although the computational effort varies according to the flow restrictions considered, the solver is able to propose solutions in acceptable times. In some cases the solver was not able to find good solutions for reasons that are still unknown, however these difficulties were solved with only a small adjustment in the value of parameter $a$. In general, we could observe that the solver is really quite robust and adequately meets the proposed objective (elaboration of water distribution schedules in periods of scarcity, also defining the ideal flows and distribution times).
+
+\begin{table}[h!]
+\begin{center}
+\begin{small}
+	\begin{tabular}{ c c c c c c c c c c }     
+	case & ND & NS &  $1^o$ Term & $2^o$ T & $3^o$ T & $4^o$ T &  fitness  &  time  & ierations     \\
+	 01  &  1 & 1  &  69,120.00 &  0.00  & 0.00 &  0.71 & 69,119.29  & 0.41 s & 1,342     \\
+	 02  &  1 & 2  & 69,120.00 &  0.00  & 0.00 & 0.71 &   69,119.29 & 0.17 s & 550  \\
+	 03  &  1 & 3  & 69,120.00 &  0.00  & 0.00 & 0.71 &   69,119.29  & 0.21 s & 661   \\
+	 04  &  2 & 1  & 69,120.00 & 0.00  & 0.00 & 0.64 & 69,119.36 & 0.17 s & 539     \\
+	 05  &  2 & 2  & 69,120.00 &  0.00  & 0.00 & 0.64  & 69,119.36 & 0.35 s & 1,086     \\
+	 06  &  2 & 3  & 69,120.00 &  0.00  & 0.00 & 0.64 & 69,119.36 & 0.53 s & 1,298     \\
+	 07  &  3 & 1  & 69,120.00  &  0.00  & 0.00 & 0.64  & 69,119.36 & 0.24 s & 778     \\
+	 08  &  3 & 2  & 69,120.00 &  0.00 & 0.00 & 0.64  & 69,119.36  & 0.53 s & 1,342     \\
+	 09  &  3 & 3  & 69,120.00 &  0.00  & 0.00 &  0.64 &   69,119.36  & 2.45 s & 4,827 \\
+	 10  &  4 & 1  & 69,120.00 & 0.00  & 0.00 & 0.64 &  69,119.36  & 0.42 s & 1,447   \\
+	 11  &  4 & 2  & 69,120.00  & 0.00  & 0.00 &  0.64  &   69,119.36  & 0.81 s & 1,576     \\
+	 12  &  4 & 3  & 69,120.00  &  0.00  & 0.00 &  0.64 &   69,119.36  & 2.08 s & 2,890  \\
+	 13  &  5 & 1  & 69,120.00 &  0.00  & 0.00 &  0.64 & 69,119.36 & 0.50 s & 1,385    \\
+	 14  &  5 & 2  & 69,120.00 &  0.00 & 0.00 & 0.64 &  69,119.36 & 1.28 s & 2,235 \\
+	 15  &  5 & 3  & 69,120.00 &  0.00  & 0.00 & 0.64 &   69,119.36  & 12.07 m & 272,631    \\
+	 16  &  6 & 1  & 69,120.00 & 0.00  & 0.00 & 0.64 & 69,119.36 & 0.50 s & 1,148 \\
+	 17  &  6 & 2  & 69,120.00 & 0.00  & 0.00 &  0.64 & 69,119.36  & 9,12 m & 134,540 \\
+	 18  &  6 & 3  & 69,120.00 &  0.00  & 0.00 & 0.64 &   69,119.36  & 19.20 m & 134,540 \\
+	 19  &  7 & 1  & 69,120.00  &  0.00  & 0.00 &  0.64  &   69,119.36  & 0.59 s & 1,257 \\
+	 20  &  7 & 2  & 69,120.00 &  0.00 & 0.00 &  0.64 & 69,119.36 & 2.02 m & 105,430 \\
+	 21  &  7 & 3  & 69,120.00 &  0.00  & 0.00 &  0.64  & 69,119.36 & 15.44 m & 442,965 \\
+     22  &  1 & 3  & 69,120.00 &  0.00  & 10.00 &  0.71 &   69,109.29  & 5.35 s & 39,685 \\
+	 23  &  2 & 3  & 69,120.00 &  0.00 & 30.00 &  0.64 &   69,089.36 & 1.08 m & 347,190 \\
+	 24  & 3 & 3  & 69,120.00 &  0.00  & 58.00 & 0.64 &   69,061.36  & 29.54 m & 2,288,288 \\
+	 25  & 4 & 3  & 69,120.00  &  0.00  & 94.00 &  0.64 &   69,025.36  & 37.71 m & 5,290,914 \\
+     26*  & 5 & 3  & 69,120.00 &  0.00  & 244.00 &  0.64 &   68,875.36  & 1.13 h & 3,272,716 \\
+	 27*  & 6 & 3  & 69,120.00 &  0.00 & 344.00 &  0.64   &   68,775.36  & 4.48 h & 37,967,422 \\
+	 28  & 7 & 3  & 69,120.00  &  0.00  & 230.00 &  0.64 &   68,889.36  & 3.89 h & 49,650,061 \\
+	 29  & 1 & 3  & 55,046.69  &  0.00  & 0.00 & 0.55 & 55,046.14  & 0.49 s & 702 \\
+	 30  & 1 & 3  & 55,046.66  &  0.00 & 2.00 &  0.54   &   55,044.11  & 4.69 s & 41,568\\
+	 31  & 2 & 3  & 55,046.70  &  0.00 & 12.00 &  0.42   &   55,034.28  & 1.82 m & 403,389 \\
+	 32  & 3 & 3  & 48,930.37  & 0.00 & 128.00 &  0.37   &   48,802.00  & 14.80 m & 750,189 \\
+	 33  & 4 & 3  & 55,046.72 &  0.00 & 66.00 &  0.29   &   54,980.43  & 20.99 m & 2,047,134 \\
+	 34  & 5 & 3  & 55,105.90  &  121.94  & 86.00 &  0.29   &   54,897.67  & 25.66 m & 1,116,250 \\
+	 35**  & 6 & 3  & 55,103.04  &  116.05  & 378.00 &  0.29   &   54,608.70  & 4 h & 5,016,544 \\
+	 36  & 7 & 3  & 55,046.66  &  0.00  & 198.00 &  0.29   &   54,848.37  & 1.01 h & 4,535,449 \\
+	\end{tabular}
+\caption{Study on the efficiency of the mathematical model and the solver. *These cases didn't work using $a=1$ for the definition of C3, so we used $a=2$. ** This case didn't work using $a=1$ and $a=2$ for the definition of C3, so we used $a=3$. In this case, we also stopped SOLVER without it signaling that it found the optimal solution, after the 4 h period.}
+\label{tab:lingoEvaluation}
+\end{small}
+\end{center}
+\end{table}
+
+An important issue to be considered is that the adjustment of the parameters C1, C2, C3 and C4 strongly influence the efficiency of the solver as well as the solution found. The main aspect of the relevance / irrelevance parameters adopted is that they allow the planner to interfere in the solution presented by the solver, so that this solution meets the planning objectives (e.g., prioritization of filling reservoirs or meeting demand). However, this requires that the planner has good experience in applying the solver and a good understanding of how the solver reacts to the adjustment of these parameters. Therefore, the good performance of the developed solver will depend largely on the qualification of the planner for this purpose. We understand that it is possible to build formulas for automatic calculation of suitable values for these parameters, using quantitative and qualitative analyzes referring to the decision-making process (e.g., formulas defined according to answers given for some questionnaire). It is also possible, of course, to develop a user-friendly graphical interface. These efforts would make using the solver much simpler, however they depend on the continuity of this project, with a strong commitment of time and dedication of qualified professionals.
+
+The solver developed in LINGO language (EWDSPS.lng) as well as the files generated with the results found (results/*.lgr) are available at "https://github.com/tbfraga/gamos-journal/tree/main/EWDSPS".
+
+\section{Conclusions and future works}
+\label{sec:conclusions}
+
+In the present work, a detailed description of the water distribution system of a city in northeastern Brazil and a conceptual and a new mathematical model for the problem of water distribution in periods of scarcity was presented. The validation of the mathematical model was performed using a solver developed with the LINGO software from LINDO Systems. Through the tests carried out, we concluded that the developed model and solver fit perfectly to the studied reality, and are capable of, in a short time, proposing solutions that make the distribution of water volumes for the different zones fair, in periods of scarcity, through the control of flows and distribution times. Such solutions take into account the restrictions of the system and present alternatives for when the channelings are to be modulated optimally (with flow rates that optimally regulate the distribution). However, it was verified that, for the solver to present good results, it must be used by a suitably qualified employee. What may become less relevant through new advanced studies for high-level calculation of relevance / irrelevance parameters adopted in the model, as well as through the construction of a friendly graphic interface.  Additionally, due to the limitations of the exact methodologies developed so far for solving non-polynomial optimization problems (such as the studied problem), the developed solver naturally presented limitations related to its ability to solve larger problems. Such limitations justify the need to develop solution algorithms based on heuristics applied to optimization problems. These efforts will be the focus of our next works.
+
+\section*{Acknowledgement}
+\label{sec:acknowledgement}
+
+We are enormously grateful to CAPES (Coordenação de Aperfeiçoamento de Pessoal de Nível Superior) and to CNPq (Conselho Nacional de Desenvolvimento Científico e Tecnológico) for the financial support provided to our projects. We also thank LINDO Systems team for their important contributions and for the LINGO software license, without which this work would not have been possible and the managers of the municipality of Catende, for having provided us with such rich and relevant information. Finally, we would like to thank PROExC (Pró-reitoria de Extensão e Cultura da UFPE) and the Research Director of Propesqi (Pró-reitoria de Pesquisa e Inovação da UFPE) for their support and recognition of our work, and dear Profs. Antônio José da Silva Neto and João Flávio Vieira de Vasconcellos from IPRJ/UERJ, who contributed significantly to the formation of essential skills for the development of our projects. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\bibliography{ijmso}
+%\bibliographystyle{unsrt}
+%\bibliographystyle{alpha}
+
+\begin{thebibliography}{10}
+
+\bibitem[\protect\citeauthoryear{Candido et al.}{2016}]{CandidoEtAl2016}
+Candido, A.K.B., Lima, M.M.A.E., Fraga T.B. (2016) 'Planejamento da Distribuição de Água em Catende em Períodos de Escassez'. {\it Resumos do II ENExC}, https://www.ufpe.br/proexc/periodicos-e-publicacoes/ii-enexc (Accessed 08 December 2021) 
+
+\bibitem[\protect\citeauthoryear{Creaco et al.}{2019}]{CreacoEtAl2019}
+Creaco E., Campisano, A., Fontana, N.,  Marini, G., Page, P.R. and Walski, T. (2019) 'Real time control of water distribution networks: A state-of-the-art
+review', {\it Water Research}, Vol. 161, pp.517--530
+
+\bibitem[\protect\citeauthoryear{Huang et al.}{2021}]{HangEtAl2021}
+Huang, Z., Yuan, X. and  Liu, X. (2021) 'The key drivers for the changes in global water scarcity: Water withdrawal versus water availability', {\it Journal of Hydrology}, Vol. 601, pp.126658
+
+\bibitem[\protect\citeauthoryear{IBGE}{2021}]{IBGECatende}
+IBGE. Instituto Brasileiro de Geografia e Estatística. (2021) 'Regional data about the city of Catende',
+https://cidades.ibge.gov.br/brasil/pe/catende/panorama (Accessed 27 November 2021)
+
+\bibitem[\protect\citeauthoryear{Jafari-Asl et al.}{2021}]{JafariEtAl2021}
+Jafari-Asl, J., Azizyan, G., Monfared, S.A.H., Rashki, M., and Andrade-Campos, A.G. (2021) 'An enhanced binary dragonfly algorithm based on a V-shaped
+transfer function for optimization of pump scheduling program in water supply systems (case study of Iran)', {\it Engineering Failure Analysis}, Vol. 123, 105323
+
+\bibitem[\protect\citeauthoryear{Kurian et al.}{2018}]{KurianEtAl2018}
+Kurian, V., Chinnusamy, S., Natarajan A. Narasimhan, S. and Narasimhan S. (2018) 'Optimal operation of water distribution networks with intermediate storage facilities', {\it Computers \& Chemical Engineering}, Vol. 119, pp.215--227
+
+\bibitem[\protect\citeauthoryear{LINGO}{2021}]{LINGO}
+LINGO [online], https://www.lindo.com/index.php/products/lingo-and-optimization-modeling (Accessed 30 November 2021)
+
+\bibitem[\protect\citeauthoryear{Luna et al.}{2019}]{LunaEtAl2019}
+Luna, T., Ribau, J., Figueiredo D and Alves, R. (2019) 'Improving energy efficiency in water supply systems with pump scheduling optimization', {\it Journal of Cleaner Production}, Vol. 213, pp.342--356
+
+\bibitem[\protect\citeauthoryear{Paganine}{2013}]{Paganine2013}
+Paganine, J. (2013) 'Dia Mundial da Água incentiva cooperação entre os países', {\it senadonotícias, Agência Senado}, https://www12.senado.leg.br/noticias/especiais/especial-cidadania/dia-mundial-da-agua-incentiva-cooperacao-entre-os-paises (Accessed 28 November 2021)
+
+\bibitem[\protect\citeauthoryear{Sankar et al.}{2015}]{SankarEtAl2015}
+Sankar, G.S., {Mohan Kumar}, S., Narasimhan, S., Narasimhan S. and {Murty Bhallamudi}, S. (2015) 'Optimal control of water distribution networks with storage facilities', {\it Journal of Process Control}, Vol. 32, pp.127--137
+
+\bibitem[\protect\citeauthoryear{Silva et al.}{2019}]{SilvaEtAl2019}
+Silva, J.L.B., Bezerra, A.C., Silva, T.T.F., Batista, P.H.D., Moura, G.B.A. and  Lopes, P.M.O. (2019) 'Quantification Caatinga vegetable coverage and water availability by remote sensing in the Brazilian semiarid', {\it Journal of Hyperspectral Remote Sensing}, Vol. 9, No. 4, pp.166--176
+
+\end{thebibliography}
+\end{document}
